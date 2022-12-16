@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32929.385
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SolZoho", "SolZoho\SolZoho.csproj", "{3C491A6B-AEB5-4DDB-9155-2ED32F30176C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppZoho", "AppZoho\AppZoho.csproj", "{D3B51EA7-569C-4447-95E2-CE143D641717}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppWithPostman", "AppWithPostman\AppWithPostman.csproj", "{71F2AF35-DA02-4ED3-8EC4-04CBEBB8D302}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesktopAppZoho", "DesktopAppZoho\DesktopAppZoho.csproj", "{837B9279-08D3-47E9-8F07-C29C7DC7444E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3C491A6B-AEB5-4DDB-9155-2ED32F30176C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C491A6B-AEB5-4DDB-9155-2ED32F30176C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C491A6B-AEB5-4DDB-9155-2ED32F30176C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C491A6B-AEB5-4DDB-9155-2ED32F30176C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3B51EA7-569C-4447-95E2-CE143D641717}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3B51EA7-569C-4447-95E2-CE143D641717}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3B51EA7-569C-4447-95E2-CE143D641717}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3B51EA7-569C-4447-95E2-CE143D641717}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71F2AF35-DA02-4ED3-8EC4-04CBEBB8D302}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71F2AF35-DA02-4ED3-8EC4-04CBEBB8D302}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71F2AF35-DA02-4ED3-8EC4-04CBEBB8D302}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71F2AF35-DA02-4ED3-8EC4-04CBEBB8D302}.Release|Any CPU.Build.0 = Release|Any CPU
+		{837B9279-08D3-47E9-8F07-C29C7DC7444E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{837B9279-08D3-47E9-8F07-C29C7DC7444E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{837B9279-08D3-47E9-8F07-C29C7DC7444E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{837B9279-08D3-47E9-8F07-C29C7DC7444E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5184500E-E294-4511-9103-DA3628109376}
+	EndGlobalSection
+EndGlobal

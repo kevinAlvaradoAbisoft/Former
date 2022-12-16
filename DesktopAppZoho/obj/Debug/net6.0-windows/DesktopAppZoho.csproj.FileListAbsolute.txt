@@ -1,0 +1,17 @@
+C:\Projects\SolZoho\DesktopAppZoho\bin\Debug\net6.0-windows\DesktopAppZoho.exe
+C:\Projects\SolZoho\DesktopAppZoho\bin\Debug\net6.0-windows\DesktopAppZoho.deps.json
+C:\Projects\SolZoho\DesktopAppZoho\bin\Debug\net6.0-windows\DesktopAppZoho.runtimeconfig.json
+C:\Projects\SolZoho\DesktopAppZoho\bin\Debug\net6.0-windows\DesktopAppZoho.dll
+C:\Projects\SolZoho\DesktopAppZoho\bin\Debug\net6.0-windows\DesktopAppZoho.pdb
+C:\Projects\SolZoho\DesktopAppZoho\obj\Debug\net6.0-windows\DesktopAppZoho.csproj.AssemblyReference.cache
+C:\Projects\SolZoho\DesktopAppZoho\obj\Debug\net6.0-windows\DesktopAppZoho.Form1.resources
+C:\Projects\SolZoho\DesktopAppZoho\obj\Debug\net6.0-windows\DesktopAppZoho.csproj.GenerateResource.cache
+C:\Projects\SolZoho\DesktopAppZoho\obj\Debug\net6.0-windows\DesktopAppZoho.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projects\SolZoho\DesktopAppZoho\obj\Debug\net6.0-windows\DesktopAppZoho.AssemblyInfoInputs.cache
+C:\Projects\SolZoho\DesktopAppZoho\obj\Debug\net6.0-windows\DesktopAppZoho.AssemblyInfo.cs
+C:\Projects\SolZoho\DesktopAppZoho\obj\Debug\net6.0-windows\DesktopAppZoho.csproj.CoreCompileInputs.cache
+C:\Projects\SolZoho\DesktopAppZoho\obj\Debug\net6.0-windows\DesktopAppZoho.dll
+C:\Projects\SolZoho\DesktopAppZoho\obj\Debug\net6.0-windows\refint\DesktopAppZoho.dll
+C:\Projects\SolZoho\DesktopAppZoho\obj\Debug\net6.0-windows\DesktopAppZoho.pdb
+C:\Projects\SolZoho\DesktopAppZoho\obj\Debug\net6.0-windows\DesktopAppZoho.genruntimeconfig.cache
+C:\Projects\SolZoho\DesktopAppZoho\obj\Debug\net6.0-windows\ref\DesktopAppZoho.dll

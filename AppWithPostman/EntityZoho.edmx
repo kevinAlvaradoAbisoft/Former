@@ -1,0 +1,887 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DbZohoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Ordini">
+          <Key>
+            <PropertyRef Name="IdOrdine" />
+          </Key>
+          <Property Name="IdOrdine" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdUt" Type="int" />
+          <Property Name="IdListinoBase" Type="int" />
+          <Property Name="IdOrdineInt" Type="int" />
+          <Property Name="IdIndirizzo" Type="int" />
+          <Property Name="IdCorriere" Type="int" />
+          <Property Name="TipoConsegna" Type="int" />
+          <Property Name="DataIns" Type="smalldatetime" />
+          <Property Name="DataCambioStato" Type="smalldatetime" />
+          <Property Name="DataPrevProduzione" Type="smalldatetime" />
+          <Property Name="DataPrevConsegna" Type="smalldatetime" />
+          <Property Name="Annotazioni" Type="nvarchar(max)" />
+          <Property Name="Nfogli" Type="int" />
+          <Property Name="Preventivo" Type="int" />
+          <Property Name="Anteprima" Type="nvarchar" MaxLength="255" />
+          <Property Name="SorgenteFronte" Type="nvarchar" MaxLength="255" />
+          <Property Name="SorgenteRetro" Type="nvarchar" MaxLength="255" />
+          <Property Name="SorgenteCopertina" Type="nvarchar" MaxLength="255" />
+          <Property Name="TipoRetro" Type="int" />
+          <Property Name="PrezzoCalcolatoNetto" Type="decimal" Precision="19" Scale="4" />
+          <Property Name="PrezzoCorriere" Type="decimal" Precision="19" Scale="4" />
+          <Property Name="TotaleNetto" Type="decimal" Precision="19" Scale="4" />
+          <Property Name="TotaleIva" Type="decimal" Precision="19" Scale="4" />
+          <Property Name="TotaleOrdine" Type="decimal" Precision="19" Scale="4" />
+          <Property Name="Qta" Type="int" />
+          <Property Name="NumeroColli" Type="int" />
+          <Property Name="Peso" Type="int" />
+          <Property Name="Altezza" Type="int" />
+          <Property Name="Larghezza" Type="int" />
+          <Property Name="Mq" Type="real" />
+          <Property Name="Stato" Type="int" />
+          <Property Name="StatoWeb" Type="int" />
+          <Property Name="Lavorazioni" Type="nvarchar" MaxLength="255" />
+          <Property Name="OrdineWeb" Type="bit" />
+          <Property Name="IdCons" Type="int" />
+          <Property Name="InseritoDa" Type="int" />
+          <Property Name="Profondita" Type="int" />
+          <Property Name="IdTipoFustella" Type="int" />
+          <Property Name="IdCoupon" Type="int" />
+          <Property Name="Sconto" Type="decimal" Precision="19" Scale="4" />
+          <Property Name="Ricarico" Type="decimal" Precision="19" Scale="4" />
+          <Property Name="NomeLavoro" Type="nvarchar" MaxLength="100" />
+          <Property Name="Orientamento" Type="int" />
+          <Property Name="NoEmailDemone" Type="int" />
+          <Property Name="OrdineInOmaggio" Type="int" />
+          <Property Name="ExtraData" Type="nvarchar" MaxLength="255" />
+          <Property Name="IdPromo" Type="int" />
+          <Property Name="UsaNomeLavoroInFattura" Type="int" />
+          <Property Name="IdMailPreventivo" Type="int" />
+          <Property Name="IdMacchinarioProduzioneUtilizzato" Type="int" />
+          <Property Name="ConsegnaGarantita" Type="datetime" />
+          <Property Name="ConsegnaGarantitaDa" Type="int" />
+          <Property Name="IdZoho" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="T_Corriere">
+          <Key>
+            <PropertyRef Name="IdCorriere" />
+          </Key>
+          <Property Name="IdCorriere" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descrizione" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Costo" Type="decimal" Precision="19" Scale="4" />
+          <Property Name="GGConsegna" Type="int" />
+          <Property Name="TestoMail" Type="nvarchar" MaxLength="80" />
+          <Property Name="NomeBreve" Type="nvarchar" MaxLength="255" />
+          <Property Name="PrevedeAccorpamento" Type="bit" Nullable="false" />
+          <Property Name="TipoCorriere" Type="int" />
+          <Property Name="PercPortoAssegnato" Type="int" />
+          <Property Name="KgLimite1" Type="int" />
+          <Property Name="TariffaLimite1" Type="decimal" Precision="19" Scale="4" />
+          <Property Name="KgLimite2" Type="int" />
+          <Property Name="TariffaLimite2" Type="decimal" Precision="19" Scale="4" />
+          <Property Name="KgLimite3" Type="int" />
+          <Property Name="TariffaLimite3" Type="decimal" Precision="19" Scale="4" />
+          <Property Name="KgLimite4" Type="int" />
+          <Property Name="TariffaLimite4" Type="decimal" Precision="19" Scale="4" />
+          <Property Name="KgLimite5" Type="int" />
+          <Property Name="TariffaLimite5" Type="decimal" Precision="19" Scale="4" />
+          <Property Name="KgLimite6" Type="int" />
+          <Property Name="TariffaLimite6" Type="decimal" Precision="19" Scale="4" />
+          <Property Name="KgLimite7" Type="int" />
+          <Property Name="TariffaLimite7" Type="decimal" Precision="19" Scale="4" />
+          <Property Name="DisponibileOnline" Type="bit" />
+          <Property Name="Label" Type="nvarchar" MaxLength="255" />
+          <Property Name="PathTrack" Type="nvarchar" MaxLength="255" />
+          <Property Name="Disattivo" Type="int" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DbZoho.dbo.T_listinobase' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="T_listinobase">
+          <Key>
+            <PropertyRef Name="IdListinoBase" />
+          </Key>
+          <Property Name="IdListinoBase" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nome" Type="nvarchar" MaxLength="255" />
+          <Property Name="IdCurvaAtt" Type="int" />
+          <Property Name="IdCurvaPubbl" Type="int" />
+          <Property Name="IdFormProd" Type="int" />
+          <Property Name="IdFormato" Type="int" />
+          <Property Name="IdTipoCartaCop" Type="int" />
+          <Property Name="IdTipoCarta" Type="int" />
+          <Property Name="IdTipoCartaDorso" Type="int" />
+          <Property Name="IdPrev" Type="int" />
+          <Property Name="IdColoreStampa" Type="int" />
+          <Property Name="v1" Type="decimal" Precision="19" Scale="4" />
+          <Property Name="v2" Type="decimal" Precision="19" Scale="4" />
+          <Property Name="v3" Type="decimal" Precision="19" Scale="4" />
+          <Property Name="v4" Type="decimal" Precision="19" Scale="4" />
+          <Property Name="v5" Type="decimal" Precision="19" Scale="4" />
+          <Property Name="v6" Type="decimal" Precision="19" Scale="4" />
+          <Property Name="qta1" Type="real" />
+          <Property Name="qta2" Type="real" />
+          <Property Name="qta3" Type="real" />
+          <Property Name="qta4" Type="real" />
+          <Property Name="qta5" Type="real" />
+          <Property Name="qta6" Type="real" />
+          <Property Name="p1" Type="real" />
+          <Property Name="p2" Type="real" />
+          <Property Name="p3" Type="real" />
+          <Property Name="p4" Type="real" />
+          <Property Name="p5" Type="real" />
+          <Property Name="p6" Type="real" />
+          <Property Name="qtacollo" Type="int" />
+          <Property Name="faccmin" Type="int" />
+          <Property Name="faccmax" Type="int" />
+          <Property Name="imgrif" Type="nvarchar" MaxLength="255" />
+          <Property Name="nofaccsuimpianti" Type="bit" />
+          <Property Name="Disattivo" Type="smallint" />
+          <Property Name="MultiploQta" Type="int" />
+          <Property Name="noResa" Type="smallint" />
+          <Property Name="PercAdatCostoCopia" Type="int" />
+          <Property Name="AvviamStampa" Type="int" />
+          <Property Name="MinimaleStampa" Type="int" />
+          <Property Name="ImgSito" Type="nvarchar" MaxLength="255" />
+          <Property Name="PrendiIcoDa" Type="int" />
+          <Property Name="TipoPrezzo" Type="int" />
+          <Property Name="DescrSito" Type="nvarchar" MaxLength="255" />
+          <Property Name="LastUpdate" Type="int" />
+          <Property Name="IdTipoImballo" Type="int" />
+          <Property Name="IdModelloCubetto" Type="int" />
+          <Property Name="GoogleDescr" Type="nvarchar" MaxLength="255" />
+          <Property Name="GoogleSEO" Type="nvarchar(max)" />
+          <Property Name="MoltiplicatoreQta" Type="int" />
+          <Property Name="InEvidenza" Type="int" />
+          <Property Name="Ordinamento" Type="int" />
+          <Property Name="NascondiOnline" Type="int" />
+          <Property Name="LabelWeb" Type="nvarchar" MaxLength="255" />
+          <Property Name="NomeInterno" Type="nvarchar" MaxLength="255" />
+          <Property Name="LargRotolo" Type="nvarchar" MaxLength="255" />
+          <Property Name="QtaDefault" Type="int" />
+          <Property Name="MostraPrezziTabella" Type="int" />
+          <Property Name="IdHotFolderPostRefine" Type="int" />
+          <Property Name="CalcolaAncheDaSolo" Type="int" />
+          <Property Name="IdMacchinarioProduzione" Type="int" />
+          <Property Name="IdMacchinarioTaglio" Type="int" />
+          <Property Name="TipoControlloPrezzo" Type="int" />
+          <Property Name="DefaultNFogli" Type="int" />
+          <Property Name="VMotoreCalcolo" Type="int" />
+          <Property Name="PercPromoAutomatico" Type="int" />
+          <Property Name="PercMaxPromoFatturato" Type="int" />
+          <Property Name="MoltiplicatoreQta2" Type="int" />
+          <Property Name="MoltiplicatoreQta3" Type="int" />
+          <Property Name="MoltiplicatoreQta4" Type="int" />
+          <Property Name="MoltiplicatoreQta5" Type="int" />
+          <Property Name="AbilitaQtaIntermedie" Type="int" />
+          <Property Name="AbilitaQtaSottoColonna1" Type="int" />
+          <Property Name="MoltiplicatoreQta0" Type="int" />
+          <Property Name="MoltiplicatoreQtaIntermedia" Type="int" />
+          <Property Name="IdMacchinarioProduzione2" Type="int" />
+          <Property Name="AvviamStampa2" Type="int" />
+          <Property Name="MinimaleStampa2" Type="int" />
+          <Property Name="IdFormatoMacchina2" Type="int" />
+          <Property Name="IsFormerChoice" Type="int" />
+          <Property Name="IdListinoBaseSource" Type="int" />
+          <Property Name="PrefissoVarianti" Type="nvarchar" MaxLength="50" />
+          <Property Name="NoAttachFile" Type="int" />
+          <Property Name="ConSoggettiDuplicati" Type="int" />
+          <Property Name="idGruppoLogico" Type="int" />
+          <Property Name="IdGruppoListiniConsigliati" Type="int" />
+          <Property Name="IdGruppoLCAppartenenza" Type="int" />
+          <Property Name="AllowCustomSize" Type="int" />
+          <Property Name="IdLavTaglioSoggetti" Type="int" />
+          <Property Name="IdLavTaglioDuplicati" Type="int" />
+          <Property Name="AttivaPromoAutomatico" Type="int" />
+          <Property Name="CounterDayPromo" Type="int" />
+          <Property Name="IdZoho" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tokens">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Token_Refresh" Type="varchar" MaxLength="200" />
+          <Property Name="Token_Work" Type="varchar" MaxLength="200" />
+          <Property Name="LastUpdate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Utenti">
+          <Key>
+            <PropertyRef Name="IdUt" />
+          </Key>
+          <Property Name="IdUt" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="IdRubricaInt" Type="int" />
+          <Property Name="LastUpdate" Type="smalldatetime" />
+          <Property Name="RagSoc" Type="nvarchar" MaxLength="100" />
+          <Property Name="Nome" Type="nvarchar" MaxLength="50" />
+          <Property Name="Cognome" Type="nvarchar" MaxLength="50" />
+          <Property Name="Indirizzo" Type="nvarchar" MaxLength="100" />
+          <Property Name="IdProvincia" Type="int" />
+          <Property Name="IdComune" Type="int" />
+          <Property Name="Citta" Type="nvarchar" MaxLength="100" />
+          <Property Name="Provincia" Type="nvarchar" MaxLength="2" />
+          <Property Name="Cap" Type="nvarchar" MaxLength="5" />
+          <Property Name="Piva" Type="nvarchar" MaxLength="20" />
+          <Property Name="CodFisc" Type="nvarchar" MaxLength="16" />
+          <Property Name="Tel" Type="nvarchar" MaxLength="20" />
+          <Property Name="Fax" Type="nvarchar" MaxLength="20" />
+          <Property Name="Cellulare" Type="nvarchar" MaxLength="20" />
+          <Property Name="TipoRub" Type="int" Nullable="false" />
+          <Property Name="TipoWeb" Type="int" />
+          <Property Name="IdCorriereDef" Type="int" />
+          <Property Name="LastLogin" Type="smalldatetime" />
+          <Property Name="LastIp" Type="nvarchar" MaxLength="50" />
+          <Property Name="SitoWeb" Type="nvarchar" MaxLength="250" />
+          <Property Name="IdPagamento" Type="int" />
+          <Property Name="DataIns" Type="datetime" />
+          <Property Name="IdTipoAttivita" Type="int" />
+          <Property Name="DownloadEsplicito" Type="int" />
+          <Property Name="NoMail" Type="int" />
+          <Property Name="CodiceSDI" Type="nvarchar" MaxLength="7" />
+          <Property Name="Pec" Type="nvarchar" MaxLength="100" />
+          <Property Name="UpdateFromUser" Type="int" />
+          <Property Name="NoCheckDatiFisc" Type="int" />
+          <Property Name="IdNazione" Type="int" />
+          <Property Name="PrefissoPIva" Type="nvarchar" MaxLength="2" />
+          <Property Name="DisattivaAccessoSito" Type="int" />
+          <Property Name="IdZoho" Type="varchar" MaxLength="19" />
+          <Property Name="ZohoId" Type="varchar" MaxLength="50" />
+          <Property Name="IsDeletedInZoho" Type="bit" />
+          <Property Name="IdZohoAziende" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityContainer Name="DbZohoModelStoreContainer">
+          <EntitySet Name="Ordini" EntityType="Self.Ordini" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_Corriere" EntityType="Self.T_Corriere" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tokens" EntityType="Self.tokens" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Utenti" EntityType="Self.Utenti" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_listinobase" EntityType="Self.T_listinobase" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [T_listinobase].[IdListinoBase] AS [IdListinoBase], 
+    [T_listinobase].[Nome] AS [Nome], 
+    [T_listinobase].[IdCurvaAtt] AS [IdCurvaAtt], 
+    [T_listinobase].[IdCurvaPubbl] AS [IdCurvaPubbl], 
+    [T_listinobase].[IdFormProd] AS [IdFormProd], 
+    [T_listinobase].[IdFormato] AS [IdFormato], 
+    [T_listinobase].[IdTipoCartaCop] AS [IdTipoCartaCop], 
+    [T_listinobase].[IdTipoCarta] AS [IdTipoCarta], 
+    [T_listinobase].[IdTipoCartaDorso] AS [IdTipoCartaDorso], 
+    [T_listinobase].[IdPrev] AS [IdPrev], 
+    [T_listinobase].[IdColoreStampa] AS [IdColoreStampa], 
+    [T_listinobase].[v1] AS [v1], 
+    [T_listinobase].[v2] AS [v2], 
+    [T_listinobase].[v3] AS [v3], 
+    [T_listinobase].[v4] AS [v4], 
+    [T_listinobase].[v5] AS [v5], 
+    [T_listinobase].[v6] AS [v6], 
+    [T_listinobase].[qta1] AS [qta1], 
+    [T_listinobase].[qta2] AS [qta2], 
+    [T_listinobase].[qta3] AS [qta3], 
+    [T_listinobase].[qta4] AS [qta4], 
+    [T_listinobase].[qta5] AS [qta5], 
+    [T_listinobase].[qta6] AS [qta6], 
+    [T_listinobase].[p1] AS [p1], 
+    [T_listinobase].[p2] AS [p2], 
+    [T_listinobase].[p3] AS [p3], 
+    [T_listinobase].[p4] AS [p4], 
+    [T_listinobase].[p5] AS [p5], 
+    [T_listinobase].[p6] AS [p6], 
+    [T_listinobase].[qtacollo] AS [qtacollo], 
+    [T_listinobase].[faccmin] AS [faccmin], 
+    [T_listinobase].[faccmax] AS [faccmax], 
+    [T_listinobase].[imgrif] AS [imgrif], 
+    [T_listinobase].[nofaccsuimpianti] AS [nofaccsuimpianti], 
+    [T_listinobase].[Disattivo] AS [Disattivo], 
+    [T_listinobase].[MultiploQta] AS [MultiploQta], 
+    [T_listinobase].[noResa] AS [noResa], 
+    [T_listinobase].[PercAdatCostoCopia] AS [PercAdatCostoCopia], 
+    [T_listinobase].[AvviamStampa] AS [AvviamStampa], 
+    [T_listinobase].[MinimaleStampa] AS [MinimaleStampa], 
+    [T_listinobase].[ImgSito] AS [ImgSito], 
+    [T_listinobase].[PrendiIcoDa] AS [PrendiIcoDa], 
+    [T_listinobase].[TipoPrezzo] AS [TipoPrezzo], 
+    [T_listinobase].[DescrSito] AS [DescrSito], 
+    [T_listinobase].[LastUpdate] AS [LastUpdate], 
+    [T_listinobase].[IdTipoImballo] AS [IdTipoImballo], 
+    [T_listinobase].[IdModelloCubetto] AS [IdModelloCubetto], 
+    [T_listinobase].[GoogleDescr] AS [GoogleDescr], 
+    [T_listinobase].[GoogleSEO] AS [GoogleSEO], 
+    [T_listinobase].[MoltiplicatoreQta] AS [MoltiplicatoreQta], 
+    [T_listinobase].[InEvidenza] AS [InEvidenza], 
+    [T_listinobase].[Ordinamento] AS [Ordinamento], 
+    [T_listinobase].[NascondiOnline] AS [NascondiOnline], 
+    [T_listinobase].[LabelWeb] AS [LabelWeb], 
+    [T_listinobase].[NomeInterno] AS [NomeInterno], 
+    [T_listinobase].[LargRotolo] AS [LargRotolo], 
+    [T_listinobase].[QtaDefault] AS [QtaDefault], 
+    [T_listinobase].[MostraPrezziTabella] AS [MostraPrezziTabella], 
+    [T_listinobase].[IdHotFolderPostRefine] AS [IdHotFolderPostRefine], 
+    [T_listinobase].[CalcolaAncheDaSolo] AS [CalcolaAncheDaSolo], 
+    [T_listinobase].[IdMacchinarioProduzione] AS [IdMacchinarioProduzione], 
+    [T_listinobase].[IdMacchinarioTaglio] AS [IdMacchinarioTaglio], 
+    [T_listinobase].[TipoControlloPrezzo] AS [TipoControlloPrezzo], 
+    [T_listinobase].[DefaultNFogli] AS [DefaultNFogli], 
+    [T_listinobase].[VMotoreCalcolo] AS [VMotoreCalcolo], 
+    [T_listinobase].[PercPromoAutomatico] AS [PercPromoAutomatico], 
+    [T_listinobase].[PercMaxPromoFatturato] AS [PercMaxPromoFatturato], 
+    [T_listinobase].[MoltiplicatoreQta2] AS [MoltiplicatoreQta2], 
+    [T_listinobase].[MoltiplicatoreQta3] AS [MoltiplicatoreQta3], 
+    [T_listinobase].[MoltiplicatoreQta4] AS [MoltiplicatoreQta4], 
+    [T_listinobase].[MoltiplicatoreQta5] AS [MoltiplicatoreQta5], 
+    [T_listinobase].[AbilitaQtaIntermedie] AS [AbilitaQtaIntermedie], 
+    [T_listinobase].[AbilitaQtaSottoColonna1] AS [AbilitaQtaSottoColonna1], 
+    [T_listinobase].[MoltiplicatoreQta0] AS [MoltiplicatoreQta0], 
+    [T_listinobase].[MoltiplicatoreQtaIntermedia] AS [MoltiplicatoreQtaIntermedia], 
+    [T_listinobase].[IdMacchinarioProduzione2] AS [IdMacchinarioProduzione2], 
+    [T_listinobase].[AvviamStampa2] AS [AvviamStampa2], 
+    [T_listinobase].[MinimaleStampa2] AS [MinimaleStampa2], 
+    [T_listinobase].[IdFormatoMacchina2] AS [IdFormatoMacchina2], 
+    [T_listinobase].[IsFormerChoice] AS [IsFormerChoice], 
+    [T_listinobase].[IdListinoBaseSource] AS [IdListinoBaseSource], 
+    [T_listinobase].[PrefissoVarianti] AS [PrefissoVarianti], 
+    [T_listinobase].[NoAttachFile] AS [NoAttachFile], 
+    [T_listinobase].[ConSoggettiDuplicati] AS [ConSoggettiDuplicati], 
+    [T_listinobase].[idGruppoLogico] AS [idGruppoLogico], 
+    [T_listinobase].[IdGruppoListiniConsigliati] AS [IdGruppoListiniConsigliati], 
+    [T_listinobase].[IdGruppoLCAppartenenza] AS [IdGruppoLCAppartenenza], 
+    [T_listinobase].[AllowCustomSize] AS [AllowCustomSize], 
+    [T_listinobase].[IdLavTaglioSoggetti] AS [IdLavTaglioSoggetti], 
+    [T_listinobase].[IdLavTaglioDuplicati] AS [IdLavTaglioDuplicati], 
+    [T_listinobase].[AttivaPromoAutomatico] AS [AttivaPromoAutomatico], 
+    [T_listinobase].[CounterDayPromo] AS [CounterDayPromo], 
+    [T_listinobase].[IdZoho] AS [IdZoho]
+    FROM [dbo].[T_listinobase] AS [T_listinobase]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DbZohoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="DbZohoEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Utenti" EntityType="DbZohoModel.Utenti" />
+          <EntitySet Name="tokens" EntityType="DbZohoModel.tokens" />
+          <EntitySet Name="Ordini" EntityType="DbZohoModel.Ordini" />
+          <EntitySet Name="T_Corriere" EntityType="DbZohoModel.T_Corriere" />
+          <EntitySet Name="T_listinobase" EntityType="DbZohoModel.T_listinobase" />
+        </EntityContainer>
+        <EntityType Name="Utenti">
+          <Key>
+            <PropertyRef Name="IdUt" />
+          </Key>
+          <Property Name="IdUt" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PasswordHash" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="IdRubricaInt" Type="Int32" />
+          <Property Name="LastUpdate" Type="DateTime" Precision="0" />
+          <Property Name="RagSoc" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Nome" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Cognome" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Indirizzo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="IdProvincia" Type="Int32" />
+          <Property Name="IdComune" Type="Int32" />
+          <Property Name="Citta" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Provincia" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="Cap" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="Piva" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CodFisc" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="Tel" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Fax" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Cellulare" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="TipoRub" Type="Int32" Nullable="false" />
+          <Property Name="TipoWeb" Type="Int32" />
+          <Property Name="IdCorriereDef" Type="Int32" />
+          <Property Name="LastLogin" Type="DateTime" Precision="0" />
+          <Property Name="LastIp" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SitoWeb" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="IdPagamento" Type="Int32" />
+          <Property Name="DataIns" Type="DateTime" Precision="3" />
+          <Property Name="IdTipoAttivita" Type="Int32" />
+          <Property Name="DownloadEsplicito" Type="Int32" />
+          <Property Name="NoMail" Type="Int32" />
+          <Property Name="CodiceSDI" Type="String" MaxLength="7" FixedLength="false" Unicode="true" />
+          <Property Name="Pec" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateFromUser" Type="Int32" />
+          <Property Name="NoCheckDatiFisc" Type="Int32" />
+          <Property Name="IdNazione" Type="Int32" />
+          <Property Name="PrefissoPIva" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="DisattivaAccessoSito" Type="Int32" />
+          <Property Name="IdZoho" Type="String" MaxLength="19" FixedLength="false" Unicode="false" />
+          <Property Name="ZohoId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsDeletedInZoho" Type="Boolean" />
+          <Property Name="IdZohoAziende" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tokens">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Token_Refresh" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="LastUpdate" Type="DateTime" Precision="3" />
+          <Property Name="Token_Work" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Ordini">
+          <Key>
+            <PropertyRef Name="IdOrdine" />
+          </Key>
+          <Property Name="IdOrdine" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdUt" Type="Int32" />
+          <Property Name="IdListinoBase" Type="Int32" />
+          <Property Name="IdOrdineInt" Type="Int32" />
+          <Property Name="IdIndirizzo" Type="Int32" />
+          <Property Name="IdCorriere" Type="Int32" />
+          <Property Name="TipoConsegna" Type="Int32" />
+          <Property Name="DataIns" Type="DateTime" Precision="0" />
+          <Property Name="DataCambioStato" Type="DateTime" Precision="0" />
+          <Property Name="DataPrevProduzione" Type="DateTime" Precision="0" />
+          <Property Name="DataPrevConsegna" Type="DateTime" Precision="0" />
+          <Property Name="Annotazioni" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Nfogli" Type="Int32" />
+          <Property Name="Preventivo" Type="Int32" />
+          <Property Name="Anteprima" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="SorgenteFronte" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="SorgenteRetro" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="SorgenteCopertina" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="TipoRetro" Type="Int32" />
+          <Property Name="PrezzoCalcolatoNetto" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="PrezzoCorriere" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="TotaleNetto" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="TotaleIva" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="TotaleOrdine" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Qta" Type="Int32" />
+          <Property Name="NumeroColli" Type="Int32" />
+          <Property Name="Peso" Type="Int32" />
+          <Property Name="Altezza" Type="Int32" />
+          <Property Name="Larghezza" Type="Int32" />
+          <Property Name="Mq" Type="Single" />
+          <Property Name="Stato" Type="Int32" />
+          <Property Name="StatoWeb" Type="Int32" />
+          <Property Name="Lavorazioni" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="OrdineWeb" Type="Boolean" />
+          <Property Name="IdCons" Type="Int32" />
+          <Property Name="InseritoDa" Type="Int32" />
+          <Property Name="Profondita" Type="Int32" />
+          <Property Name="IdTipoFustella" Type="Int32" />
+          <Property Name="IdCoupon" Type="Int32" />
+          <Property Name="Sconto" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Ricarico" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="NomeLavoro" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Orientamento" Type="Int32" />
+          <Property Name="NoEmailDemone" Type="Int32" />
+          <Property Name="OrdineInOmaggio" Type="Int32" />
+          <Property Name="ExtraData" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="IdPromo" Type="Int32" />
+          <Property Name="UsaNomeLavoroInFattura" Type="Int32" />
+          <Property Name="IdMailPreventivo" Type="Int32" />
+          <Property Name="IdMacchinarioProduzioneUtilizzato" Type="Int32" />
+          <Property Name="ConsegnaGarantita" Type="DateTime" Precision="3" />
+          <Property Name="ConsegnaGarantitaDa" Type="Int32" />
+          <Property Name="IdZoho" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="T_Corriere">
+          <Key>
+            <PropertyRef Name="IdCorriere" />
+          </Key>
+          <Property Name="IdCorriere" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descrizione" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Costo" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="GGConsegna" Type="Int32" />
+          <Property Name="TestoMail" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="NomeBreve" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="PrevedeAccorpamento" Type="Boolean" Nullable="false" />
+          <Property Name="TipoCorriere" Type="Int32" />
+          <Property Name="PercPortoAssegnato" Type="Int32" />
+          <Property Name="KgLimite1" Type="Int32" />
+          <Property Name="TariffaLimite1" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="KgLimite2" Type="Int32" />
+          <Property Name="TariffaLimite2" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="KgLimite3" Type="Int32" />
+          <Property Name="TariffaLimite3" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="KgLimite4" Type="Int32" />
+          <Property Name="TariffaLimite4" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="KgLimite5" Type="Int32" />
+          <Property Name="TariffaLimite5" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="KgLimite6" Type="Int32" />
+          <Property Name="TariffaLimite6" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="KgLimite7" Type="Int32" />
+          <Property Name="TariffaLimite7" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="DisponibileOnline" Type="Boolean" />
+          <Property Name="Label" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="PathTrack" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Disattivo" Type="Int32" />
+        </EntityType>
+        <EntityType Name="T_listinobase">
+          <Key>
+            <PropertyRef Name="IdListinoBase" />
+          </Key>
+          <Property Name="IdListinoBase" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="IdCurvaAtt" Type="Int32" />
+          <Property Name="IdCurvaPubbl" Type="Int32" />
+          <Property Name="IdFormProd" Type="Int32" />
+          <Property Name="IdFormato" Type="Int32" />
+          <Property Name="IdTipoCartaCop" Type="Int32" />
+          <Property Name="IdTipoCarta" Type="Int32" />
+          <Property Name="IdTipoCartaDorso" Type="Int32" />
+          <Property Name="IdPrev" Type="Int32" />
+          <Property Name="IdColoreStampa" Type="Int32" />
+          <Property Name="v1" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="v2" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="v3" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="v4" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="v5" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="v6" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="qta1" Type="Single" />
+          <Property Name="qta2" Type="Single" />
+          <Property Name="qta3" Type="Single" />
+          <Property Name="qta4" Type="Single" />
+          <Property Name="qta5" Type="Single" />
+          <Property Name="qta6" Type="Single" />
+          <Property Name="p1" Type="Single" />
+          <Property Name="p2" Type="Single" />
+          <Property Name="p3" Type="Single" />
+          <Property Name="p4" Type="Single" />
+          <Property Name="p5" Type="Single" />
+          <Property Name="p6" Type="Single" />
+          <Property Name="qtacollo" Type="Int32" />
+          <Property Name="faccmin" Type="Int32" />
+          <Property Name="faccmax" Type="Int32" />
+          <Property Name="imgrif" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="nofaccsuimpianti" Type="Boolean" />
+          <Property Name="Disattivo" Type="Int16" />
+          <Property Name="MultiploQta" Type="Int32" />
+          <Property Name="noResa" Type="Int16" />
+          <Property Name="PercAdatCostoCopia" Type="Int32" />
+          <Property Name="AvviamStampa" Type="Int32" />
+          <Property Name="MinimaleStampa" Type="Int32" />
+          <Property Name="ImgSito" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="PrendiIcoDa" Type="Int32" />
+          <Property Name="TipoPrezzo" Type="Int32" />
+          <Property Name="DescrSito" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdate" Type="Int32" />
+          <Property Name="IdTipoImballo" Type="Int32" />
+          <Property Name="IdModelloCubetto" Type="Int32" />
+          <Property Name="GoogleDescr" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="GoogleSEO" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MoltiplicatoreQta" Type="Int32" />
+          <Property Name="InEvidenza" Type="Int32" />
+          <Property Name="Ordinamento" Type="Int32" />
+          <Property Name="NascondiOnline" Type="Int32" />
+          <Property Name="LabelWeb" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="NomeInterno" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LargRotolo" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="QtaDefault" Type="Int32" />
+          <Property Name="MostraPrezziTabella" Type="Int32" />
+          <Property Name="IdHotFolderPostRefine" Type="Int32" />
+          <Property Name="CalcolaAncheDaSolo" Type="Int32" />
+          <Property Name="IdMacchinarioProduzione" Type="Int32" />
+          <Property Name="IdMacchinarioTaglio" Type="Int32" />
+          <Property Name="TipoControlloPrezzo" Type="Int32" />
+          <Property Name="DefaultNFogli" Type="Int32" />
+          <Property Name="VMotoreCalcolo" Type="Int32" />
+          <Property Name="PercPromoAutomatico" Type="Int32" />
+          <Property Name="PercMaxPromoFatturato" Type="Int32" />
+          <Property Name="MoltiplicatoreQta2" Type="Int32" />
+          <Property Name="MoltiplicatoreQta3" Type="Int32" />
+          <Property Name="MoltiplicatoreQta4" Type="Int32" />
+          <Property Name="MoltiplicatoreQta5" Type="Int32" />
+          <Property Name="AbilitaQtaIntermedie" Type="Int32" />
+          <Property Name="AbilitaQtaSottoColonna1" Type="Int32" />
+          <Property Name="MoltiplicatoreQta0" Type="Int32" />
+          <Property Name="MoltiplicatoreQtaIntermedia" Type="Int32" />
+          <Property Name="IdMacchinarioProduzione2" Type="Int32" />
+          <Property Name="AvviamStampa2" Type="Int32" />
+          <Property Name="MinimaleStampa2" Type="Int32" />
+          <Property Name="IdFormatoMacchina2" Type="Int32" />
+          <Property Name="IsFormerChoice" Type="Int32" />
+          <Property Name="IdListinoBaseSource" Type="Int32" />
+          <Property Name="PrefissoVarianti" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NoAttachFile" Type="Int32" />
+          <Property Name="ConSoggettiDuplicati" Type="Int32" />
+          <Property Name="idGruppoLogico" Type="Int32" />
+          <Property Name="IdGruppoListiniConsigliati" Type="Int32" />
+          <Property Name="IdGruppoLCAppartenenza" Type="Int32" />
+          <Property Name="AllowCustomSize" Type="Int32" />
+          <Property Name="IdLavTaglioSoggetti" Type="Int32" />
+          <Property Name="IdLavTaglioDuplicati" Type="Int32" />
+          <Property Name="AttivaPromoAutomatico" Type="Int32" />
+          <Property Name="CounterDayPromo" Type="Int32" />
+          <Property Name="IdZoho" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DbZohoModelStoreContainer" CdmEntityContainer="DbZohoEntities">
+        <EntitySetMapping Name="Utenti">
+            <EntityTypeMapping TypeName="DbZohoModel.Utenti">
+              <MappingFragment StoreEntitySet="Utenti">
+                <ScalarProperty Name="IdZohoAziende" ColumnName="IdZohoAziende" />
+                <ScalarProperty Name="IsDeletedInZoho" ColumnName="IsDeletedInZoho" />
+                <ScalarProperty Name="ZohoId" ColumnName="ZohoId" />
+                <ScalarProperty Name="IdZoho" ColumnName="IdZoho" />
+                <ScalarProperty Name="DisattivaAccessoSito" ColumnName="DisattivaAccessoSito" />
+                <ScalarProperty Name="PrefissoPIva" ColumnName="PrefissoPIva" />
+                <ScalarProperty Name="IdNazione" ColumnName="IdNazione" />
+                <ScalarProperty Name="NoCheckDatiFisc" ColumnName="NoCheckDatiFisc" />
+                <ScalarProperty Name="UpdateFromUser" ColumnName="UpdateFromUser" />
+                <ScalarProperty Name="Pec" ColumnName="Pec" />
+                <ScalarProperty Name="CodiceSDI" ColumnName="CodiceSDI" />
+                <ScalarProperty Name="NoMail" ColumnName="NoMail" />
+                <ScalarProperty Name="DownloadEsplicito" ColumnName="DownloadEsplicito" />
+                <ScalarProperty Name="IdTipoAttivita" ColumnName="IdTipoAttivita" />
+                <ScalarProperty Name="DataIns" ColumnName="DataIns" />
+                <ScalarProperty Name="IdPagamento" ColumnName="IdPagamento" />
+                <ScalarProperty Name="SitoWeb" ColumnName="SitoWeb" />
+                <ScalarProperty Name="LastIp" ColumnName="LastIp" />
+                <ScalarProperty Name="LastLogin" ColumnName="LastLogin" />
+                <ScalarProperty Name="IdCorriereDef" ColumnName="IdCorriereDef" />
+                <ScalarProperty Name="TipoWeb" ColumnName="TipoWeb" />
+                <ScalarProperty Name="TipoRub" ColumnName="TipoRub" />
+                <ScalarProperty Name="Cellulare" ColumnName="Cellulare" />
+                <ScalarProperty Name="Fax" ColumnName="Fax" />
+                <ScalarProperty Name="Tel" ColumnName="Tel" />
+                <ScalarProperty Name="CodFisc" ColumnName="CodFisc" />
+                <ScalarProperty Name="Piva" ColumnName="Piva" />
+                <ScalarProperty Name="Cap" ColumnName="Cap" />
+                <ScalarProperty Name="Provincia" ColumnName="Provincia" />
+                <ScalarProperty Name="Citta" ColumnName="Citta" />
+                <ScalarProperty Name="IdComune" ColumnName="IdComune" />
+                <ScalarProperty Name="IdProvincia" ColumnName="IdProvincia" />
+                <ScalarProperty Name="Indirizzo" ColumnName="Indirizzo" />
+                <ScalarProperty Name="Cognome" ColumnName="Cognome" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="RagSoc" ColumnName="RagSoc" />
+                <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+                <ScalarProperty Name="IdRubricaInt" ColumnName="IdRubricaInt" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="IdUt" ColumnName="IdUt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tokens">
+            <EntityTypeMapping TypeName="DbZohoModel.tokens">
+              <MappingFragment StoreEntitySet="tokens">
+                <ScalarProperty Name="Token_Work" ColumnName="Token_Work" />
+                <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+                <ScalarProperty Name="Token_Refresh" ColumnName="Token_Refresh" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ordini">
+            <EntityTypeMapping TypeName="DbZohoModel.Ordini">
+              <MappingFragment StoreEntitySet="Ordini">
+                <ScalarProperty Name="IdZoho" ColumnName="IdZoho" />
+                <ScalarProperty Name="ConsegnaGarantitaDa" ColumnName="ConsegnaGarantitaDa" />
+                <ScalarProperty Name="ConsegnaGarantita" ColumnName="ConsegnaGarantita" />
+                <ScalarProperty Name="IdMacchinarioProduzioneUtilizzato" ColumnName="IdMacchinarioProduzioneUtilizzato" />
+                <ScalarProperty Name="IdMailPreventivo" ColumnName="IdMailPreventivo" />
+                <ScalarProperty Name="UsaNomeLavoroInFattura" ColumnName="UsaNomeLavoroInFattura" />
+                <ScalarProperty Name="IdPromo" ColumnName="IdPromo" />
+                <ScalarProperty Name="ExtraData" ColumnName="ExtraData" />
+                <ScalarProperty Name="OrdineInOmaggio" ColumnName="OrdineInOmaggio" />
+                <ScalarProperty Name="NoEmailDemone" ColumnName="NoEmailDemone" />
+                <ScalarProperty Name="Orientamento" ColumnName="Orientamento" />
+                <ScalarProperty Name="NomeLavoro" ColumnName="NomeLavoro" />
+                <ScalarProperty Name="Ricarico" ColumnName="Ricarico" />
+                <ScalarProperty Name="Sconto" ColumnName="Sconto" />
+                <ScalarProperty Name="IdCoupon" ColumnName="IdCoupon" />
+                <ScalarProperty Name="IdTipoFustella" ColumnName="IdTipoFustella" />
+                <ScalarProperty Name="Profondita" ColumnName="Profondita" />
+                <ScalarProperty Name="InseritoDa" ColumnName="InseritoDa" />
+                <ScalarProperty Name="IdCons" ColumnName="IdCons" />
+                <ScalarProperty Name="OrdineWeb" ColumnName="OrdineWeb" />
+                <ScalarProperty Name="Lavorazioni" ColumnName="Lavorazioni" />
+                <ScalarProperty Name="StatoWeb" ColumnName="StatoWeb" />
+                <ScalarProperty Name="Stato" ColumnName="Stato" />
+                <ScalarProperty Name="Mq" ColumnName="Mq" />
+                <ScalarProperty Name="Larghezza" ColumnName="Larghezza" />
+                <ScalarProperty Name="Altezza" ColumnName="Altezza" />
+                <ScalarProperty Name="Peso" ColumnName="Peso" />
+                <ScalarProperty Name="NumeroColli" ColumnName="NumeroColli" />
+                <ScalarProperty Name="Qta" ColumnName="Qta" />
+                <ScalarProperty Name="TotaleOrdine" ColumnName="TotaleOrdine" />
+                <ScalarProperty Name="TotaleIva" ColumnName="TotaleIva" />
+                <ScalarProperty Name="TotaleNetto" ColumnName="TotaleNetto" />
+                <ScalarProperty Name="PrezzoCorriere" ColumnName="PrezzoCorriere" />
+                <ScalarProperty Name="PrezzoCalcolatoNetto" ColumnName="PrezzoCalcolatoNetto" />
+                <ScalarProperty Name="TipoRetro" ColumnName="TipoRetro" />
+                <ScalarProperty Name="SorgenteCopertina" ColumnName="SorgenteCopertina" />
+                <ScalarProperty Name="SorgenteRetro" ColumnName="SorgenteRetro" />
+                <ScalarProperty Name="SorgenteFronte" ColumnName="SorgenteFronte" />
+                <ScalarProperty Name="Anteprima" ColumnName="Anteprima" />
+                <ScalarProperty Name="Preventivo" ColumnName="Preventivo" />
+                <ScalarProperty Name="Nfogli" ColumnName="Nfogli" />
+                <ScalarProperty Name="Annotazioni" ColumnName="Annotazioni" />
+                <ScalarProperty Name="DataPrevConsegna" ColumnName="DataPrevConsegna" />
+                <ScalarProperty Name="DataPrevProduzione" ColumnName="DataPrevProduzione" />
+                <ScalarProperty Name="DataCambioStato" ColumnName="DataCambioStato" />
+                <ScalarProperty Name="DataIns" ColumnName="DataIns" />
+                <ScalarProperty Name="TipoConsegna" ColumnName="TipoConsegna" />
+                <ScalarProperty Name="IdCorriere" ColumnName="IdCorriere" />
+                <ScalarProperty Name="IdIndirizzo" ColumnName="IdIndirizzo" />
+                <ScalarProperty Name="IdOrdineInt" ColumnName="IdOrdineInt" />
+                <ScalarProperty Name="IdListinoBase" ColumnName="IdListinoBase" />
+                <ScalarProperty Name="IdUt" ColumnName="IdUt" />
+                <ScalarProperty Name="IdOrdine" ColumnName="IdOrdine" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_Corriere">
+            <EntityTypeMapping TypeName="DbZohoModel.T_Corriere">
+              <MappingFragment StoreEntitySet="T_Corriere">
+                <ScalarProperty Name="Disattivo" ColumnName="Disattivo" />
+                <ScalarProperty Name="PathTrack" ColumnName="PathTrack" />
+                <ScalarProperty Name="Label" ColumnName="Label" />
+                <ScalarProperty Name="DisponibileOnline" ColumnName="DisponibileOnline" />
+                <ScalarProperty Name="TariffaLimite7" ColumnName="TariffaLimite7" />
+                <ScalarProperty Name="KgLimite7" ColumnName="KgLimite7" />
+                <ScalarProperty Name="TariffaLimite6" ColumnName="TariffaLimite6" />
+                <ScalarProperty Name="KgLimite6" ColumnName="KgLimite6" />
+                <ScalarProperty Name="TariffaLimite5" ColumnName="TariffaLimite5" />
+                <ScalarProperty Name="KgLimite5" ColumnName="KgLimite5" />
+                <ScalarProperty Name="TariffaLimite4" ColumnName="TariffaLimite4" />
+                <ScalarProperty Name="KgLimite4" ColumnName="KgLimite4" />
+                <ScalarProperty Name="TariffaLimite3" ColumnName="TariffaLimite3" />
+                <ScalarProperty Name="KgLimite3" ColumnName="KgLimite3" />
+                <ScalarProperty Name="TariffaLimite2" ColumnName="TariffaLimite2" />
+                <ScalarProperty Name="KgLimite2" ColumnName="KgLimite2" />
+                <ScalarProperty Name="TariffaLimite1" ColumnName="TariffaLimite1" />
+                <ScalarProperty Name="KgLimite1" ColumnName="KgLimite1" />
+                <ScalarProperty Name="PercPortoAssegnato" ColumnName="PercPortoAssegnato" />
+                <ScalarProperty Name="TipoCorriere" ColumnName="TipoCorriere" />
+                <ScalarProperty Name="PrevedeAccorpamento" ColumnName="PrevedeAccorpamento" />
+                <ScalarProperty Name="NomeBreve" ColumnName="NomeBreve" />
+                <ScalarProperty Name="TestoMail" ColumnName="TestoMail" />
+                <ScalarProperty Name="GGConsegna" ColumnName="GGConsegna" />
+                <ScalarProperty Name="Costo" ColumnName="Costo" />
+                <ScalarProperty Name="Descrizione" ColumnName="Descrizione" />
+                <ScalarProperty Name="IdCorriere" ColumnName="IdCorriere" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_listinobase">
+            <EntityTypeMapping TypeName="DbZohoModel.T_listinobase">
+              <MappingFragment StoreEntitySet="T_listinobase">
+                <ScalarProperty Name="IdZoho" ColumnName="IdZoho" />
+                <ScalarProperty Name="CounterDayPromo" ColumnName="CounterDayPromo" />
+                <ScalarProperty Name="AttivaPromoAutomatico" ColumnName="AttivaPromoAutomatico" />
+                <ScalarProperty Name="IdLavTaglioDuplicati" ColumnName="IdLavTaglioDuplicati" />
+                <ScalarProperty Name="IdLavTaglioSoggetti" ColumnName="IdLavTaglioSoggetti" />
+                <ScalarProperty Name="AllowCustomSize" ColumnName="AllowCustomSize" />
+                <ScalarProperty Name="IdGruppoLCAppartenenza" ColumnName="IdGruppoLCAppartenenza" />
+                <ScalarProperty Name="IdGruppoListiniConsigliati" ColumnName="IdGruppoListiniConsigliati" />
+                <ScalarProperty Name="idGruppoLogico" ColumnName="idGruppoLogico" />
+                <ScalarProperty Name="ConSoggettiDuplicati" ColumnName="ConSoggettiDuplicati" />
+                <ScalarProperty Name="NoAttachFile" ColumnName="NoAttachFile" />
+                <ScalarProperty Name="PrefissoVarianti" ColumnName="PrefissoVarianti" />
+                <ScalarProperty Name="IdListinoBaseSource" ColumnName="IdListinoBaseSource" />
+                <ScalarProperty Name="IsFormerChoice" ColumnName="IsFormerChoice" />
+                <ScalarProperty Name="IdFormatoMacchina2" ColumnName="IdFormatoMacchina2" />
+                <ScalarProperty Name="MinimaleStampa2" ColumnName="MinimaleStampa2" />
+                <ScalarProperty Name="AvviamStampa2" ColumnName="AvviamStampa2" />
+                <ScalarProperty Name="IdMacchinarioProduzione2" ColumnName="IdMacchinarioProduzione2" />
+                <ScalarProperty Name="MoltiplicatoreQtaIntermedia" ColumnName="MoltiplicatoreQtaIntermedia" />
+                <ScalarProperty Name="MoltiplicatoreQta0" ColumnName="MoltiplicatoreQta0" />
+                <ScalarProperty Name="AbilitaQtaSottoColonna1" ColumnName="AbilitaQtaSottoColonna1" />
+                <ScalarProperty Name="AbilitaQtaIntermedie" ColumnName="AbilitaQtaIntermedie" />
+                <ScalarProperty Name="MoltiplicatoreQta5" ColumnName="MoltiplicatoreQta5" />
+                <ScalarProperty Name="MoltiplicatoreQta4" ColumnName="MoltiplicatoreQta4" />
+                <ScalarProperty Name="MoltiplicatoreQta3" ColumnName="MoltiplicatoreQta3" />
+                <ScalarProperty Name="MoltiplicatoreQta2" ColumnName="MoltiplicatoreQta2" />
+                <ScalarProperty Name="PercMaxPromoFatturato" ColumnName="PercMaxPromoFatturato" />
+                <ScalarProperty Name="PercPromoAutomatico" ColumnName="PercPromoAutomatico" />
+                <ScalarProperty Name="VMotoreCalcolo" ColumnName="VMotoreCalcolo" />
+                <ScalarProperty Name="DefaultNFogli" ColumnName="DefaultNFogli" />
+                <ScalarProperty Name="TipoControlloPrezzo" ColumnName="TipoControlloPrezzo" />
+                <ScalarProperty Name="IdMacchinarioTaglio" ColumnName="IdMacchinarioTaglio" />
+                <ScalarProperty Name="IdMacchinarioProduzione" ColumnName="IdMacchinarioProduzione" />
+                <ScalarProperty Name="CalcolaAncheDaSolo" ColumnName="CalcolaAncheDaSolo" />
+                <ScalarProperty Name="IdHotFolderPostRefine" ColumnName="IdHotFolderPostRefine" />
+                <ScalarProperty Name="MostraPrezziTabella" ColumnName="MostraPrezziTabella" />
+                <ScalarProperty Name="QtaDefault" ColumnName="QtaDefault" />
+                <ScalarProperty Name="LargRotolo" ColumnName="LargRotolo" />
+                <ScalarProperty Name="NomeInterno" ColumnName="NomeInterno" />
+                <ScalarProperty Name="LabelWeb" ColumnName="LabelWeb" />
+                <ScalarProperty Name="NascondiOnline" ColumnName="NascondiOnline" />
+                <ScalarProperty Name="Ordinamento" ColumnName="Ordinamento" />
+                <ScalarProperty Name="InEvidenza" ColumnName="InEvidenza" />
+                <ScalarProperty Name="MoltiplicatoreQta" ColumnName="MoltiplicatoreQta" />
+                <ScalarProperty Name="GoogleSEO" ColumnName="GoogleSEO" />
+                <ScalarProperty Name="GoogleDescr" ColumnName="GoogleDescr" />
+                <ScalarProperty Name="IdModelloCubetto" ColumnName="IdModelloCubetto" />
+                <ScalarProperty Name="IdTipoImballo" ColumnName="IdTipoImballo" />
+                <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+                <ScalarProperty Name="DescrSito" ColumnName="DescrSito" />
+                <ScalarProperty Name="TipoPrezzo" ColumnName="TipoPrezzo" />
+                <ScalarProperty Name="PrendiIcoDa" ColumnName="PrendiIcoDa" />
+                <ScalarProperty Name="ImgSito" ColumnName="ImgSito" />
+                <ScalarProperty Name="MinimaleStampa" ColumnName="MinimaleStampa" />
+                <ScalarProperty Name="AvviamStampa" ColumnName="AvviamStampa" />
+                <ScalarProperty Name="PercAdatCostoCopia" ColumnName="PercAdatCostoCopia" />
+                <ScalarProperty Name="noResa" ColumnName="noResa" />
+                <ScalarProperty Name="MultiploQta" ColumnName="MultiploQta" />
+                <ScalarProperty Name="Disattivo" ColumnName="Disattivo" />
+                <ScalarProperty Name="nofaccsuimpianti" ColumnName="nofaccsuimpianti" />
+                <ScalarProperty Name="imgrif" ColumnName="imgrif" />
+                <ScalarProperty Name="faccmax" ColumnName="faccmax" />
+                <ScalarProperty Name="faccmin" ColumnName="faccmin" />
+                <ScalarProperty Name="qtacollo" ColumnName="qtacollo" />
+                <ScalarProperty Name="p6" ColumnName="p6" />
+                <ScalarProperty Name="p5" ColumnName="p5" />
+                <ScalarProperty Name="p4" ColumnName="p4" />
+                <ScalarProperty Name="p3" ColumnName="p3" />
+                <ScalarProperty Name="p2" ColumnName="p2" />
+                <ScalarProperty Name="p1" ColumnName="p1" />
+                <ScalarProperty Name="qta6" ColumnName="qta6" />
+                <ScalarProperty Name="qta5" ColumnName="qta5" />
+                <ScalarProperty Name="qta4" ColumnName="qta4" />
+                <ScalarProperty Name="qta3" ColumnName="qta3" />
+                <ScalarProperty Name="qta2" ColumnName="qta2" />
+                <ScalarProperty Name="qta1" ColumnName="qta1" />
+                <ScalarProperty Name="v6" ColumnName="v6" />
+                <ScalarProperty Name="v5" ColumnName="v5" />
+                <ScalarProperty Name="v4" ColumnName="v4" />
+                <ScalarProperty Name="v3" ColumnName="v3" />
+                <ScalarProperty Name="v2" ColumnName="v2" />
+                <ScalarProperty Name="v1" ColumnName="v1" />
+                <ScalarProperty Name="IdColoreStampa" ColumnName="IdColoreStampa" />
+                <ScalarProperty Name="IdPrev" ColumnName="IdPrev" />
+                <ScalarProperty Name="IdTipoCartaDorso" ColumnName="IdTipoCartaDorso" />
+                <ScalarProperty Name="IdTipoCarta" ColumnName="IdTipoCarta" />
+                <ScalarProperty Name="IdTipoCartaCop" ColumnName="IdTipoCartaCop" />
+                <ScalarProperty Name="IdFormato" ColumnName="IdFormato" />
+                <ScalarProperty Name="IdFormProd" ColumnName="IdFormProd" />
+                <ScalarProperty Name="IdCurvaPubbl" ColumnName="IdCurvaPubbl" />
+                <ScalarProperty Name="IdCurvaAtt" ColumnName="IdCurvaAtt" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="IdListinoBase" ColumnName="IdListinoBase" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,253 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DbZohoModelStoreContainer" CdmEntityContainer="DbZohoEntities">
+    <EntitySetMapping Name="Utenti">
+      <EntityTypeMapping TypeName="DbZohoModel.Utenti">
+        <MappingFragment StoreEntitySet="Utenti">
+          <ScalarProperty Name="IdZohoAziende" ColumnName="IdZohoAziende" />
+          <ScalarProperty Name="IsDeletedInZoho" ColumnName="IsDeletedInZoho" />
+          <ScalarProperty Name="ZohoId" ColumnName="ZohoId" />
+          <ScalarProperty Name="IdZoho" ColumnName="IdZoho" />
+          <ScalarProperty Name="DisattivaAccessoSito" ColumnName="DisattivaAccessoSito" />
+          <ScalarProperty Name="PrefissoPIva" ColumnName="PrefissoPIva" />
+          <ScalarProperty Name="IdNazione" ColumnName="IdNazione" />
+          <ScalarProperty Name="NoCheckDatiFisc" ColumnName="NoCheckDatiFisc" />
+          <ScalarProperty Name="UpdateFromUser" ColumnName="UpdateFromUser" />
+          <ScalarProperty Name="Pec" ColumnName="Pec" />
+          <ScalarProperty Name="CodiceSDI" ColumnName="CodiceSDI" />
+          <ScalarProperty Name="NoMail" ColumnName="NoMail" />
+          <ScalarProperty Name="DownloadEsplicito" ColumnName="DownloadEsplicito" />
+          <ScalarProperty Name="IdTipoAttivita" ColumnName="IdTipoAttivita" />
+          <ScalarProperty Name="DataIns" ColumnName="DataIns" />
+          <ScalarProperty Name="IdPagamento" ColumnName="IdPagamento" />
+          <ScalarProperty Name="SitoWeb" ColumnName="SitoWeb" />
+          <ScalarProperty Name="LastIp" ColumnName="LastIp" />
+          <ScalarProperty Name="LastLogin" ColumnName="LastLogin" />
+          <ScalarProperty Name="IdCorriereDef" ColumnName="IdCorriereDef" />
+          <ScalarProperty Name="TipoWeb" ColumnName="TipoWeb" />
+          <ScalarProperty Name="TipoRub" ColumnName="TipoRub" />
+          <ScalarProperty Name="Cellulare" ColumnName="Cellulare" />
+          <ScalarProperty Name="Fax" ColumnName="Fax" />
+          <ScalarProperty Name="Tel" ColumnName="Tel" />
+          <ScalarProperty Name="CodFisc" ColumnName="CodFisc" />
+          <ScalarProperty Name="Piva" ColumnName="Piva" />
+          <ScalarProperty Name="Cap" ColumnName="Cap" />
+          <ScalarProperty Name="Provincia" ColumnName="Provincia" />
+          <ScalarProperty Name="Citta" ColumnName="Citta" />
+          <ScalarProperty Name="IdComune" ColumnName="IdComune" />
+          <ScalarProperty Name="IdProvincia" ColumnName="IdProvincia" />
+          <ScalarProperty Name="Indirizzo" ColumnName="Indirizzo" />
+          <ScalarProperty Name="Cognome" ColumnName="Cognome" />
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
+          <ScalarProperty Name="RagSoc" ColumnName="RagSoc" />
+          <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+          <ScalarProperty Name="IdRubricaInt" ColumnName="IdRubricaInt" />
+          <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="IdUt" ColumnName="IdUt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tokens">
+      <EntityTypeMapping TypeName="DbZohoModel.tokens">
+        <MappingFragment StoreEntitySet="tokens">
+          <ScalarProperty Name="Token_Work" ColumnName="Token_Work" />
+          <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+          <ScalarProperty Name="Token_Refresh" ColumnName="Token_Refresh" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ordini">
+      <EntityTypeMapping TypeName="DbZohoModel.Ordini">
+        <MappingFragment StoreEntitySet="Ordini">
+          <ScalarProperty Name="IdZoho" ColumnName="IdZoho" />
+          <ScalarProperty Name="ConsegnaGarantitaDa" ColumnName="ConsegnaGarantitaDa" />
+          <ScalarProperty Name="ConsegnaGarantita" ColumnName="ConsegnaGarantita" />
+          <ScalarProperty Name="IdMacchinarioProduzioneUtilizzato" ColumnName="IdMacchinarioProduzioneUtilizzato" />
+          <ScalarProperty Name="IdMailPreventivo" ColumnName="IdMailPreventivo" />
+          <ScalarProperty Name="UsaNomeLavoroInFattura" ColumnName="UsaNomeLavoroInFattura" />
+          <ScalarProperty Name="IdPromo" ColumnName="IdPromo" />
+          <ScalarProperty Name="ExtraData" ColumnName="ExtraData" />
+          <ScalarProperty Name="OrdineInOmaggio" ColumnName="OrdineInOmaggio" />
+          <ScalarProperty Name="NoEmailDemone" ColumnName="NoEmailDemone" />
+          <ScalarProperty Name="Orientamento" ColumnName="Orientamento" />
+          <ScalarProperty Name="NomeLavoro" ColumnName="NomeLavoro" />
+          <ScalarProperty Name="Ricarico" ColumnName="Ricarico" />
+          <ScalarProperty Name="Sconto" ColumnName="Sconto" />
+          <ScalarProperty Name="IdCoupon" ColumnName="IdCoupon" />
+          <ScalarProperty Name="IdTipoFustella" ColumnName="IdTipoFustella" />
+          <ScalarProperty Name="Profondita" ColumnName="Profondita" />
+          <ScalarProperty Name="InseritoDa" ColumnName="InseritoDa" />
+          <ScalarProperty Name="IdCons" ColumnName="IdCons" />
+          <ScalarProperty Name="OrdineWeb" ColumnName="OrdineWeb" />
+          <ScalarProperty Name="Lavorazioni" ColumnName="Lavorazioni" />
+          <ScalarProperty Name="StatoWeb" ColumnName="StatoWeb" />
+          <ScalarProperty Name="Stato" ColumnName="Stato" />
+          <ScalarProperty Name="Mq" ColumnName="Mq" />
+          <ScalarProperty Name="Larghezza" ColumnName="Larghezza" />
+          <ScalarProperty Name="Altezza" ColumnName="Altezza" />
+          <ScalarProperty Name="Peso" ColumnName="Peso" />
+          <ScalarProperty Name="NumeroColli" ColumnName="NumeroColli" />
+          <ScalarProperty Name="Qta" ColumnName="Qta" />
+          <ScalarProperty Name="TotaleOrdine" ColumnName="TotaleOrdine" />
+          <ScalarProperty Name="TotaleIva" ColumnName="TotaleIva" />
+          <ScalarProperty Name="TotaleNetto" ColumnName="TotaleNetto" />
+          <ScalarProperty Name="PrezzoCorriere" ColumnName="PrezzoCorriere" />
+          <ScalarProperty Name="PrezzoCalcolatoNetto" ColumnName="PrezzoCalcolatoNetto" />
+          <ScalarProperty Name="TipoRetro" ColumnName="TipoRetro" />
+          <ScalarProperty Name="SorgenteCopertina" ColumnName="SorgenteCopertina" />
+          <ScalarProperty Name="SorgenteRetro" ColumnName="SorgenteRetro" />
+          <ScalarProperty Name="SorgenteFronte" ColumnName="SorgenteFronte" />
+          <ScalarProperty Name="Anteprima" ColumnName="Anteprima" />
+          <ScalarProperty Name="Preventivo" ColumnName="Preventivo" />
+          <ScalarProperty Name="Nfogli" ColumnName="Nfogli" />
+          <ScalarProperty Name="Annotazioni" ColumnName="Annotazioni" />
+          <ScalarProperty Name="DataPrevConsegna" ColumnName="DataPrevConsegna" />
+          <ScalarProperty Name="DataPrevProduzione" ColumnName="DataPrevProduzione" />
+          <ScalarProperty Name="DataCambioStato" ColumnName="DataCambioStato" />
+          <ScalarProperty Name="DataIns" ColumnName="DataIns" />
+          <ScalarProperty Name="TipoConsegna" ColumnName="TipoConsegna" />
+          <ScalarProperty Name="IdCorriere" ColumnName="IdCorriere" />
+          <ScalarProperty Name="IdIndirizzo" ColumnName="IdIndirizzo" />
+          <ScalarProperty Name="IdOrdineInt" ColumnName="IdOrdineInt" />
+          <ScalarProperty Name="IdListinoBase" ColumnName="IdListinoBase" />
+          <ScalarProperty Name="IdUt" ColumnName="IdUt" />
+          <ScalarProperty Name="IdOrdine" ColumnName="IdOrdine" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_Corriere">
+      <EntityTypeMapping TypeName="DbZohoModel.T_Corriere">
+        <MappingFragment StoreEntitySet="T_Corriere">
+          <ScalarProperty Name="Disattivo" ColumnName="Disattivo" />
+          <ScalarProperty Name="PathTrack" ColumnName="PathTrack" />
+          <ScalarProperty Name="Label" ColumnName="Label" />
+          <ScalarProperty Name="DisponibileOnline" ColumnName="DisponibileOnline" />
+          <ScalarProperty Name="TariffaLimite7" ColumnName="TariffaLimite7" />
+          <ScalarProperty Name="KgLimite7" ColumnName="KgLimite7" />
+          <ScalarProperty Name="TariffaLimite6" ColumnName="TariffaLimite6" />
+          <ScalarProperty Name="KgLimite6" ColumnName="KgLimite6" />
+          <ScalarProperty Name="TariffaLimite5" ColumnName="TariffaLimite5" />
+          <ScalarProperty Name="KgLimite5" ColumnName="KgLimite5" />
+          <ScalarProperty Name="TariffaLimite4" ColumnName="TariffaLimite4" />
+          <ScalarProperty Name="KgLimite4" ColumnName="KgLimite4" />
+          <ScalarProperty Name="TariffaLimite3" ColumnName="TariffaLimite3" />
+          <ScalarProperty Name="KgLimite3" ColumnName="KgLimite3" />
+          <ScalarProperty Name="TariffaLimite2" ColumnName="TariffaLimite2" />
+          <ScalarProperty Name="KgLimite2" ColumnName="KgLimite2" />
+          <ScalarProperty Name="TariffaLimite1" ColumnName="TariffaLimite1" />
+          <ScalarProperty Name="KgLimite1" ColumnName="KgLimite1" />
+          <ScalarProperty Name="PercPortoAssegnato" ColumnName="PercPortoAssegnato" />
+          <ScalarProperty Name="TipoCorriere" ColumnName="TipoCorriere" />
+          <ScalarProperty Name="PrevedeAccorpamento" ColumnName="PrevedeAccorpamento" />
+          <ScalarProperty Name="NomeBreve" ColumnName="NomeBreve" />
+          <ScalarProperty Name="TestoMail" ColumnName="TestoMail" />
+          <ScalarProperty Name="GGConsegna" ColumnName="GGConsegna" />
+          <ScalarProperty Name="Costo" ColumnName="Costo" />
+          <ScalarProperty Name="Descrizione" ColumnName="Descrizione" />
+          <ScalarProperty Name="IdCorriere" ColumnName="IdCorriere" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_listinobase">
+      <EntityTypeMapping TypeName="DbZohoModel.T_listinobase">
+        <MappingFragment StoreEntitySet="T_listinobase">
+          <ScalarProperty Name="IdZoho" ColumnName="IdZoho" />
+          <ScalarProperty Name="CounterDayPromo" ColumnName="CounterDayPromo" />
+          <ScalarProperty Name="AttivaPromoAutomatico" ColumnName="AttivaPromoAutomatico" />
+          <ScalarProperty Name="IdLavTaglioDuplicati" ColumnName="IdLavTaglioDuplicati" />
+          <ScalarProperty Name="IdLavTaglioSoggetti" ColumnName="IdLavTaglioSoggetti" />
+          <ScalarProperty Name="AllowCustomSize" ColumnName="AllowCustomSize" />
+          <ScalarProperty Name="IdGruppoLCAppartenenza" ColumnName="IdGruppoLCAppartenenza" />
+          <ScalarProperty Name="IdGruppoListiniConsigliati" ColumnName="IdGruppoListiniConsigliati" />
+          <ScalarProperty Name="idGruppoLogico" ColumnName="idGruppoLogico" />
+          <ScalarProperty Name="ConSoggettiDuplicati" ColumnName="ConSoggettiDuplicati" />
+          <ScalarProperty Name="NoAttachFile" ColumnName="NoAttachFile" />
+          <ScalarProperty Name="PrefissoVarianti" ColumnName="PrefissoVarianti" />
+          <ScalarProperty Name="IdListinoBaseSource" ColumnName="IdListinoBaseSource" />
+          <ScalarProperty Name="IsFormerChoice" ColumnName="IsFormerChoice" />
+          <ScalarProperty Name="IdFormatoMacchina2" ColumnName="IdFormatoMacchina2" />
+          <ScalarProperty Name="MinimaleStampa2" ColumnName="MinimaleStampa2" />
+          <ScalarProperty Name="AvviamStampa2" ColumnName="AvviamStampa2" />
+          <ScalarProperty Name="IdMacchinarioProduzione2" ColumnName="IdMacchinarioProduzione2" />
+          <ScalarProperty Name="MoltiplicatoreQtaIntermedia" ColumnName="MoltiplicatoreQtaIntermedia" />
+          <ScalarProperty Name="MoltiplicatoreQta0" ColumnName="MoltiplicatoreQta0" />
+          <ScalarProperty Name="AbilitaQtaSottoColonna1" ColumnName="AbilitaQtaSottoColonna1" />
+          <ScalarProperty Name="AbilitaQtaIntermedie" ColumnName="AbilitaQtaIntermedie" />
+          <ScalarProperty Name="MoltiplicatoreQta5" ColumnName="MoltiplicatoreQta5" />
+          <ScalarProperty Name="MoltiplicatoreQta4" ColumnName="MoltiplicatoreQta4" />
+          <ScalarProperty Name="MoltiplicatoreQta3" ColumnName="MoltiplicatoreQta3" />
+          <ScalarProperty Name="MoltiplicatoreQta2" ColumnName="MoltiplicatoreQta2" />
+          <ScalarProperty Name="PercMaxPromoFatturato" ColumnName="PercMaxPromoFatturato" />
+          <ScalarProperty Name="PercPromoAutomatico" ColumnName="PercPromoAutomatico" />
+          <ScalarProperty Name="VMotoreCalcolo" ColumnName="VMotoreCalcolo" />
+          <ScalarProperty Name="DefaultNFogli" ColumnName="DefaultNFogli" />
+          <ScalarProperty Name="TipoControlloPrezzo" ColumnName="TipoControlloPrezzo" />
+          <ScalarProperty Name="IdMacchinarioTaglio" ColumnName="IdMacchinarioTaglio" />
+          <ScalarProperty Name="IdMacchinarioProduzione" ColumnName="IdMacchinarioProduzione" />
+          <ScalarProperty Name="CalcolaAncheDaSolo" ColumnName="CalcolaAncheDaSolo" />
+          <ScalarProperty Name="IdHotFolderPostRefine" ColumnName="IdHotFolderPostRefine" />
+          <ScalarProperty Name="MostraPrezziTabella" ColumnName="MostraPrezziTabella" />
+          <ScalarProperty Name="QtaDefault" ColumnName="QtaDefault" />
+          <ScalarProperty Name="LargRotolo" ColumnName="LargRotolo" />
+          <ScalarProperty Name="NomeInterno" ColumnName="NomeInterno" />
+          <ScalarProperty Name="LabelWeb" ColumnName="LabelWeb" />
+          <ScalarProperty Name="NascondiOnline" ColumnName="NascondiOnline" />
+          <ScalarProperty Name="Ordinamento" ColumnName="Ordinamento" />
+          <ScalarProperty Name="InEvidenza" ColumnName="InEvidenza" />
+          <ScalarProperty Name="MoltiplicatoreQta" ColumnName="MoltiplicatoreQta" />
+          <ScalarProperty Name="GoogleSEO" ColumnName="GoogleSEO" />
+          <ScalarProperty Name="GoogleDescr" ColumnName="GoogleDescr" />
+          <ScalarProperty Name="IdModelloCubetto" ColumnName="IdModelloCubetto" />
+          <ScalarProperty Name="IdTipoImballo" ColumnName="IdTipoImballo" />
+          <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+          <ScalarProperty Name="DescrSito" ColumnName="DescrSito" />
+          <ScalarProperty Name="TipoPrezzo" ColumnName="TipoPrezzo" />
+          <ScalarProperty Name="PrendiIcoDa" ColumnName="PrendiIcoDa" />
+          <ScalarProperty Name="ImgSito" ColumnName="ImgSito" />
+          <ScalarProperty Name="MinimaleStampa" ColumnName="MinimaleStampa" />
+          <ScalarProperty Name="AvviamStampa" ColumnName="AvviamStampa" />
+          <ScalarProperty Name="PercAdatCostoCopia" ColumnName="PercAdatCostoCopia" />
+          <ScalarProperty Name="noResa" ColumnName="noResa" />
+          <ScalarProperty Name="MultiploQta" ColumnName="MultiploQta" />
+          <ScalarProperty Name="Disattivo" ColumnName="Disattivo" />
+          <ScalarProperty Name="nofaccsuimpianti" ColumnName="nofaccsuimpianti" />
+          <ScalarProperty Name="imgrif" ColumnName="imgrif" />
+          <ScalarProperty Name="faccmax" ColumnName="faccmax" />
+          <ScalarProperty Name="faccmin" ColumnName="faccmin" />
+          <ScalarProperty Name="qtacollo" ColumnName="qtacollo" />
+          <ScalarProperty Name="p6" ColumnName="p6" />
+          <ScalarProperty Name="p5" ColumnName="p5" />
+          <ScalarProperty Name="p4" ColumnName="p4" />
+          <ScalarProperty Name="p3" ColumnName="p3" />
+          <ScalarProperty Name="p2" ColumnName="p2" />
+          <ScalarProperty Name="p1" ColumnName="p1" />
+          <ScalarProperty Name="qta6" ColumnName="qta6" />
+          <ScalarProperty Name="qta5" ColumnName="qta5" />
+          <ScalarProperty Name="qta4" ColumnName="qta4" />
+          <ScalarProperty Name="qta3" ColumnName="qta3" />
+          <ScalarProperty Name="qta2" ColumnName="qta2" />
+          <ScalarProperty Name="qta1" ColumnName="qta1" />
+          <ScalarProperty Name="v6" ColumnName="v6" />
+          <ScalarProperty Name="v5" ColumnName="v5" />
+          <ScalarProperty Name="v4" ColumnName="v4" />
+          <ScalarProperty Name="v3" ColumnName="v3" />
+          <ScalarProperty Name="v2" ColumnName="v2" />
+          <ScalarProperty Name="v1" ColumnName="v1" />
+          <ScalarProperty Name="IdColoreStampa" ColumnName="IdColoreStampa" />
+          <ScalarProperty Name="IdPrev" ColumnName="IdPrev" />
+          <ScalarProperty Name="IdTipoCartaDorso" ColumnName="IdTipoCartaDorso" />
+          <ScalarProperty Name="IdTipoCarta" ColumnName="IdTipoCarta" />
+          <ScalarProperty Name="IdTipoCartaCop" ColumnName="IdTipoCartaCop" />
+          <ScalarProperty Name="IdFormato" ColumnName="IdFormato" />
+          <ScalarProperty Name="IdFormProd" ColumnName="IdFormProd" />
+          <ScalarProperty Name="IdCurvaPubbl" ColumnName="IdCurvaPubbl" />
+          <ScalarProperty Name="IdCurvaAtt" ColumnName="IdCurvaAtt" />
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
+          <ScalarProperty Name="IdListinoBase" ColumnName="IdListinoBase" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
