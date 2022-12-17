@@ -90,13 +90,11 @@
     <Property Name="PathTrack" Type="nvarchar" MaxLength="255" />
     <Property Name="Disattivo" Type="int" />
   </EntityType>
-  <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DbZoho.dbo.T_listinobase' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
   <EntityType Name="T_listinobase">
     <Key>
       <PropertyRef Name="IdListinoBase" />
     </Key>
-    <Property Name="IdListinoBase" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdListinoBase" Type="int" Nullable="false" />
     <Property Name="Nome" Type="nvarchar" MaxLength="255" />
     <Property Name="IdCurvaAtt" Type="int" />
     <Property Name="IdCurvaPubbl" Type="int" />
@@ -189,6 +187,8 @@ advertencia 6002: La tabla o vista 'DbZoho.dbo.T_listinobase' no tiene definida 
     <Property Name="AttivaPromoAutomatico" Type="int" />
     <Property Name="CounterDayPromo" Type="int" />
     <Property Name="IdZoho" Type="varchar" MaxLength="50" />
+    <Property Name="DisattivaAccessoSito" Type="int" />
+    <Property Name="IsDeletedInZoho" Type="bit" />
   </EntityType>
   <EntityType Name="tokens">
     <Key>
@@ -245,107 +245,59 @@ advertencia 6002: La tabla o vista 'DbZoho.dbo.T_listinobase' no tiene definida 
     <Property Name="IsDeletedInZoho" Type="bit" />
     <Property Name="IdZohoAziende" Type="varchar" MaxLength="50" />
   </EntityType>
+  <Association Name="FK_Ordini_T_Corriere">
+    <End Role="T_Corriere" Type="Self.T_Corriere" Multiplicity="0..1" />
+    <End Role="Ordini" Type="Self.Ordini" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_Corriere">
+        <PropertyRef Name="IdCorriere" />
+      </Principal>
+      <Dependent Role="Ordini">
+        <PropertyRef Name="IdCorriere" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ordini_T_listinobase">
+    <End Role="T_listinobase" Type="Self.T_listinobase" Multiplicity="0..1" />
+    <End Role="Ordini" Type="Self.Ordini" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_listinobase">
+        <PropertyRef Name="IdListinoBase" />
+      </Principal>
+      <Dependent Role="Ordini">
+        <PropertyRef Name="IdListinoBase" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ordini_Utenti">
+    <End Role="Utenti" Type="Self.Utenti" Multiplicity="0..1" />
+    <End Role="Ordini" Type="Self.Ordini" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Utenti">
+        <PropertyRef Name="IdUt" />
+      </Principal>
+      <Dependent Role="Ordini">
+        <PropertyRef Name="IdUt" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="DbZohoModelStoreContainer">
     <EntitySet Name="Ordini" EntityType="Self.Ordini" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="T_Corriere" EntityType="Self.T_Corriere" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="T_listinobase" EntityType="Self.T_listinobase" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tokens" EntityType="Self.tokens" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Utenti" EntityType="Self.Utenti" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="T_listinobase" EntityType="Self.T_listinobase" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [T_listinobase].[IdListinoBase] AS [IdListinoBase], 
-    [T_listinobase].[Nome] AS [Nome], 
-    [T_listinobase].[IdCurvaAtt] AS [IdCurvaAtt], 
-    [T_listinobase].[IdCurvaPubbl] AS [IdCurvaPubbl], 
-    [T_listinobase].[IdFormProd] AS [IdFormProd], 
-    [T_listinobase].[IdFormato] AS [IdFormato], 
-    [T_listinobase].[IdTipoCartaCop] AS [IdTipoCartaCop], 
-    [T_listinobase].[IdTipoCarta] AS [IdTipoCarta], 
-    [T_listinobase].[IdTipoCartaDorso] AS [IdTipoCartaDorso], 
-    [T_listinobase].[IdPrev] AS [IdPrev], 
-    [T_listinobase].[IdColoreStampa] AS [IdColoreStampa], 
-    [T_listinobase].[v1] AS [v1], 
-    [T_listinobase].[v2] AS [v2], 
-    [T_listinobase].[v3] AS [v3], 
-    [T_listinobase].[v4] AS [v4], 
-    [T_listinobase].[v5] AS [v5], 
-    [T_listinobase].[v6] AS [v6], 
-    [T_listinobase].[qta1] AS [qta1], 
-    [T_listinobase].[qta2] AS [qta2], 
-    [T_listinobase].[qta3] AS [qta3], 
-    [T_listinobase].[qta4] AS [qta4], 
-    [T_listinobase].[qta5] AS [qta5], 
-    [T_listinobase].[qta6] AS [qta6], 
-    [T_listinobase].[p1] AS [p1], 
-    [T_listinobase].[p2] AS [p2], 
-    [T_listinobase].[p3] AS [p3], 
-    [T_listinobase].[p4] AS [p4], 
-    [T_listinobase].[p5] AS [p5], 
-    [T_listinobase].[p6] AS [p6], 
-    [T_listinobase].[qtacollo] AS [qtacollo], 
-    [T_listinobase].[faccmin] AS [faccmin], 
-    [T_listinobase].[faccmax] AS [faccmax], 
-    [T_listinobase].[imgrif] AS [imgrif], 
-    [T_listinobase].[nofaccsuimpianti] AS [nofaccsuimpianti], 
-    [T_listinobase].[Disattivo] AS [Disattivo], 
-    [T_listinobase].[MultiploQta] AS [MultiploQta], 
-    [T_listinobase].[noResa] AS [noResa], 
-    [T_listinobase].[PercAdatCostoCopia] AS [PercAdatCostoCopia], 
-    [T_listinobase].[AvviamStampa] AS [AvviamStampa], 
-    [T_listinobase].[MinimaleStampa] AS [MinimaleStampa], 
-    [T_listinobase].[ImgSito] AS [ImgSito], 
-    [T_listinobase].[PrendiIcoDa] AS [PrendiIcoDa], 
-    [T_listinobase].[TipoPrezzo] AS [TipoPrezzo], 
-    [T_listinobase].[DescrSito] AS [DescrSito], 
-    [T_listinobase].[LastUpdate] AS [LastUpdate], 
-    [T_listinobase].[IdTipoImballo] AS [IdTipoImballo], 
-    [T_listinobase].[IdModelloCubetto] AS [IdModelloCubetto], 
-    [T_listinobase].[GoogleDescr] AS [GoogleDescr], 
-    [T_listinobase].[GoogleSEO] AS [GoogleSEO], 
-    [T_listinobase].[MoltiplicatoreQta] AS [MoltiplicatoreQta], 
-    [T_listinobase].[InEvidenza] AS [InEvidenza], 
-    [T_listinobase].[Ordinamento] AS [Ordinamento], 
-    [T_listinobase].[NascondiOnline] AS [NascondiOnline], 
-    [T_listinobase].[LabelWeb] AS [LabelWeb], 
-    [T_listinobase].[NomeInterno] AS [NomeInterno], 
-    [T_listinobase].[LargRotolo] AS [LargRotolo], 
-    [T_listinobase].[QtaDefault] AS [QtaDefault], 
-    [T_listinobase].[MostraPrezziTabella] AS [MostraPrezziTabella], 
-    [T_listinobase].[IdHotFolderPostRefine] AS [IdHotFolderPostRefine], 
-    [T_listinobase].[CalcolaAncheDaSolo] AS [CalcolaAncheDaSolo], 
-    [T_listinobase].[IdMacchinarioProduzione] AS [IdMacchinarioProduzione], 
-    [T_listinobase].[IdMacchinarioTaglio] AS [IdMacchinarioTaglio], 
-    [T_listinobase].[TipoControlloPrezzo] AS [TipoControlloPrezzo], 
-    [T_listinobase].[DefaultNFogli] AS [DefaultNFogli], 
-    [T_listinobase].[VMotoreCalcolo] AS [VMotoreCalcolo], 
-    [T_listinobase].[PercPromoAutomatico] AS [PercPromoAutomatico], 
-    [T_listinobase].[PercMaxPromoFatturato] AS [PercMaxPromoFatturato], 
-    [T_listinobase].[MoltiplicatoreQta2] AS [MoltiplicatoreQta2], 
-    [T_listinobase].[MoltiplicatoreQta3] AS [MoltiplicatoreQta3], 
-    [T_listinobase].[MoltiplicatoreQta4] AS [MoltiplicatoreQta4], 
-    [T_listinobase].[MoltiplicatoreQta5] AS [MoltiplicatoreQta5], 
-    [T_listinobase].[AbilitaQtaIntermedie] AS [AbilitaQtaIntermedie], 
-    [T_listinobase].[AbilitaQtaSottoColonna1] AS [AbilitaQtaSottoColonna1], 
-    [T_listinobase].[MoltiplicatoreQta0] AS [MoltiplicatoreQta0], 
-    [T_listinobase].[MoltiplicatoreQtaIntermedia] AS [MoltiplicatoreQtaIntermedia], 
-    [T_listinobase].[IdMacchinarioProduzione2] AS [IdMacchinarioProduzione2], 
-    [T_listinobase].[AvviamStampa2] AS [AvviamStampa2], 
-    [T_listinobase].[MinimaleStampa2] AS [MinimaleStampa2], 
-    [T_listinobase].[IdFormatoMacchina2] AS [IdFormatoMacchina2], 
-    [T_listinobase].[IsFormerChoice] AS [IsFormerChoice], 
-    [T_listinobase].[IdListinoBaseSource] AS [IdListinoBaseSource], 
-    [T_listinobase].[PrefissoVarianti] AS [PrefissoVarianti], 
-    [T_listinobase].[NoAttachFile] AS [NoAttachFile], 
-    [T_listinobase].[ConSoggettiDuplicati] AS [ConSoggettiDuplicati], 
-    [T_listinobase].[idGruppoLogico] AS [idGruppoLogico], 
-    [T_listinobase].[IdGruppoListiniConsigliati] AS [IdGruppoListiniConsigliati], 
-    [T_listinobase].[IdGruppoLCAppartenenza] AS [IdGruppoLCAppartenenza], 
-    [T_listinobase].[AllowCustomSize] AS [AllowCustomSize], 
-    [T_listinobase].[IdLavTaglioSoggetti] AS [IdLavTaglioSoggetti], 
-    [T_listinobase].[IdLavTaglioDuplicati] AS [IdLavTaglioDuplicati], 
-    [T_listinobase].[AttivaPromoAutomatico] AS [AttivaPromoAutomatico], 
-    [T_listinobase].[CounterDayPromo] AS [CounterDayPromo], 
-    [T_listinobase].[IdZoho] AS [IdZoho]
-    FROM [dbo].[T_listinobase] AS [T_listinobase]</DefiningQuery>
-    </EntitySet>
+    <AssociationSet Name="FK_Ordini_T_Corriere" Association="Self.FK_Ordini_T_Corriere">
+      <End Role="T_Corriere" EntitySet="T_Corriere" />
+      <End Role="Ordini" EntitySet="Ordini" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ordini_T_listinobase" Association="Self.FK_Ordini_T_listinobase">
+      <End Role="T_listinobase" EntitySet="T_listinobase" />
+      <End Role="Ordini" EntitySet="Ordini" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ordini_Utenti" Association="Self.FK_Ordini_Utenti">
+      <End Role="Utenti" EntitySet="Utenti" />
+      <End Role="Ordini" EntitySet="Ordini" />
+    </AssociationSet>
   </EntityContainer>
 </Schema>

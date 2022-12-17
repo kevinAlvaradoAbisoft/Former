@@ -5,7 +5,19 @@
     <EntitySet Name="tokens" EntityType="DbZohoModel.tokens" />
     <EntitySet Name="Ordini" EntityType="DbZohoModel.Ordini" />
     <EntitySet Name="T_Corriere" EntityType="DbZohoModel.T_Corriere" />
+    <AssociationSet Name="FK_Ordini_T_Corriere" Association="DbZohoModel.FK_Ordini_T_Corriere">
+      <End Role="T_Corriere" EntitySet="T_Corriere" />
+      <End Role="Ordini" EntitySet="Ordini" />
+    </AssociationSet>
     <EntitySet Name="T_listinobase" EntityType="DbZohoModel.T_listinobase" />
+    <AssociationSet Name="FK_Ordini_T_listinobase" Association="DbZohoModel.FK_Ordini_T_listinobase">
+      <End Role="T_listinobase" EntitySet="T_listinobase" />
+      <End Role="Ordini" EntitySet="Ordini" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ordini_Utenti" Association="DbZohoModel.FK_Ordini_Utenti">
+      <End Role="Utenti" EntitySet="Utenti" />
+      <End Role="Ordini" EntitySet="Ordini" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Utenti">
     <Key>
@@ -52,6 +64,7 @@
     <Property Name="ZohoId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="IsDeletedInZoho" Type="Boolean" />
     <Property Name="IdZohoAziende" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Ordini" Relationship="DbZohoModel.FK_Ordini_Utenti" FromRole="Utenti" ToRole="Ordini" />
   </EntityType>
   <EntityType Name="tokens">
     <Key>
@@ -119,6 +132,9 @@
     <Property Name="ConsegnaGarantita" Type="DateTime" Precision="3" />
     <Property Name="ConsegnaGarantitaDa" Type="Int32" />
     <Property Name="IdZoho" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="T_Corriere" Relationship="DbZohoModel.FK_Ordini_T_Corriere" FromRole="Ordini" ToRole="T_Corriere" />
+    <NavigationProperty Name="T_listinobase" Relationship="DbZohoModel.FK_Ordini_T_listinobase" FromRole="Ordini" ToRole="T_listinobase" />
+    <NavigationProperty Name="Utenti" Relationship="DbZohoModel.FK_Ordini_Utenti" FromRole="Ordini" ToRole="Utenti" />
   </EntityType>
   <EntityType Name="T_Corriere">
     <Key>
@@ -151,12 +167,25 @@
     <Property Name="Label" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="PathTrack" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="Disattivo" Type="Int32" />
+    <NavigationProperty Name="Ordini" Relationship="DbZohoModel.FK_Ordini_T_Corriere" FromRole="T_Corriere" ToRole="Ordini" />
   </EntityType>
+  <Association Name="FK_Ordini_T_Corriere">
+    <End Type="DbZohoModel.T_Corriere" Role="T_Corriere" Multiplicity="0..1" />
+    <End Type="DbZohoModel.Ordini" Role="Ordini" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_Corriere">
+        <PropertyRef Name="IdCorriere" />
+      </Principal>
+      <Dependent Role="Ordini">
+        <PropertyRef Name="IdCorriere" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityType Name="T_listinobase">
     <Key>
       <PropertyRef Name="IdListinoBase" />
     </Key>
-    <Property Name="IdListinoBase" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdListinoBase" Type="Int32" Nullable="false" />
     <Property Name="Nome" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="IdCurvaAtt" Type="Int32" />
     <Property Name="IdCurvaPubbl" Type="Int32" />
@@ -249,5 +278,32 @@
     <Property Name="AttivaPromoAutomatico" Type="Int32" />
     <Property Name="CounterDayPromo" Type="Int32" />
     <Property Name="IdZoho" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DisattivaAccessoSito" Type="Int32" />
+    <Property Name="IsDeletedInZoho" Type="Boolean" />
+    <NavigationProperty Name="Ordini" Relationship="DbZohoModel.FK_Ordini_T_listinobase" FromRole="T_listinobase" ToRole="Ordini" />
   </EntityType>
+  <Association Name="FK_Ordini_T_listinobase">
+    <End Type="DbZohoModel.T_listinobase" Role="T_listinobase" Multiplicity="0..1" />
+    <End Type="DbZohoModel.Ordini" Role="Ordini" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_listinobase">
+        <PropertyRef Name="IdListinoBase" />
+      </Principal>
+      <Dependent Role="Ordini">
+        <PropertyRef Name="IdListinoBase" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ordini_Utenti">
+    <End Type="DbZohoModel.Utenti" Role="Utenti" Multiplicity="0..1" />
+    <End Type="DbZohoModel.Ordini" Role="Ordini" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Utenti">
+        <PropertyRef Name="IdUt" />
+      </Principal>
+      <Dependent Role="Ordini">
+        <PropertyRef Name="IdUt" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

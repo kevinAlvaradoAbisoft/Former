@@ -92,10 +92,10 @@ namespace AppWithPostman
 
             List<Utenti> utentiCompanie = CompanieRepository.GetUtentiCompanie();
             List<DatumCompanie> _datiCompanie = new List<DatumCompanie>();
-            int cuentaContactosCompanie = 1;
+            int numeroContattiCompanie = 1;
             foreach (var _utente in utentiCompanie)
             {
-                if (cuentaContactosCompanie <= 10)
+                if (numeroContattiCompanie <= 10)
                 {
                     _datiCompanie.Add(
                             new DatumCompanie()
@@ -112,12 +112,12 @@ namespace AppWithPostman
                                 Id_Cliente = _utente.IdUt
                             }
                         );
-                    cuentaContactosCompanie++;
+                    numeroContattiCompanie++;
                 }
                 else
                 {
                     AddUpdateCompani(Token_Work, _datiCompanie);
-                    cuentaContactosCompanie = 1;
+                    numeroContattiCompanie = 1;
                     _datiCompanie.Clear();
 
                     _datiCompanie.Add(
@@ -148,10 +148,10 @@ namespace AppWithPostman
             //add and update Contact process
             List<Utenti> utenti = UtentiRepository.GetUtenti();
             List<Datum> _dati = new List<Datum>();
-            int cuentaContactos = 1;
+            int numeroContatti = 1;
             foreach (var _utente in utenti)
             {
-                if (cuentaContactos <= 10)
+                if (numeroContatti <= 10)
                 {
                     _dati.Add(
                             new Datum()
@@ -175,12 +175,12 @@ namespace AppWithPostman
                                 }
                             }
                         );
-                    cuentaContactos++;
+                    numeroContatti++;
                 }
                 else
                 {
                     AddUpdateContact(Token_Work, _dati);
-                    cuentaContactos = 1;
+                    numeroContatti = 1;
                     _dati.Clear();
 
                     _dati.Add(
@@ -292,187 +292,93 @@ namespace AppWithPostman
 
             var data = ordini[0];
 
-            /*foreach (var _order in ordini)
+            foreach (var _order in ordini)
             {
-                if (numberOrder <= 1)
+                productList.Add(new ProductDetail
                 {
-                    productList.Add(new ProductDetail
+                    product = new Product
                     {
-                        product = new Product
-                        {
-                            Product_Code = "Cartoline 14x14 350gr",
-                            name = "Cartoline 14x14 350gr",
-                            id= "517570000000629031"
-                        },
-                        quantity = 5,
-                        Discount=0,
-                        total_after_discount=0,
-                        net_total= 0,
-                        book= null,
-                        Tax = null,
-                        list_price = 0,
-                        unit_price= null,
-                        quantity_in_stock=-1,
-                        total=1500,
-                        product_description=null,
-                    });
+                        Product_Code = "Offset",
+                        name = "Offset",
+                        id= "517570000000607003"
+                    },
+                    quantity = 5,
+                    Discount=0,
+                    total_after_discount=0,
+                    net_total= 0,
+                    book= null,
+                    Tax = null,
+                    list_price = 0,
+                    unit_price= null,
+                    quantity_in_stock=-1,
+                    total= (int)_order.TotaleOrdine,
+                    product_description=null,
+                });
 
-                    _datiOrder.Add(
-                            new DatumOrder()
-                            {
-                                currency_symbol = "€",
-                                Quantit= 5,
-                                field_states = null,
-                                Tax= 0,
-                                Anteprima = null,
-                                Sorgente_Fronte = null,
-                                state= "save",
-                                converted= false,
-                                process_flow= false,
-                                Deal_Name= null,
-                                Billing_Country=null,
-                                Carrier= "FedEX",
-                                approved = true,
-                                Quote_Name= null,
-                                Status= "Registrato",
-                                Grand_Total= 0,
+                _datiOrder.Add(
+                        new DatumOrder()
+                        {
+                            currency_symbol = "€",
+                            Quantit= 5,
+                            field_states = null,
+                            Tax= (int)_order.TotaleIva,
+                            Anteprima = _order.Anteprima,
+                            Sorgente_Fronte = _order.SorgenteFronte,
+                            state = "save",
+                            converted= false,
+                            process_flow= false,
+                            Deal_Name= null,
+                            Billing_Country=null,
+                            Carrier= _order.T_Corriere.Descrizione,
+                            approved = true,
+                            Quote_Name= null,
+                            Status= "Registrato",
+                            Grand_Total= (int)_order.TotaleOrdine,
                                 
-                                Billing_Street= null,
-                                Adjustment= 77,
-                                editable = true,
-                                Billing_Code= null,
-                                Product_Details = productList,
-                                Sorgente_Retro= null,
-                                Id_Ordine = 14589,
-                                Excise_Duty= null,
-                                Shipping_City= null,
-                                Shipping_Country = null,
-                                Shipping_Code = null,
-                                Billing_City= null, 
-                                Purchase_Order= null,
+                            Billing_Street= null,
+                            Adjustment= 77,
+                            editable = true,
+                            Billing_Code= null,
+                            Product_Details = productList,
+                            Sorgente_Retro= _order.SorgenteRetro,
+                            //Id_Ordine = 14589,
+                            Excise_Duty= null,
+                            Shipping_City= null,
+                            Shipping_Country = null,
+                            Shipping_Code = null,
+                            Billing_City= null, 
+                            Purchase_Order= null,
 
-                                Shipping_Street = null,
-                                Description = null,
-                                Discount = 0,
-                                Shipping_State= null,
+                            Shipping_Street = null,
+                            Description = null,
+                            Discount = 0,
+                            Shipping_State= null,
 
-                                review = null,
-                                Account_Name = new AccountName
-                                {
-                                    name = "Former",
-                                    id = "517570000000629036"
-                                },
-                                Tipologia_di_consegna = "Ritiro da Cliente",
-                                Sales_Commission= null,
-
-                                Due_Date = null,
-                                Data_di_consegna = "2022-12-15",
-                                Terms_and_Conditions= null,
-                                Sub_Total= 0,
-                                Data_di_inserimento= DateTime.Now.ToString("yyyy-MM-dd"),
-                                Subject = "ORDER TEST 001",
-                                orchestration= false,
-                                Contact_Name= null
-
-                            }
-                        );
-                    numberOrder++;
-                }
-                else
-                {
-                    AddUpdateOrder(Token_Work, _datiOrder);
-                    numberOrder = 1;
-                    _datiOrder.Clear();
-                    productList.Clear();
-
-                    productList.Add(new ProductDetail
-                    {
-                        product = new Product
-                        {
-                            Product_Code = "Cartoline 14x14 350gr",
-                            name = "Cartoline 14x14 350gr",
-                            id = "517570000000629031"
-                        },
-                        quantity = 5,
-                        Discount = 0,
-                        total_after_discount = 0,
-                        net_total = 0,
-                        book = null,
-                        Tax = null,
-                        list_price = 15,
-                        unit_price = null,
-                        quantity_in_stock = -1,
-                        total = 1500,
-                        product_description = null,
-                        line_tax = null
-                    });
-
-                    _datiOrder.Add(
-                            new DatumOrder()
+                            review = null ,
+                            Account_Name = new AccountName
                             {
-                                currency_symbol = "€",
-                                Quantit = 5,
-                                field_states = null,
-                                Tax = 0,
-                                Anteprima = null,
-                                Sorgente_Fronte = null,
-                                state = "save",
-                                converted = false,
-                                process_flow = false,
-                                Deal_Name = null,
-                                Billing_Country = null,
-                                Carrier = "FedEX",
-                                approved = true,
-                                Quote_Name = null,
-                                Status = "Registrato",
-                                Grand_Total = 0,
+                                name = _order.Utenti.Nome,
+                                id = _order.Utenti.IdZohoAziende
+                            },
+                            Tipologia_di_consegna = "Ritiro da Cliente",
+                            Sales_Commission= null,
 
-                                Billing_Street = null,
-                                Adjustment = 77,
-                                editable = true,
-                                Billing_Code = null,
-                                Product_Details = productList,
-                                Sorgente_Retro = null,
-                                Id_Ordine = 14579,
-                                Excise_Duty = null,
-                                Shipping_City = null,
-                                Shipping_Country = null,
-                                Shipping_Code = null,
-                                Billing_City = null,
-                                Purchase_Order = null,
+                            Due_Date = null,
+                            Data_di_consegna = DateTime.Now.AddDays(3).ToString("yyyy-MM-dd"),
+                            Terms_and_Conditions= null,
+                            Sub_Total= (int)_order.TotaleNetto,
+                            Data_di_inserimento= DateTime.Now.ToString("yyyy-MM-dd"),
+                            Subject = _order.T_listinobase.Nome,
+                            orchestration = false,
+                            Contact_Name= null
 
-                                Shipping_Street = null,
-                                Description = null,
-                                Discount = 0,
-                                Shipping_State = null,
-
-                                review = null,
-                                Account_Name = new AccountName
-                                {
-                                    name = "Former",
-                                    id = "517570000000629036"
-                                },
-                                Tipologia_di_consegna = "Ritiro da Cliente",
-                                Sales_Commission = null,
-
-                                Due_Date = null,
-                                Data_di_consegna = "2022-12-15",
-                                Terms_and_Conditions = null,
-                                Sub_Total = 0,
-                                Data_di_inserimento = DateTime.Now.ToString("yyyy-MM-dd"),
-                                Subject = "ORDER TEST 001",
-                                orchestration = false,
-                                Contact_Name = null,
-
-                            }
-                        );
-                }
-
-            }
-            if (_datiOrder.Count > 0)
-            {
+                        }
+                    );
                 AddUpdateOrder(Token_Work, _datiOrder);
-            }*/
+                numberOrder = 1;
+                _datiOrder.Clear();
+                productList.Clear();
+            }
 
         }
         private static void AddUpdateContact(string Token_Work, List<Datum> _dati)

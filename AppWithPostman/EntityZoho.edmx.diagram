@@ -9,7 +9,10 @@
         <EntityTypeShape EntityType="DbZohoModel.tokens" Width="1.5" PointX="6.75" PointY="0.75" />
         <EntityTypeShape EntityType="DbZohoModel.Ordini" Width="1.5" PointX="1.125" PointY="1" />
         <EntityTypeShape EntityType="DbZohoModel.T_Corriere" Width="1.5" PointX="5.75" PointY="3.75" />
-        <EntityTypeShape EntityType="DbZohoModel.T_listinobase" Width="1.5" PointX="7.75" PointY="3.75" />
+        <AssociationConnector Association="DbZohoModel.FK_Ordini_T_Corriere" />
+        <EntityTypeShape EntityType="DbZohoModel.T_listinobase" Width="1.5" PointX="8.375" PointY="4.75" />
+        <AssociationConnector Association="DbZohoModel.FK_Ordini_T_listinobase" />
+        <AssociationConnector Association="DbZohoModel.FK_Ordini_Utenti" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

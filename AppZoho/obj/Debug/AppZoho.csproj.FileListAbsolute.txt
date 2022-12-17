@@ -23,3 +23,16 @@ C:\Projects\SolZoho\AppZoho\obj\Debug\AppZoho.csproj.CoreCompileInputs.cache
 C:\Projects\SolZoho\AppZoho\obj\Debug\AppZoho.csproj.CopyComplete
 C:\Projects\SolZoho\AppZoho\obj\Debug\AppZoho.exe
 C:\Projects\SolZoho\AppZoho\obj\Debug\AppZoho.pdb
+C:\Projects\SolSohoRepo\Former\AppZoho\bin\Debug\AppZoho.exe.config
+C:\Projects\SolSohoRepo\Former\AppZoho\bin\Debug\AppZoho.exe
+C:\Projects\SolSohoRepo\Former\AppZoho\bin\Debug\AppZoho.pdb
+C:\Projects\SolSohoRepo\Former\AppZoho\bin\Debug\MySql.Data.dll
+C:\Projects\SolSohoRepo\Former\AppZoho\bin\Debug\Newtonsoft.Json.dll
+C:\Projects\SolSohoRepo\Former\AppZoho\bin\Debug\ZCRMSDK.dll
+C:\Projects\SolSohoRepo\Former\AppZoho\bin\Debug\Newtonsoft.Json.xml
+C:\Projects\SolSohoRepo\Former\AppZoho\obj\Debug\AppZoho.csproj.AssemblyReference.cache
+C:\Projects\SolSohoRepo\Former\AppZoho\obj\Debug\AppZoho.csproj.SuggestedBindingRedirects.cache
+C:\Projects\SolSohoRepo\Former\AppZoho\obj\Debug\AppZoho.csproj.CoreCompileInputs.cache
+C:\Projects\SolSohoRepo\Former\AppZoho\obj\Debug\AppZoho.csproj.CopyComplete
+C:\Projects\SolSohoRepo\Former\AppZoho\obj\Debug\AppZoho.exe
+C:\Projects\SolSohoRepo\Former\AppZoho\obj\Debug\AppZoho.pdb

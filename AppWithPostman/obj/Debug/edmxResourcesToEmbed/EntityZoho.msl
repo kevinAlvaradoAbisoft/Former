@@ -153,6 +153,8 @@
     <EntitySetMapping Name="T_listinobase">
       <EntityTypeMapping TypeName="DbZohoModel.T_listinobase">
         <MappingFragment StoreEntitySet="T_listinobase">
+          <ScalarProperty Name="IsDeletedInZoho" ColumnName="IsDeletedInZoho" />
+          <ScalarProperty Name="DisattivaAccessoSito" ColumnName="DisattivaAccessoSito" />
           <ScalarProperty Name="IdZoho" ColumnName="IdZoho" />
           <ScalarProperty Name="CounterDayPromo" ColumnName="CounterDayPromo" />
           <ScalarProperty Name="AttivaPromoAutomatico" ColumnName="AttivaPromoAutomatico" />
