@@ -19,7 +19,7 @@ namespace AppWithPostman
     {
         const string ACCOUNTS_URL = "https://accounts.zoho.eu/oauth/v2/token";
         static void Main(string[] args)
-        {            
+        {
             string _code = ConfigurationSettings.AppSettings["code"];
             string _client_id = ConfigurationSettings.AppSettings["client_id"];
             string _secret_id = ConfigurationSettings.AppSettings["secret_id"];
@@ -30,7 +30,7 @@ namespace AppWithPostman
             var Token_Refresh = "";
             var Token_Work = "";
             var token = TokenRepository.GetToken();
-            if(token == null)
+            if (token == null)
             {
 
                 var requestToken = new RestRequest(ACCOUNTS_URL, Method.Post);
@@ -46,7 +46,7 @@ namespace AppWithPostman
                 Console.WriteLine(response.Content);
                 GenerarToken accesToken = JsonConvert.DeserializeObject<GenerarToken>(response.Content);
 
-                string urlEncoded = ACCOUNTS_URL+"?Content-Type=application/x-www-form-urlencoded";
+                string urlEncoded = ACCOUNTS_URL + "?Content-Type=application/x-www-form-urlencoded";
                 var requestEncoded = new RestRequest(urlEncoded, Method.Post);
                 requestEncoded.AddHeader("Content-Type", "application/x-www-form-urlencoded");
                 requestEncoded.AddHeader("Cookie", "_zcsr_tmp=dce17c2b-03ed-4a5a-8490-ee8c4589b5df; b266a5bf57=57c7a14afabcac9a0b9dfc64b3542b70; iamcsr=dce17c2b-03ed-4a5a-8490-ee8c4589b5df");
@@ -64,14 +64,14 @@ namespace AppWithPostman
             else
             {
                 var timetoken = DateTime.Now - token.LastUpdate;
-                if((timetoken.Value.Hours*60 + timetoken.Value.Minutes) < 59)
+                if ((timetoken.Value.Hours * 60 + timetoken.Value.Minutes) < 59)
                 {
                     Token_Refresh = token.Token_Refresh;
                     Token_Work = token.Token_Work;
                 }
                 else
                 {
-                    string urlEncoded = ACCOUNTS_URL+"?Content-Type=application/x-www-form-urlencoded";
+                    string urlEncoded = ACCOUNTS_URL + "?Content-Type=application/x-www-form-urlencoded";
                     var requestEncoded = new RestRequest(urlEncoded, Method.Post);
                     requestEncoded.AddHeader("Content-Type", "application/x-www-form-urlencoded");
                     requestEncoded.AddHeader("Cookie", "_zcsr_tmp=dce17c2b-03ed-4a5a-8490-ee8c4589b5df; b266a5bf57=57c7a14afabcac9a0b9dfc64b3542b70; iamcsr=dce17c2b-03ed-4a5a-8490-ee8c4589b5df");
@@ -102,14 +102,14 @@ namespace AppWithPostman
                             {
                                 state = "save",
                                 approved = true,
-                                Enrich_Status__s ="Disponibile",
+                                Enrich_Status__s = "Disponibile",
                                 editable = true,
-           
+
                                 Phone = _utente.Tel,
                                 Account_Name = _utente.Nome + " " + _utente.Cognome,
                                 s = "Disponibile",
                                 approval_state = "approved",
-                                Id_Cliente=_utente.IdUt
+                                Id_Cliente = _utente.IdUt
                             }
                         );
                     cuentaContactosCompanie++;
@@ -170,7 +170,7 @@ namespace AppWithPostman
                                 Mobile = _utente.Cellulare,
                                 Account_Name = new AccountNameCompanie
                                 {
-                                    name= _utente.Nome + " " + _utente.Cognome,
+                                    name = _utente.Nome + " " + _utente.Cognome,
                                     id = _utente.IdZohoAziende
                                 }
                             }
@@ -206,7 +206,7 @@ namespace AppWithPostman
                         }
                     );
                 }
-                
+
             }
             if (_dati.Count > 0)
             {
@@ -215,7 +215,7 @@ namespace AppWithPostman
 
 
             //delete process
-            List<string> arrayItem1 = new List<string>();
+            /*List<string> arrayItem1 = new List<string>();
             List<Utenti> utenti2 = UtentiRepository.GetUtentiDelete();
             if (utenti2 != null)
             {
@@ -243,19 +243,50 @@ namespace AppWithPostman
                     _count++;
                 }
                 if (!string.IsNullOrEmpty(lista))
-                {
+                {       
                     DeleteZohoContact(lista, arrayItem1, Token_Work);
                 }
-            }
+            }*/
 
             //delete companie
 
+            List<string> arrayItem1 = new List<string>();
+            List<Utenti> utenti2 = CompanieRepository.GetCompanieDelete();
+            if (utenti2 != null)
+            {
+                int _count = 1;
+                var lista = "";
+                foreach (var _utentedel in utenti2)
+                {
 
+                    if (_count <= 100)
+                    {
+                        arrayItem1.Add(_utentedel.IdZohoAziende);
+                        lista = lista + _utentedel.IdZohoAziende + ",";
+                    }
+                    else
+                    {
+                        lista = "";
+                        _count = 1;
+                        arrayItem1.Clear();
+
+                        lista = lista + _utentedel.IdZohoAziende + ",";
+                        arrayItem1.Add(_utentedel.IdZohoAziende);
+                        DeleteZohoCompanie(lista, arrayItem1, Token_Work);
+
+                    }
+                    _count++;
+                }
+                if (!string.IsNullOrEmpty(lista))
+                {
+                    DeleteZohoCompanie(lista, arrayItem1, Token_Work);
+                }
+            }
 
             //order
             List<Ordini> ordini = OrdiniRepository.GetOrders();
             List<DatumOrder> _datiOrder = new List<DatumOrder>();
-            List <ProductDetail> productList = new List<ProductDetail>();
+            List<ProductDetail> productList = new List<ProductDetail>();
 
             int numberOrder = 1;
 
@@ -457,35 +488,35 @@ namespace AppWithPostman
             List<Datum> arrayItem = new List<Datum>();
             arrayItem.AddRange(_dati);
 
-                Contact item = new Contact();
-                item.data = arrayItem.ToArray();
-                var itemSerialize = JsonConvert.SerializeObject(item);
-                requesturlLeads.AddParameter("application/json", itemSerialize, ParameterType.RequestBody);
-                var responseLeads = client.Execute(requesturlLeads);
-                Console.WriteLine(responseLeads.Content);
-                Zresponse zresponse = JsonConvert.DeserializeObject<Zresponse>(responseLeads.Content);
-                int counter = 0;
-                foreach (var _zresponse in zresponse.data)
+            Contact item = new Contact();
+            item.data = arrayItem.ToArray();
+            var itemSerialize = JsonConvert.SerializeObject(item);
+            requesturlLeads.AddParameter("application/json", itemSerialize, ParameterType.RequestBody);
+            var responseLeads = client.Execute(requesturlLeads);
+            Console.WriteLine(responseLeads.Content);
+            Zresponse zresponse = JsonConvert.DeserializeObject<Zresponse>(responseLeads.Content);
+            int counter = 0;
+            foreach (var _zresponse in zresponse.data)
+            {
+                if (_zresponse.status != "error")
                 {
-                    if (_zresponse.status != "error")
+                    Utenti utenti1 = UtentiRepository.GetUtentiIdClient(arrayItem[counter].Id_Cliente);
+                    if (utenti1 != null)
                     {
-                        Utenti utenti1 = UtentiRepository.GetUtentiIdClient(arrayItem[counter].Id_Cliente);
-                        if (utenti1 != null)
-                        {
-                            utenti1.ZohoId = _zresponse.details.id;
-                            UtentiRepository.UpdateUtentiEmail(utenti1);
-                            //AddUpdateCompani(Token_Work, utenti1);
-                        }
+                        utenti1.ZohoId = _zresponse.details.id;
+                        UtentiRepository.UpdateUtentiEmail(utenti1);
+                        //AddUpdateCompani(Token_Work, utenti1);
                     }
-                    counter++;
                 }
-            
+                counter++;
+            }
+
         }
         private static void DeleteZohoContact(string lista, List<string> ZohoId, string Token_Work)
         {
             //Esta Api realiza deletes
             var client = new RestClient("https://accounts.zoho.eu/oauth/v2/Saten");
-            string urlLeads = "https://www.zohoapis.eu/crm/v2/Contacts?ids="+lista;
+            string urlLeads = "https://www.zohoapis.eu/crm/v2/Contacts?ids=" + lista;
             var requesturlLeads = new RestRequest(urlLeads, Method.Delete);
             requesturlLeads.AddHeader("Authorization", "Zoho-oauthtoken " + Token_Work);
             requesturlLeads.AddHeader("Content-Type", "application/json");
@@ -514,7 +545,7 @@ namespace AppWithPostman
             }
         }
 
-        
+
         private static void AddUpdateCompani(string Token_Work, List<DatumCompanie> _dati)
         {
             var client = new RestClient("https://accounts.zoho.eu/oauth/v2/Saten");
@@ -523,12 +554,12 @@ namespace AppWithPostman
             var requesturlLeads = new RestRequest(urlLeads, Method.Post);
             requesturlLeads.AddHeader("Authorization", "Zoho-oauthtoken " + Token_Work);
             requesturlLeads.AddHeader("Content-Type", "application/json");
-            requesturlLeads.AddHeader("Cookie", "1a99390653=fa937bf8820a337da6a65156d344d3c2; 1ccad04dca=d29e417f368f50fa25b6be760117403f; _zcsr_tmp=3e2a1e6c-a084-4095-a53e-6763be3d3252; crmcsr=3e2a1e6c-a084-4095-a53e-6763be3d3252");   
+            requesturlLeads.AddHeader("Cookie", "1a99390653=fa937bf8820a337da6a65156d344d3c2; 1ccad04dca=d29e417f368f50fa25b6be760117403f; _zcsr_tmp=3e2a1e6c-a084-4095-a53e-6763be3d3252; crmcsr=3e2a1e6c-a084-4095-a53e-6763be3d3252");
 
-            List< DatumCompanie> arrayItem = new List<DatumCompanie>();
+            List<DatumCompanie> arrayItem = new List<DatumCompanie>();
 
             arrayItem.AddRange(_dati);
-            
+
             Companie item = new Companie();
             item.data = arrayItem.ToArray();
             var itemSerialize = JsonConvert.SerializeObject(item);
@@ -592,6 +623,38 @@ namespace AppWithPostman
 
         }
 
+        private static void DeleteZohoCompanie(string lista, List<string> ZohoId, string Token_Work)
+        {
+            //Esta Api realiza deletes
+            var client = new RestClient("https://accounts.zoho.eu/oauth/v2/Saten");
+            string urlLeads = "https://www.zohoapis.eu/crm/v2/Accounts?ids=" + lista;
+            var requesturlLeads = new RestRequest(urlLeads, Method.Delete);
+            requesturlLeads.AddHeader("Authorization", "Zoho-oauthtoken " + Token_Work);
+            requesturlLeads.AddHeader("Content-Type", "application/json");
+            requesturlLeads.AddHeader("Cookie", "1a99390653=fa937bf8820a337da6a65156d344d3c2; 1ccad04dca=d29e417f368f50fa25b6be760117403f; _zcsr_tmp=3e2a1e6c-a084-4095-a53e-6763be3d3252; crmcsr=3e2a1e6c-a084-4095-a53e-6763be3d3252");
+
+            var responseLeads = client.Execute(requesturlLeads);
+            Console.WriteLine(responseLeads.Content);
+
+            Zresponse zresponse = JsonConvert.DeserializeObject<Zresponse>(responseLeads.Content);
+
+            int countres = 0;
+            foreach (var _zresponse in zresponse.data)
+            {
+                if (_zresponse.status != "error")
+                {
+                    //Utenti utenti1 = UtentiRepository.GetUtentiEmail(arrayItem[countres].Email);
+                    Utenti utenti1 = UtentiRepository.GetUtentiIdZoho(_zresponse.details.id);
+                    if (utenti1 != null)
+                    {
+                        utenti1.ZohoId = _zresponse.details.id;
+                        utenti1.IsDeletedInZoho = false;
+                        UtentiRepository.UpdateUtentiDelete(utenti1);
+                    }
+                }
+                countres++;
+            }
+        }
 
     }
     public class GenerarToken

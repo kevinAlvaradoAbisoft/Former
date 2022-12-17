@@ -15,7 +15,7 @@ namespace AppWithPostman.Repository
             using (var _dbo = new DbZohoEntities())
             {
                 _utentiList = _dbo.Utenti
-                    .Where(d => d.IdZohoAziende == null)
+                    .Where(d => d.IdZohoAziende == null && d.DisattivaAccessoSito == 0)
                     .ToList();
             }
 
@@ -46,6 +46,32 @@ namespace AppWithPostman.Repository
             }
             return outupdate;
         }
+        public static List<Utenti> GetCompanieDelete()
+        {
+            List<Utenti> _utentiList = new List<Utenti>();
+            using (var _dbo = new DbZohoEntities())
+            {
+                _utentiList = _dbo.Utenti
+                    .Where(d => d.DisattivaAccessoSito == 1 && d.IsDeletedInZoho == true)
+                    .ToList();
+            }
 
+            return _utentiList;
+        }
+        public static int UpdateCompanyDelete(Utenti utenti)
+        {
+            int outupdate = 0;
+
+            using (var _dbo = new DbZohoEntities())
+            {
+                var utenti1 = _dbo.Utenti.First(i => i.IdUt == utenti.IdUt);
+                utenti1.IsDeletedInZoho = false;
+
+                _dbo.Utenti.AddOrUpdate(utenti1);
+                outupdate = _dbo.SaveChanges();
+            }
+
+            return outupdate;
+        }
     }
 }
