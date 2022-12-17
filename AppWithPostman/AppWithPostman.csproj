@@ -89,7 +89,7 @@
     <Compile Include="DTO\Companie.cs" />
     <Compile Include="DTO\Contact.cs" />
     <Compile Include="DTO\Order.cs" />
-    <Compile Include="DTO\Products.cs" />
+    <Compile Include="DTO\tmp\Order.cs" />
     <Compile Include="DTO\ZohoResponse.cs" />
     <Compile Include="EntityZoho.Context.cs">
       <AutoGen>True</AutoGen>

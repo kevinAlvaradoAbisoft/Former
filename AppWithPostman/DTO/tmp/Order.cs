@@ -1,61 +1,13 @@
-﻿using AppWithPostman.DTO.tmp;
-using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AppWithPostman.DTO
+namespace AppWithPostman.DTO.tmp
 {
-    public class Order
-    {
-        /*
-        ID ordine IdOrdine
-        ID cliente IdUt
-        Prodotto (Tagliato dal Codice) 
-        Nome lavoro
-        Quantità qta
-        Prezzo 
-        Corriere
-        Data di inserimento
-        Data di Consegna
-        Stato dell'Ordine
-        Link anteprima
-        Link Sorgente fronte
-        Link Sorgente retro
-        */
-        public List<DatumOrder> data { get; set; }
-        //public Info info { get; set; }
-    }
-    public class Account_Name
-    {
-        public string name { get; set; }
-        public string id { get; set; }
-    }
 
-    public class Approval
-    {
-        public bool @delegate { get; set; }
-        public bool approve { get; set; }
-        public bool reject { get; set; }
-        public bool resubmit { get; set; }
-    }
-
-    public class ContactName
-    {
-        public string name { get; set; }
-        public string id { get; set; }
-    }
-
-    public class CreatedBy
-    {
-        public string name { get; set; }
-        public string id { get; set; }
-        public string email { get; set; }
-    }
-
-    public class DatumOrder
+    public class Datum
     {
         public bool approved { get; set; }
         public bool converted { get; set; }
@@ -84,7 +36,7 @@ namespace AppWithPostman.DTO
         public object Excise_Duty { get; set; }
         public int Grand_Total { get; set; }
         public int Id_Ordine { get; set; }
-        public ProductDetails[] Product_Details { get; set; }
+        public Product_Details[] Product_Details { get; set; }
         public object Purchase_Order { get; set; }
         public int Quantit { get; set; }
         public object Quote_Name { get; set; }
@@ -104,52 +56,19 @@ namespace AppWithPostman.DTO
         public string Tipologia_di_consegna { get; set; }
     }
 
-    public class Info
+    public class Account_Name
     {
-        public int per_page { get; set; }
-        public int count { get; set; }
-        public int page { get; set; }
-        public string sort_by { get; set; }
-        public string sort_order { get; set; }
-        public bool more_records { get; set; }
-    }
-
-    public class Layout
-    {
-        public string name { get; set; }
         public string id { get; set; }
-    }
-
-    public class LineTax
-    {
-        public int percentage { get; set; }
         public string name { get; set; }
-        public string id { get; set; }
-        public int value { get; set; }
     }
 
-    public class ModifiedBy
+    public class Contact_Name
     {
-        public string name { get; set; }
         public string id { get; set; }
-        public string email { get; set; }
+        public string name { get; set; }
     }
 
-    public class Owner
-    {
-        public string name { get; set; }
-        public string id { get; set; }
-        public string email { get; set; }
-    }
-
-    public class Product
-    {
-        public string Product_Code { get; set; }
-        public string name { get; set; }
-        public string id { get; set; }
-    }
-
-    public class ProductDetails
+    public class Product_Details
     {
         public object book { get; set; }
         public int Discount { get; set; }
@@ -166,16 +85,10 @@ namespace AppWithPostman.DTO
         public object unit_price { get; set; }
     }
 
-    public class QuoteName
+    public class Product
     {
-        public string name { get; set; }
         public string id { get; set; }
-    }
-
-    public class ReviewProcess
-    {
-        public bool approve { get; set; }
-        public bool reject { get; set; }
-        public bool resubmit { get; set; }
+        public string name { get; set; }
+        public string Product_Code { get; set; }
     }
 }

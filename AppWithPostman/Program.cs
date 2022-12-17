@@ -286,7 +286,7 @@ namespace AppWithPostman
             //order
             List<Ordini> ordini = OrdiniRepository.GetOrders();
             List<DatumOrder> _datiOrder = new List<DatumOrder>();
-            List<ProductDetail> productList = new List<ProductDetail>();
+            List<ProductDetails> productList = new List<ProductDetails>();
 
             int numberOrder = 1;
 
@@ -294,8 +294,9 @@ namespace AppWithPostman
 
             foreach (var _order in ordini)
             {
-                productList.Add(new ProductDetail
+                productList.Add(new ProductDetails
                 {
+                    
                     product = new Product
                     {
                         Product_Code = "Offset",
@@ -339,7 +340,7 @@ namespace AppWithPostman
                             Adjustment= 77,
                             editable = true,
                             Billing_Code= null,
-                            Product_Details = productList,
+                            Product_Details = productList.ToArray(),
                             Sorgente_Retro= _order.SorgenteRetro,
                             //Id_Ordine = 14589,
                             Excise_Duty= null,
@@ -355,7 +356,7 @@ namespace AppWithPostman
                             Shipping_State= null,
 
                             review = null ,
-                            Account_Name = new AccountName
+                            Account_Name = new Account_Name
                             {
                                 name = _order.Utenti.Nome,
                                 id = _order.Utenti.IdZohoAziende
