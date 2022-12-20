@@ -12,81 +12,20 @@ using AppWithPostman.Repository;
 using System.Threading;
 using System.Data.Common;
 using Newtonsoft.Json.Linq;
+using AppWithPostman.Helpers;
 
 namespace AppWithPostman
 {
     class Program
     {
         const string ACCOUNTS_URL = "https://accounts.zoho.eu/oauth/v2/token";
+        static string Token_Refresh = "";
+        static string Token_Work = "";
         static void Main(string[] args)
         {
-            string _code = ConfigurationSettings.AppSettings["code"];
-            string _client_id = ConfigurationSettings.AppSettings["client_id"];
-            string _secret_id = ConfigurationSettings.AppSettings["secret_id"];
-            string _grant_type = ConfigurationSettings.AppSettings["grant_type"];
-            string _redirect_url = ConfigurationSettings.AppSettings["redirect_url"];
-            var client = new RestClient(ACCOUNTS_URL);
-
-            var Token_Refresh = "";
-            var Token_Work = "";
-            var token = TokenRepository.GetToken();
-            if (token == null)
-            {
-
-                var requestToken = new RestRequest(ACCOUNTS_URL, Method.Post);
-                requestToken.AddHeader("Content-Type", "application/x-www-form-urlencoded");
-                requestToken.AddHeader("Cookie", "_zcsr_tmp=dce17c2b-03ed-4a5a-8490-ee8c4589b5df; b266a5bf57=57c7a14afabcac9a0b9dfc64b3542b70; iamcsr=dce17c2b-03ed-4a5a-8490-ee8c4589b5df");
-                requestToken.AddParameter("code", _code);
-                requestToken.AddParameter("redirect_url", _redirect_url);
-                requestToken.AddParameter("client_id", _client_id);
-                requestToken.AddParameter("client_secret", _secret_id);
-                requestToken.AddParameter("grant_type", "authorization_code");
-                var response = client.Execute(requestToken);
-
-                Console.WriteLine(response.Content);
-                GenerarToken accesToken = JsonConvert.DeserializeObject<GenerarToken>(response.Content);
-
-                string urlEncoded = ACCOUNTS_URL + "?Content-Type=application/x-www-form-urlencoded";
-                var requestEncoded = new RestRequest(urlEncoded, Method.Post);
-                requestEncoded.AddHeader("Content-Type", "application/x-www-form-urlencoded");
-                requestEncoded.AddHeader("Cookie", "_zcsr_tmp=dce17c2b-03ed-4a5a-8490-ee8c4589b5df; b266a5bf57=57c7a14afabcac9a0b9dfc64b3542b70; iamcsr=dce17c2b-03ed-4a5a-8490-ee8c4589b5df");
-                requestEncoded.AddParameter("refresh_token", accesToken.refresh_token);
-                requestEncoded.AddParameter("client_id", _client_id);
-                requestEncoded.AddParameter("client_secret", _secret_id);
-                requestEncoded.AddParameter("grant_type", "refresh_token");
-                var responseEncoded = client.Execute(requestEncoded);
-
-                GenerarToken generationToken = JsonConvert.DeserializeObject<GenerarToken>(responseEncoded.Content);
-                Token_Refresh = accesToken.refresh_token;
-                Token_Work = generationToken.access_token;
-                TokenRepository.AddToken(Token_Refresh, Token_Work);
-            }
-            else
-            {
-                var timetoken = DateTime.Now - token.LastUpdate;
-                if ((timetoken.Value.Hours * 60 + timetoken.Value.Minutes) < 59)
-                {
-                    Token_Refresh = token.Token_Refresh;
-                    Token_Work = token.Token_Work;
-                }
-                else
-                {
-                    string urlEncoded = ACCOUNTS_URL + "?Content-Type=application/x-www-form-urlencoded";
-                    var requestEncoded = new RestRequest(urlEncoded, Method.Post);
-                    requestEncoded.AddHeader("Content-Type", "application/x-www-form-urlencoded");
-                    requestEncoded.AddHeader("Cookie", "_zcsr_tmp=dce17c2b-03ed-4a5a-8490-ee8c4589b5df; b266a5bf57=57c7a14afabcac9a0b9dfc64b3542b70; iamcsr=dce17c2b-03ed-4a5a-8490-ee8c4589b5df");
-                    requestEncoded.AddParameter("refresh_token", token.Token_Refresh);
-                    requestEncoded.AddParameter("client_id", _client_id);
-                    requestEncoded.AddParameter("client_secret", _secret_id);
-                    requestEncoded.AddParameter("grant_type", "refresh_token");
-                    var responseEncoded = client.Execute(requestEncoded);
-
-                    GenerarToken generationToken = JsonConvert.DeserializeObject<GenerarToken>(responseEncoded.Content);
-                    Token_Refresh = token.Token_Refresh;
-                    Token_Work = generationToken.access_token;
-                    TokenRepository.UpdateToken(Token_Refresh, Token_Work);
-                }
-            }
+            ZohoAPIHelper zohoAPIHelper = new ZohoAPIHelper();
+            Token_Work =  zohoAPIHelper.ObtainTokens();
+            Token_Refresh = zohoAPIHelper.TokenRefresh;
 
             // add and update Azienda
 
@@ -116,7 +55,7 @@ namespace AppWithPostman
                 }
                 else
                 {
-                    AddUpdateCompani(Token_Work, _datiCompanie);
+                    CompanieHelper.AddUpdateCompanie(Token_Work, _datiCompanie);
                     numeroContattiCompanie = 1;
                     _datiCompanie.Clear();
 
@@ -140,7 +79,7 @@ namespace AppWithPostman
             }
             if (_datiCompanie.Count > 0)
             {
-                AddUpdateCompani(Token_Work, _datiCompanie);
+                CompanieHelper.AddUpdateCompanie(Token_Work, _datiCompanie);
             }
 
 
@@ -179,7 +118,7 @@ namespace AppWithPostman
                 }
                 else
                 {
-                    AddUpdateContact(Token_Work, _dati);
+                    ContactHelper.AddUpdateContact(Token_Work, _dati);
                     numeroContatti = 1;
                     _dati.Clear();
 
@@ -210,43 +149,8 @@ namespace AppWithPostman
             }
             if (_dati.Count > 0)
             {
-                AddUpdateContact(Token_Work, _dati);
+                ContactHelper.AddUpdateContact(Token_Work, _dati);
             }
-
-
-            //delete process
-            /*List<string> arrayItem1 = new List<string>();
-            List<Utenti> utenti2 = UtentiRepository.GetUtentiDelete();
-            if (utenti2 != null)
-            {
-                int _count = 1;
-                var lista = "";
-                foreach (var _utentedel in utenti2)
-                {
-
-                    if (_count <= 100)
-                    {
-                        arrayItem1.Add(_utentedel.ZohoId);
-                        lista = lista + _utentedel.ZohoId + ",";
-                    }
-                    else
-                    {
-                        lista = "";
-                        _count = 1;
-                        arrayItem1.Clear();
-
-                        lista = lista + _utentedel.ZohoId + ",";
-                        arrayItem1.Add(_utentedel.ZohoId);
-                        DeleteZohoContact(lista, arrayItem1, Token_Work);
-
-                    }
-                    _count++;
-                }
-                if (!string.IsNullOrEmpty(lista))
-                {       
-                    DeleteZohoContact(lista, arrayItem1, Token_Work);
-                }
-            }*/
 
             //delete companie
 
@@ -272,14 +176,14 @@ namespace AppWithPostman
 
                         lista = lista + _utentedel.IdZohoAziende + ",";
                         arrayItem1.Add(_utentedel.IdZohoAziende);
-                        DeleteZohoCompanie(lista, arrayItem1, Token_Work);
+                        CompanieHelper.DeleteZohoCompanie(lista, arrayItem1, Token_Work);
 
                     }
                     _count++;
                 }
                 if (!string.IsNullOrEmpty(lista))
                 {
-                    DeleteZohoCompanie(lista, arrayItem1, Token_Work);
+                    CompanieHelper.DeleteZohoCompanie(lista, arrayItem1, Token_Work);
                 }
             }
 
@@ -371,232 +275,22 @@ namespace AppWithPostman
                             Data_di_inserimento= DateTime.Now.ToString("yyyy-MM-dd"),
                             Subject = _order.T_listinobase.Nome,
                             orchestration = false,
-                            Contact_Name= null
+                            Contact_Name= null,
+                            Id_Ordine = _order.IdOrdine
 
                         }
                     );
-                AddUpdateOrder(Token_Work, _datiOrder);
+                if(!OrderHelper.AddUpdateOrder(Token_Work, _datiOrder))
+                {
+                    Token_Work = zohoAPIHelper.ObtainTokens();
+                    OrderHelper.AddUpdateOrder(Token_Work, _datiOrder);
+                }
                 numberOrder = 1;
                 _datiOrder.Clear();
                 productList.Clear();
             }
 
         }
-        private static void AddUpdateContact(string Token_Work, List<Datum> _dati)
-        {
-            var client = new RestClient("https://accounts.zoho.eu/oauth/v2/Saten");
-
-            string urlLeads = "https://www.zohoapis.eu/crm/v3/Contacts/upsert";
-            var requesturlLeads = new RestRequest(urlLeads, Method.Post);
-            requesturlLeads.AddHeader("Authorization", "Zoho-oauthtoken " + Token_Work);
-            requesturlLeads.AddHeader("Content-Type", "application/json");
-            requesturlLeads.AddHeader("Cookie", "1a99390653=fa937bf8820a337da6a65156d344d3c2; 1ccad04dca=d29e417f368f50fa25b6be760117403f; _zcsr_tmp=3e2a1e6c-a084-4095-a53e-6763be3d3252; crmcsr=3e2a1e6c-a084-4095-a53e-6763be3d3252");
-
-            List<Datum> arrayItem = new List<Datum>();
-            arrayItem.AddRange(_dati);
-
-            Contact item = new Contact();
-            item.data = arrayItem.ToArray();
-            var itemSerialize = JsonConvert.SerializeObject(item);
-            requesturlLeads.AddParameter("application/json", itemSerialize, ParameterType.RequestBody);
-            var responseLeads = client.Execute(requesturlLeads);
-            Console.WriteLine(responseLeads.Content);
-            Zresponse zresponse = JsonConvert.DeserializeObject<Zresponse>(responseLeads.Content);
-            int counter = 0;
-            foreach (var _zresponse in zresponse.data)
-            {
-                if (_zresponse.status != "error")
-                {
-                    Utenti utenti1 = UtentiRepository.GetUtentiIdClient(arrayItem[counter].Id_Cliente);
-                    if (utenti1 != null)
-                    {
-                        utenti1.ZohoId = _zresponse.details.id;
-                        UtentiRepository.UpdateUtentiEmail(utenti1);
-                        //AddUpdateCompani(Token_Work, utenti1);
-                    }
-                }
-                counter++;
-            }
-
-        }
-        private static void DeleteZohoContact(string lista, List<string> ZohoId, string Token_Work)
-        {
-            //Esta Api realiza deletes
-            var client = new RestClient("https://accounts.zoho.eu/oauth/v2/Saten");
-            string urlLeads = "https://www.zohoapis.eu/crm/v2/Contacts?ids=" + lista;
-            var requesturlLeads = new RestRequest(urlLeads, Method.Delete);
-            requesturlLeads.AddHeader("Authorization", "Zoho-oauthtoken " + Token_Work);
-            requesturlLeads.AddHeader("Content-Type", "application/json");
-            requesturlLeads.AddHeader("Cookie", "1a99390653=fa937bf8820a337da6a65156d344d3c2; 1ccad04dca=d29e417f368f50fa25b6be760117403f; _zcsr_tmp=3e2a1e6c-a084-4095-a53e-6763be3d3252; crmcsr=3e2a1e6c-a084-4095-a53e-6763be3d3252");
-
-            var responseLeads = client.Execute(requesturlLeads);
-            Console.WriteLine(responseLeads.Content);
-
-            Zresponse zresponse = JsonConvert.DeserializeObject<Zresponse>(responseLeads.Content);
-
-            int countres = 0;
-            foreach (var _zresponse in zresponse.data)
-            {
-                if (_zresponse.status != "error")
-                {
-                    //Utenti utenti1 = UtentiRepository.GetUtentiEmail(arrayItem[countres].Email);
-                    Utenti utenti1 = UtentiRepository.GetUtentiIdZoho(_zresponse.details.id);
-                    if (utenti1 != null)
-                    {
-                        utenti1.ZohoId = _zresponse.details.id;
-                        utenti1.IsDeletedInZoho = false;
-                        UtentiRepository.UpdateUtentiDelete(utenti1);
-                    }
-                }
-                countres++;
-            }
-        }
-
-
-        private static void AddUpdateCompani(string Token_Work, List<DatumCompanie> _dati)
-        {
-            var client = new RestClient("https://accounts.zoho.eu/oauth/v2/Saten");
-
-            string urlLeads = "https://www.zohoapis.eu/crm/v2/Accounts/upsert";
-            var requesturlLeads = new RestRequest(urlLeads, Method.Post);
-            requesturlLeads.AddHeader("Authorization", "Zoho-oauthtoken " + Token_Work);
-            requesturlLeads.AddHeader("Content-Type", "application/json");
-            requesturlLeads.AddHeader("Cookie", "1a99390653=fa937bf8820a337da6a65156d344d3c2; 1ccad04dca=d29e417f368f50fa25b6be760117403f; _zcsr_tmp=3e2a1e6c-a084-4095-a53e-6763be3d3252; crmcsr=3e2a1e6c-a084-4095-a53e-6763be3d3252");
-
-            List<DatumCompanie> arrayItem = new List<DatumCompanie>();
-
-            arrayItem.AddRange(_dati);
-
-            Companie item = new Companie();
-            item.data = arrayItem.ToArray();
-            var itemSerialize = JsonConvert.SerializeObject(item);
-            requesturlLeads.AddParameter("application/json", itemSerialize, ParameterType.RequestBody);
-            var responseLeads = client.Execute(requesturlLeads);
-            Console.WriteLine(responseLeads.Content);
-            Zresponse zresponse = JsonConvert.DeserializeObject<Zresponse>(responseLeads.Content);
-            int counter = 0;
-            foreach (var _zresponse in zresponse.data)
-            {
-                if (_zresponse.status != "error")
-                {
-                    Utenti utenti1 = CompanieRepository.GetUtentiIdClient(arrayItem[counter].Id_Cliente);
-                    if (utenti1 != null)
-                    {
-                        utenti1.IdZohoAziende = _zresponse.details.id;
-                        CompanieRepository.UpdateUtentiCompanie(utenti1);
-                    }
-                }
-                counter++;
-            }
-
-        }
-        private static void AddUpdateOrder(string Token_Work, List<DatumOrder> _dati)
-        {
-            var client = new RestClient("https://accounts.zoho.eu/oauth/v2/Saten");
-
-            string urlLeads = "https://www.zohoapis.eu/crm/v2/Sales_Orders/upsert";
-            var requesturlLeads = new RestRequest(urlLeads, Method.Post);
-            requesturlLeads.AddHeader("Authorization", "Zoho-oauthtoken " + Token_Work);
-            requesturlLeads.AddHeader("Content-Type", "application/json");
-            requesturlLeads.AddHeader("Cookie", "1a99390653=fa937bf8820a337da6a65156d344d3c2; 1ccad04dca=d29e417f368f50fa25b6be760117403f; _zcsr_tmp=3e2a1e6c-a084-4095-a53e-6763be3d3252; crmcsr=3e2a1e6c-a084-4095-a53e-6763be3d3252");
-
-            List<DatumOrder> arrayItem = new List<DatumOrder>();
-            arrayItem.AddRange(_dati);
-
-            Order item = new Order();
-            item.data = arrayItem;
-
-            var itemSerialize = JsonConvert.SerializeObject(item);
-            requesturlLeads.AddParameter("application/json", itemSerialize, ParameterType.RequestBody);
-            var responseLeads = client.Execute(requesturlLeads);
-
-            Console.WriteLine(responseLeads.Content);
-            Zresponse zresponse = JsonConvert.DeserializeObject<Zresponse>(responseLeads.Content);
-            int counter = 0;
-
-            foreach (var _zresponse in zresponse.data)
-            {
-                if (_zresponse.status != "error")
-                {
-                    Ordini data = OrdiniRepository.GetOrderById((int)arrayItem[counter].Id_Ordine);
-                    if (data != null)
-                    {
-                        data.IdZoho = _zresponse.details.id;
-                        OrdiniRepository.UpdateOrder(data);
-                    }
-                }
-                counter++;
-            }
-
-        }
-
-        private static void DeleteZohoCompanie(string lista, List<string> ZohoId, string Token_Work)
-        {
-            //Esta Api realiza deletes
-            var client = new RestClient("https://accounts.zoho.eu/oauth/v2/Saten");
-            string urlLeads = "https://www.zohoapis.eu/crm/v2/Accounts?ids=" + lista;
-            var requesturlLeads = new RestRequest(urlLeads, Method.Delete);
-            requesturlLeads.AddHeader("Authorization", "Zoho-oauthtoken " + Token_Work);
-            requesturlLeads.AddHeader("Content-Type", "application/json");
-            requesturlLeads.AddHeader("Cookie", "1a99390653=fa937bf8820a337da6a65156d344d3c2; 1ccad04dca=d29e417f368f50fa25b6be760117403f; _zcsr_tmp=3e2a1e6c-a084-4095-a53e-6763be3d3252; crmcsr=3e2a1e6c-a084-4095-a53e-6763be3d3252");
-
-            var responseLeads = client.Execute(requesturlLeads);
-            Console.WriteLine(responseLeads.Content);
-
-            Zresponse zresponse = JsonConvert.DeserializeObject<Zresponse>(responseLeads.Content);
-
-            int countres = 0;
-            foreach (var _zresponse in zresponse.data)
-            {
-                if (_zresponse.status != "error")
-                {
-                    //Utenti utenti1 = UtentiRepository.GetUtentiEmail(arrayItem[countres].Email);
-                    Utenti utenti1 = UtentiRepository.GetUtentiIdZoho(_zresponse.details.id);
-                    if (utenti1 != null)
-                    {
-                        utenti1.ZohoId = _zresponse.details.id;
-                        utenti1.IsDeletedInZoho = false;
-                        UtentiRepository.UpdateUtentiDelete(utenti1);
-                    }
-                }
-                countres++;
-            }
-        }
 
     }
-    public class GenerarToken
-    {
-        public string access_token { get; set; }
-        public string refresh_token { get; set; }
-        public string api_domain { get; set; }
-        public string token_type { get; set; }
-        public int expires_in { get; set; }
-    }
-
-    public class Generaterken
-    {
-        public string access_token { get; set; }
-        public string api_domain { get; set; }
-        public string token_type { get; set; }
-        public int expires_in { get; set; }
-    }
-
-
-    public class Main
-    {
-        public Customer[] data { get; set; }
-    }
-
-    public class Customer
-    {
-        public string Company { get; set; }
-        public string Last_Name { get; set; }
-        public string First_Name { get; set; }
-        public string Email { get; set; }
-        public string State { get; set; }
-    }
-
-
-
-
 }

@@ -15,7 +15,7 @@ namespace AppWithPostman.Repository
             using (var _dbo = new DbZohoEntities())
             {
                 _ordiniList = _dbo.Ordini.Include("Utenti").Include("T_listinobase").Include("T_Corriere")
-                    .Where(d => d.IdZoho == null)
+                    .Where(d => d.IdZoho == null && d.Utenti.IsDeletedInZoho == false && d.Utenti.IdZohoAziende != null)
                     .ToList();
             }
 
