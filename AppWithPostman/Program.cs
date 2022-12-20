@@ -194,100 +194,103 @@ namespace AppWithPostman
 
             int numberOrder = 1;
 
-            var data = ordini[0];
-
-            foreach (var _order in ordini)
+            if(ordini.Count > 0)
             {
-                productList.Add(new ProductDetails
+                var data = ordini[0];
+
+                foreach (var _order in ordini)
                 {
-                    
-                    product = new Product
+                    productList.Add(new ProductDetails
                     {
-                        Product_Code = "Offset",
-                        name = "Offset",
-                        id= "517570000000607003"
-                    },
-                    quantity = 5,
-                    Discount=0,
-                    total_after_discount=0,
-                    net_total= 0,
-                    book= null,
-                    Tax = null,
-                    list_price = 0,
-                    unit_price= null,
-                    quantity_in_stock=-1,
-                    total= (int)_order.TotaleOrdine,
-                    product_description=null,
-                });
 
-                _datiOrder.Add(
-                        new DatumOrder()
+                        product = new Product
                         {
-                            currency_symbol = "€",
-                            Quantit= 5,
-                            field_states = null,
-                            Tax= (int)_order.TotaleIva,
-                            Anteprima = _order.Anteprima,
-                            Sorgente_Fronte = _order.SorgenteFronte,
-                            state = "save",
-                            converted= false,
-                            process_flow= false,
-                            Deal_Name= null,
-                            Billing_Country=null,
-                            Carrier= _order.T_Corriere.Descrizione,
-                            approved = true,
-                            Quote_Name= null,
-                            Status= "Registrato",
-                            Grand_Total= (int)_order.TotaleOrdine,
-                                
-                            Billing_Street= null,
-                            Adjustment= 77,
-                            editable = true,
-                            Billing_Code= null,
-                            Product_Details = productList.ToArray(),
-                            Sorgente_Retro= _order.SorgenteRetro,
-                            //Id_Ordine = 14589,
-                            Excise_Duty= null,
-                            Shipping_City= null,
-                            Shipping_Country = null,
-                            Shipping_Code = null,
-                            Billing_City= null, 
-                            Purchase_Order= null,
+                            Product_Code = "Offset",
+                            name = "Offset",
+                            id = "517570000000607003"
+                        },
+                        quantity = 5,
+                        Discount = 0,
+                        total_after_discount = 0,
+                        net_total = 0,
+                        book = null,
+                        Tax = null,
+                        list_price = 0,
+                        unit_price = null,
+                        quantity_in_stock = -1,
+                        total = (int)_order.TotaleOrdine,
+                        product_description = null,
+                    });
 
-                            Shipping_Street = null,
-                            Description = null,
-                            Discount = 0,
-                            Shipping_State= null,
-
-                            review = null ,
-                            Account_Name = new Account_Name
+                    _datiOrder.Add(
+                            new DatumOrder()
                             {
-                                name = _order.Utenti.Nome,
-                                id = _order.Utenti.IdZohoAziende
-                            },
-                            Tipologia_di_consegna = "Ritiro da Cliente",
-                            Sales_Commission= null,
+                                currency_symbol = "€",
+                                Quantit = 5,
+                                field_states = null,
+                                Tax = (int)_order.TotaleIva,
+                                Anteprima = _order.Anteprima,
+                                Sorgente_Fronte = _order.SorgenteFronte,
+                                state = "save",
+                                converted = false,
+                                process_flow = false,
+                                Deal_Name = null,
+                                Billing_Country = null,
+                                Carrier = _order.T_Corriere.Descrizione,
+                                approved = true,
+                                Quote_Name = null,
+                                Status = "Registrato",
+                                Grand_Total = (int)_order.TotaleOrdine,
 
-                            Due_Date = null,
-                            Data_di_consegna = DateTime.Now.AddDays(3).ToString("yyyy-MM-dd"),
-                            Terms_and_Conditions= null,
-                            Sub_Total= (int)_order.TotaleNetto,
-                            Data_di_inserimento= DateTime.Now.ToString("yyyy-MM-dd"),
-                            Subject = _order.T_listinobase.Nome,
-                            orchestration = false,
-                            Contact_Name= null,
-                            Id_Ordine = _order.IdOrdine
+                                Billing_Street = null,
+                                Adjustment = 77,
+                                editable = true,
+                                Billing_Code = null,
+                                Product_Details = productList.ToArray(),
+                                Sorgente_Retro = _order.SorgenteRetro,
+                                //Id_Ordine = 14589,
+                                Excise_Duty = null,
+                                Shipping_City = null,
+                                Shipping_Country = null,
+                                Shipping_Code = null,
+                                Billing_City = null,
+                                Purchase_Order = null,
 
-                        }
-                    );
-                if(!OrderHelper.AddUpdateOrder(Token_Work, _datiOrder))
-                {
-                    Token_Work = zohoAPIHelper.ObtainTokens();
-                    OrderHelper.AddUpdateOrder(Token_Work, _datiOrder);
+                                Shipping_Street = null,
+                                Description = null,
+                                Discount = 0,
+                                Shipping_State = null,
+
+                                review = null,
+                                Account_Name = new Account_Name
+                                {
+                                    name = _order.Utenti.Nome,
+                                    id = _order.Utenti.IdZohoAziende
+                                },
+                                Tipologia_di_consegna = "Ritiro da Cliente",
+                                Sales_Commission = null,
+
+                                Due_Date = null,
+                                Data_di_consegna = DateTime.Now.AddDays(3).ToString("yyyy-MM-dd"),
+                                Terms_and_Conditions = null,
+                                Sub_Total = (int)_order.TotaleNetto,
+                                Data_di_inserimento = DateTime.Now.ToString("yyyy-MM-dd"),
+                                Subject = _order.T_listinobase.Nome,
+                                orchestration = false,
+                                Contact_Name = null,
+                                Id_Ordine = _order.IdOrdine
+
+                            }
+                        );
+                    if (!OrderHelper.AddUpdateOrder(Token_Work, _datiOrder))
+                    {
+                        Token_Work = zohoAPIHelper.ObtainTokens();
+                        OrderHelper.AddUpdateOrder(Token_Work, _datiOrder);
+                    }
+                    numberOrder = 1;
+                    _datiOrder.Clear();
+                    productList.Clear();
                 }
-                numberOrder = 1;
-                _datiOrder.Clear();
-                productList.Clear();
             }
 
         }
