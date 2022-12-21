@@ -31,7 +31,7 @@ namespace AppWithPostman.Helpers
             var itemSerialize = JsonConvert.SerializeObject(item);
             requesturlLeads.AddParameter("application/json", itemSerialize, ParameterType.RequestBody);
             var responseLeads = client.Execute(requesturlLeads);
-            Console.WriteLine(responseLeads.Content);
+            //Console.WriteLine(responseLeads.Content);
             Zresponse zresponse = JsonConvert.DeserializeObject<Zresponse>(responseLeads.Content);
             int counter = 0;
             foreach (var _zresponse in zresponse.data)
@@ -60,7 +60,7 @@ namespace AppWithPostman.Helpers
             requesturlLeads.AddHeader("Cookie", "1a99390653=fa937bf8820a337da6a65156d344d3c2; 1ccad04dca=d29e417f368f50fa25b6be760117403f; _zcsr_tmp=3e2a1e6c-a084-4095-a53e-6763be3d3252; crmcsr=3e2a1e6c-a084-4095-a53e-6763be3d3252");
 
             var responseLeads = client.Execute(requesturlLeads);
-            Console.WriteLine(responseLeads.Content);
+            //Console.WriteLine(responseLeads.Content);
 
             Zresponse zresponse = JsonConvert.DeserializeObject<Zresponse>(responseLeads.Content);
 
@@ -70,10 +70,10 @@ namespace AppWithPostman.Helpers
                 if (_zresponse.status != "error")
                 {
                     //Utenti utenti1 = UtentiRepository.GetUtentiEmail(arrayItem[countres].Email);
-                    Utenti utenti1 = UtentiRepository.GetUtentiIdZoho(_zresponse.details.id);
+                    Utenti utenti1 = UtentiRepository.GetUtentiIdZohoByIdZohoAziende(_zresponse.details.id);
                     if (utenti1 != null)
                     {
-                        utenti1.ZohoId = _zresponse.details.id;
+                        //utenti1.ZohoId = _zresponse.details.id;
                         utenti1.IsDeletedInZoho = false;
                         UtentiRepository.UpdateUtentiDelete(utenti1);
                     }

@@ -12,7 +12,7 @@ namespace AppWithPostman.Helpers
 {
     public class OrderHelper
     {
-        public static bool AddUpdateOrder(string Token_Work, List<DatumOrder> _dati)
+        public static void AddUpdateOrder(string Token_Work, List<DatumOrder> _dati)
         {
             bool retVal = false;
             var client = new RestClient("https://accounts.zoho.eu/oauth/v2/Saten");
@@ -34,7 +34,7 @@ namespace AppWithPostman.Helpers
             requesturlLeads.AddParameter("application/json", itemSerialize, ParameterType.RequestBody);
             var responseLeads = client.Execute(requesturlLeads);
 
-            Console.WriteLine(responseLeads.Content);
+            //Console.WriteLine(responseLeads.Content);
             Zresponse zresponse = JsonConvert.DeserializeObject<Zresponse>(responseLeads.Content);
             int counter = 0;
 
@@ -49,14 +49,12 @@ namespace AppWithPostman.Helpers
                         {
                             data.IdZoho = _zresponse.details.id;
                             OrdiniRepository.UpdateOrder(data);
-                            retVal &= true;
+                            retVal = true;
                         }
                     }
                     counter++;
                 }
             }
-
-            return retVal;
         }
     }
 }

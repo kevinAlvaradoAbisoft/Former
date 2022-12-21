@@ -89,7 +89,7 @@ namespace AppWithPostman.Helpers
             else
             {
                 var timetoken = DateTime.Now - token.LastUpdate;
-                if ((timetoken.Value.Hours * 60 + timetoken.Value.Minutes) < 15)
+                if ((timetoken.Value.Hours * 60 + timetoken.Value.Minutes) < 1)
                 {
                     Token_Refresh = token.Token_Refresh;
                     Token_Work = token.Token_Work;

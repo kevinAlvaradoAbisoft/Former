@@ -67,6 +67,16 @@ namespace AppWithPostman.Repository
 
             return utenti;
         }
+        public static Utenti GetUtentiIdZohoByIdZohoAziende(string Id)
+        {
+            Utenti utenti = new Utenti();
+            using (var _dbo = new DbZohoEntities())
+            {
+                utenti = _dbo.Utenti.Where(e => e.IdZohoAziende == Id).FirstOrDefault();
+            }
+
+            return utenti;
+        }
         public static int  UpdateUtentiEmail(Utenti utenti)
         {
             int outupdate = 0;

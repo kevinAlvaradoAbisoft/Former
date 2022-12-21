@@ -30,7 +30,6 @@ namespace AppWithPostman.Helpers
             var itemSerialize = JsonConvert.SerializeObject(item);
             requesturlLeads.AddParameter("application/json", itemSerialize, ParameterType.RequestBody);
             var responseLeads = client.Execute(requesturlLeads);
-            Console.WriteLine(responseLeads.Content);
             Zresponse zresponse = JsonConvert.DeserializeObject<Zresponse>(responseLeads.Content);
             int counter = 0;
             foreach (var _zresponse in zresponse.data)
