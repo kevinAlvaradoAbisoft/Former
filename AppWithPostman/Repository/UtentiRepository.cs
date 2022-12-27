@@ -66,22 +66,22 @@ namespace AppWithPostman.Repository
 
             return utenti;
         }
-        public static Utenti GetUtentiIdClient(int Id)
+        public static UserZoho GetUtentiIdClient(int Id)
         {
-            Utenti utenti = new Utenti();
+            UserZoho utenti = new UserZoho();
             using (var _dbo = new DbZohoEntities())
             {
-                utenti = _dbo.Utenti.Where(e => e.IdUt == Id).FirstOrDefault();
+                utenti = _dbo.UserZoho.Where(e => e.IdUser == Id).FirstOrDefault();
             }
 
             return utenti;
         }
-        public static Utenti GetUtentiIdZoho(string Id)
+        public static UserZoho GetUtentiIdZoho(string Id)
         {
-            Utenti utenti = new Utenti();
+            UserZoho utenti = new UserZoho();
             using (var _dbo = new DbZohoEntities())
             {
-                utenti = _dbo.Utenti.Where(e => e.IdZoho == Id).FirstOrDefault();
+                utenti = _dbo.UserZoho.Where(e => e.IdZoho == Id).FirstOrDefault();
             }
 
             return utenti;
@@ -97,37 +97,36 @@ namespace AppWithPostman.Repository
 
             return utenti;
         }
-        public static int  UpdateUtentiEmail(Utenti utenti)
+        public static int  UpdateUtentiEmail(UserZoho utenti)
         {
             int outupdate = 0;
             //Utenti dataUtenti = new Utenti();
             using (var _dbo = new DbZohoEntities())
             {
                 //var utenti1 = _dbo.Utenti.First(i => i.IdUt == utenti.IdUt);
-                var user = _dbo.UserZoho.First(i => i.IdUser == utenti.IdUt);
-                //utenti1.ZohoId = utenti.ZohoId;
-                user.IdZoho = utenti.ZohoId;
-                user.IdZohoAziende = utenti.IdZohoAziende;
+                var user = _dbo.UserZoho.First(i => i.IdUser == utenti.IdUser);
+                user.IdZoho = utenti.IdZoho;
+                //user.IdZohoAziende = utenti.IdZohoAziende;
               
                 //_dbo.Utenti.Attach(utenti1);
                 //_dbo.Entry(utenti1).State = EntityState.Modified;
                 _dbo.UserZoho.AddOrUpdate(user);
                 outupdate = _dbo.SaveChanges();
 
-                var utenti1 = _dbo.Utenti.First(i => i.IdUt == utenti.IdUt);
+                var utenti1 = _dbo.Utenti.First(i => i.IdUt == utenti.IdUser);
                 utenti1.DisattivaAccessoSito = 1;
                 outupdate = _dbo.SaveChanges();
 
             }
             return outupdate;
         }
-        public static int UpdateUtentiDelete(Utenti utenti)
+        public static int UpdateUtentiDelete(UserZoho utenti)
         {
             int outupdate = 0;
 
             using (var _dbo = new DbZohoEntities())
             {
-                var utenti1 = _dbo.UserZoho.First(i => i.IdUser == utenti.IdUt);
+                var utenti1 = _dbo.UserZoho.First(i => i.IdUser == utenti.IdUser);
                 utenti1.IsDeletedInZoho = false;
 
                 _dbo.UserZoho.AddOrUpdate(utenti1);

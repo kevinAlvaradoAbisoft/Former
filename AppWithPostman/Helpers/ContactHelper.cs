@@ -36,10 +36,10 @@ namespace AppWithPostman.Helpers
             {
                 if (_zresponse.status != "error")
                 {
-                    Utenti utenti1 = UtentiRepository.GetUtentiIdClient(arrayItem[counter].Id_Cliente);
+                    UserZoho utenti1 = UtentiRepository.GetUtentiIdClient(arrayItem[counter].Id_Cliente);
                     if (utenti1 != null)
                     {
-                        utenti1.ZohoId = _zresponse.details.id;
+                        utenti1.IdZoho = _zresponse.details.id;
                         UtentiRepository.UpdateUtentiEmail(utenti1);
                         //AddUpdateCompani(Token_Work, utenti1);
                     }
@@ -69,10 +69,10 @@ namespace AppWithPostman.Helpers
                 if (_zresponse.status != "error")
                 {
                     //Utenti utenti1 = UtentiRepository.GetUtentiEmail(arrayItem[countres].Email);
-                    Utenti utenti1 = UtentiRepository.GetUtentiIdZoho(_zresponse.details.id);
+                    UserZoho utenti1 = UtentiRepository.GetUtentiIdZoho(_zresponse.details.id);
                     if (utenti1 != null)
                     {
-                        utenti1.ZohoId = _zresponse.details.id;
+                        utenti1.IdZoho = _zresponse.details.id;
                         utenti1.IsDeletedInZoho = false;
                         UtentiRepository.UpdateUtentiDelete(utenti1);
                     }

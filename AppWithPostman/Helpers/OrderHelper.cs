@@ -44,7 +44,7 @@ namespace AppWithPostman.Helpers
                 {
                     if (_zresponse.status != "error")
                     {
-                        Ordini data = OrdiniRepository.GetOrderById((int)arrayItem[counter].Id_Ordine);
+                        OrderZoho data = OrdiniRepository.GetOrderById((int)arrayItem[counter].Id_Ordine);
                         if (data != null)
                         {
                             data.IdZoho = _zresponse.details.id;

@@ -35,24 +35,24 @@ namespace AppWithPostman.Repository
             }
             return _utentiList;
         }
-        public static Utenti GetUtentiIdClient(int Id)
+        public static UserZoho GetUtentiIdClient(int Id)
         {
-            Utenti utenti = new Utenti();
+            UserZoho utenti = new UserZoho();
             using (var _dbo = new DbZohoEntities())
             {
-                utenti = _dbo.Utenti.Where(e => e.IdUt == Id).FirstOrDefault();
+                utenti = _dbo.UserZoho.Where(e => e.IdUser == Id).FirstOrDefault();
             }
 
             return utenti;
         }
-        public static int UpdateUtentiCompanie(Utenti utenti)
+        public static int UpdateUtentiCompanie(UserZoho utenti)
         {
             int outupdate = 0;
             //Utenti dataUtenti = new Utenti();
             using (var _dbo = new DbZohoEntities())
             {
                 //var utenti1 = _dbo.Utenti.First(i => i.IdUt == utenti.IdUt);
-                var utenti1 = _dbo.UserZoho.First(i => i.IdUser == utenti.IdUt);
+                var utenti1 = _dbo.UserZoho.First(i => i.IdUser == utenti.IdUser);
 
                 utenti1.IdZohoAziende = utenti.IdZohoAziende;
 

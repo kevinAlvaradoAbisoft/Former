@@ -89,7 +89,9 @@
     <Compile Include="DTO\Companie.cs" />
     <Compile Include="DTO\Contact.cs" />
     <Compile Include="DTO\Order.cs" />
+    <Compile Include="DTO\OrderDTO.cs" />
     <Compile Include="DTO\tmp\Order.cs" />
+    <Compile Include="DTO\UserDTO.cs" />
     <Compile Include="DTO\ZohoResponse.cs" />
     <Compile Include="EntityZoho.Context.cs">
       <AutoGen>True</AutoGen>
@@ -123,9 +125,11 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\CompanieRepository.cs" />
+    <Compile Include="Repository\OrderZohoRepository.cs" />
     <Compile Include="Repository\OrdiniRepository.cs" />
     <Compile Include="Repository\TokenRepository.cs" />
     <Compile Include="Repository\T_listinobaseRepository.cs" />
+    <Compile Include="Repository\UserZohoRepository.cs" />
     <Compile Include="Repository\UtentiRepository.cs" />
     <Compile Include="tokens.cs">
       <DependentUpon>EntityZoho.tt</DependentUpon>

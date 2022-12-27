@@ -27,6 +27,22 @@ namespace AppWithPostman
             Token_Work =  zohoAPIHelper.ObtainTokens();
             Token_Refresh = zohoAPIHelper.TokenRefresh;
 
+            #region Add users to the users table UserZoho
+            try
+            {
+                List<UserDTO> getusers = UserZohoRepository.GetUsersZoho();
+                if(getusers.Count > 0)
+                {
+                    var data = UserZohoRepository.AddUserZoho(getusers);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error add Users to the users table UserZoho: {ex.Message}");
+                return ex.HResult;
+            }
+            #endregion
+
             #region Adding and updating Azienda
             try
             {
@@ -217,12 +233,26 @@ namespace AppWithPostman
             }
             #endregion
 
-            /*
+            #region Add orders to the table OrderZoho
+            try
+            {
+                List<OrderDTO> getOrders = OrderZohoRepository.GetOrdersZoho();
+                if (getOrders.Count > 0)
+                {
+                    var data = OrderZohoRepository.AddOrderZoho(getOrders);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error add Orders to the table OrderZoho: {ex.Message}");
+                return ex.HResult;
+            }
+            #endregion
 
             #region Adding Ordini
             try
             {
-                List<Ordini> ordini = OrdiniRepository.GetOrders();
+                List<OrderDTO> ordini = OrdiniRepository.GetOrders();
                 List<DatumOrder> _datiOrder = new List<DatumOrder>();
                 List<ProductDetails> productList = new List<ProductDetails>();
 
@@ -252,7 +282,7 @@ namespace AppWithPostman
                             list_price = 0,
                             unit_price = null,
                             quantity_in_stock = -1,
-                            total = (int)_order.TotaleOrdine,
+                            total = (int)_order.Total_Order,
                             product_description = null,
                         });
 
@@ -262,26 +292,26 @@ namespace AppWithPostman
                                     currency_symbol = "€",
                                     Quantit = 5,
                                     field_states = null,
-                                    Tax = (int)_order.TotaleIva,
+                                    Tax = (int)_order.Total_Iva,
                                     Anteprima = _order.Anteprima,
-                                    Sorgente_Fronte = _order.SorgenteFronte,
+                                    Sorgente_Fronte = _order.Sorgente_Fronte,
                                     state = "save",
                                     converted = false,
                                     process_flow = false,
                                     Deal_Name = null,
                                     Billing_Country = null,
-                                    Carrier = _order.T_Corriere.Descrizione,
+                                    Carrier = _order.Carrier,
                                     approved = true,
                                     Quote_Name = null,
                                     Status = "Registrato",
-                                    Grand_Total = (int)_order.TotaleOrdine,
+                                    Grand_Total = (int)_order.Total_Order,
 
                                     Billing_Street = null,
                                     Adjustment = 77,
                                     editable = true,
                                     Billing_Code = null,
                                     Product_Details = productList.ToArray(),
-                                    Sorgente_Retro = _order.SorgenteRetro,
+                                    Sorgente_Retro = _order.Sorgente_Retro,
                                     //Id_Ordine = 14589,
                                     Excise_Duty = null,
                                     Shipping_City = null,
@@ -296,24 +326,19 @@ namespace AppWithPostman
                                     Shipping_State = null,
 
                                     review = null,
-                                    Account_Name = new Account_Name
-                                    {
-                                        name = _order.Utenti.Nome,
-                                        id = _order.Utenti.IdZohoAziende
-                                    },
+                                    Account_Name = _order.Account_Name,
                                     Tipologia_di_consegna = "Ritiro da Cliente",
                                     Sales_Commission = null,
 
                                     Due_Date = null,
                                     Data_di_consegna = DateTime.Now.AddDays(3).ToString("yyyy-MM-dd"),
                                     Terms_and_Conditions = null,
-                                    Sub_Total = (int)_order.TotaleNetto,
+                                    Sub_Total = (int)_order.Sub_Total,
                                     Data_di_inserimento = DateTime.Now.ToString("yyyy-MM-dd"),
-                                    Subject = _order.T_listinobase.Nome,
+                                    Subject = _order.Subject,
                                     orchestration = false,
                                     Contact_Name = null,
-                                    Id_Ordine = _order.IdOrdine
-
+                                    Id_Ordine = _order.IdOrder
                                 }
                             );
                         OrderHelper.AddUpdateOrder(Token_Work, _datiOrder);
@@ -330,7 +355,6 @@ namespace AppWithPostman
             }
             #endregion
 
-            */
             Console.WriteLine("Finishing process");
             return 0;
 

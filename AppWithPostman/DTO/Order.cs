@@ -161,7 +161,7 @@ namespace AppWithPostman.DTO
         public int quantity { get; set; }
         public int quantity_in_stock { get; set; }
         public object Tax { get; set; }
-        public int total { get; set; }
+        public decimal total { get; set; }
         public int total_after_discount { get; set; }
         public object unit_price { get; set; }
     }

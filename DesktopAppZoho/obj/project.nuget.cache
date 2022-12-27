@@ -1,15 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "3/n6MXcxqSCuKm3YIQtkSzawcbFH6CcVS1XyYz3XRMAjYbKCOJU2x+SFKV1o/p/gMZuUnPwMK6kTvCJyhworew==",
+  "dgSpecHash": "ld2aDQfe3WOHcz9lFXFNEnaRo66LVDquKzxm32l4cgQFbOj5U86rHPp5P0hNLBO0BS09smNGtvGF3GrnmX4FNQ==",
   "success": true,
-  "projectFilePath": "C:\\Projects\\SolSohoRepo\\Former\\DesktopAppZoho\\DesktopAppZoho.csproj",
+  "projectFilePath": "C:\\Projects\\Former\\Former\\DesktopAppZoho\\DesktopAppZoho.csproj",
   "expectedPackageFiles": [],
-  "logs": [
-    {
-      "code": "NU1803",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "You are running the 'restore' operation with an 'HTTP' source, 'http://10.110.81.42:8088/nuget/Default'. Non-HTTPS access will be removed in a future version. Consider migrating to an 'HTTPS' source."
-    }
-  ]
+  "logs": []
 }

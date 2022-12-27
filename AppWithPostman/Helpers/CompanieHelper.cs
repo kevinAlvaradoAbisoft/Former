@@ -38,7 +38,7 @@ namespace AppWithPostman.Helpers
             {
                 if (_zresponse.status != "error")
                 {
-                    Utenti utenti1 = CompanieRepository.GetUtentiIdClient(arrayItem[counter].Id_Cliente);
+                    UserZoho utenti1 = CompanieRepository.GetUtentiIdClient(arrayItem[counter].Id_Cliente);
                     if (utenti1 != null)
                     {
                         utenti1.IdZohoAziende = _zresponse.details.id;
