@@ -127,10 +127,10 @@ namespace AppWithPostman.Repository
 
             using (var _dbo = new DbZohoEntities())
             {
-                var utenti1 = _dbo.Utenti.First(i => i.IdUt == utenti.IdUt);
+                var utenti1 = _dbo.UserZoho.First(i => i.IdUser == utenti.IdUt);
                 utenti1.IsDeletedInZoho = false;
 
-                _dbo.Utenti.AddOrUpdate(utenti1);
+                _dbo.UserZoho.AddOrUpdate(utenti1);
                 outupdate = _dbo.SaveChanges();
             }
 
