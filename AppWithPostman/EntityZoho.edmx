@@ -5,6 +5,16 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="DbZohoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DbZoho.dbo.OrderZoho' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="OrderZoho">
+          <Key>
+            <PropertyRef Name="IdOrder" />
+          </Key>
+          <Property Name="IdOrder" Type="int" Nullable="false" />
+          <Property Name="IdZoho" Type="varchar" MaxLength="50" />
+          <Property Name="IsDeletedInZoho" Type="bit" />
+        </EntityType>
         <EntityType Name="Ordini">
           <Key>
             <PropertyRef Name="IdOrdine" />
@@ -62,6 +72,17 @@
           <Property Name="ConsegnaGarantita" Type="datetime" />
           <Property Name="ConsegnaGarantitaDa" Type="int" />
           <Property Name="IdZoho" Type="varchar" MaxLength="50" />
+          <Property Name="IsDeletedInZoho" Type="bit" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DbZoho.dbo.PriceListZoho' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="PriceListZoho">
+          <Key>
+            <PropertyRef Name="IdPricelist" />
+          </Key>
+          <Property Name="IdPricelist" Type="int" Nullable="false" />
+          <Property Name="IdZoho" Type="varchar" MaxLength="50" />
+          <Property Name="IsDeletedInZoho" Type="bit" />
         </EntityType>
         <EntityType Name="T_Corriere">
           <Key>
@@ -204,6 +225,17 @@
           <Property Name="Token_Work" Type="varchar" MaxLength="200" />
           <Property Name="LastUpdate" Type="datetime" />
         </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DbZoho.dbo.UserZoho' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="UserZoho">
+          <Key>
+            <PropertyRef Name="IdUser" />
+          </Key>
+          <Property Name="IdUser" Type="int" Nullable="false" />
+          <Property Name="IdZoho" Type="varchar" MaxLength="50" />
+          <Property Name="IsDeletedInZoho" Type="bit" />
+          <Property Name="IdZohoAziende" Type="varchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="Utenti">
           <Key>
             <PropertyRef Name="IdUt" />
@@ -292,6 +324,28 @@
           <EntitySet Name="T_listinobase" EntityType="Self.T_listinobase" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tokens" EntityType="Self.tokens" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Utenti" EntityType="Self.Utenti" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderZoho" EntityType="Self.OrderZoho" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [OrderZoho].[IdOrder] AS [IdOrder], 
+    [OrderZoho].[IdZoho] AS [IdZoho], 
+    [OrderZoho].[IsDeletedInZoho] AS [IsDeletedInZoho]
+    FROM [dbo].[OrderZoho] AS [OrderZoho]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="PriceListZoho" EntityType="Self.PriceListZoho" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [PriceListZoho].[IdPricelist] AS [IdPricelist], 
+    [PriceListZoho].[IdZoho] AS [IdZoho], 
+    [PriceListZoho].[IsDeletedInZoho] AS [IsDeletedInZoho]
+    FROM [dbo].[PriceListZoho] AS [PriceListZoho]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="UserZoho" EntityType="Self.UserZoho" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [UserZoho].[IdUser] AS [IdUser], 
+    [UserZoho].[IdZoho] AS [IdZoho], 
+    [UserZoho].[IsDeletedInZoho] AS [IsDeletedInZoho], 
+    [UserZoho].[IdZohoAziende] AS [IdZohoAziende]
+    FROM [dbo].[UserZoho] AS [UserZoho]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_Ordini_T_Corriere" Association="Self.FK_Ordini_T_Corriere">
             <End Role="T_Corriere" EntitySet="T_Corriere" />
             <End Role="Ordini" EntitySet="Ordini" />
@@ -327,6 +381,9 @@
             <End Role="Utenti" EntitySet="Utenti" />
             <End Role="Ordini" EntitySet="Ordini" />
           </AssociationSet>
+          <EntitySet Name="OrderZoho" EntityType="DbZohoModel.OrderZoho" />
+          <EntitySet Name="PriceListZoho" EntityType="DbZohoModel.PriceListZoho" />
+          <EntitySet Name="UserZoho" EntityType="DbZohoModel.UserZoho" />
         </EntityContainer>
         <EntityType Name="Utenti">
           <Key>
@@ -444,6 +501,7 @@
           <NavigationProperty Name="T_Corriere" Relationship="DbZohoModel.FK_Ordini_T_Corriere" FromRole="Ordini" ToRole="T_Corriere" />
           <NavigationProperty Name="T_listinobase" Relationship="DbZohoModel.FK_Ordini_T_listinobase" FromRole="Ordini" ToRole="T_listinobase" />
           <NavigationProperty Name="Utenti" Relationship="DbZohoModel.FK_Ordini_Utenti" FromRole="Ordini" ToRole="Utenti" />
+          <Property Name="IsDeletedInZoho" Type="Boolean" />
         </EntityType>
         <EntityType Name="T_Corriere">
           <Key>
@@ -615,6 +673,31 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="OrderZoho">
+          <Key>
+            <PropertyRef Name="IdOrder" />
+          </Key>
+          <Property Name="IdOrder" Type="Int32" Nullable="false" />
+          <Property Name="IdZoho" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsDeletedInZoho" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="PriceListZoho">
+          <Key>
+            <PropertyRef Name="IdPricelist" />
+          </Key>
+          <Property Name="IdPricelist" Type="Int32" Nullable="false" />
+          <Property Name="IdZoho" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsDeletedInZoho" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="UserZoho">
+          <Key>
+            <PropertyRef Name="IdUser" />
+          </Key>
+          <Property Name="IdUser" Type="Int32" Nullable="false" />
+          <Property Name="IdZoho" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsDeletedInZoho" Type="Boolean" />
+          <Property Name="IdZohoAziende" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -681,6 +764,7 @@
           <EntitySetMapping Name="Ordini">
             <EntityTypeMapping TypeName="DbZohoModel.Ordini">
               <MappingFragment StoreEntitySet="Ordini">
+                <ScalarProperty Name="IsDeletedInZoho" ColumnName="IsDeletedInZoho" />
                 <ScalarProperty Name="IdZoho" ColumnName="IdZoho" />
                 <ScalarProperty Name="ConsegnaGarantitaDa" ColumnName="ConsegnaGarantitaDa" />
                 <ScalarProperty Name="ConsegnaGarantita" ColumnName="ConsegnaGarantita" />
@@ -868,6 +952,34 @@
                 <ScalarProperty Name="IdCurvaAtt" ColumnName="IdCurvaAtt" />
                 <ScalarProperty Name="Nome" ColumnName="Nome" />
                 <ScalarProperty Name="IdListinoBase" ColumnName="IdListinoBase" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderZoho">
+            <EntityTypeMapping TypeName="DbZohoModel.OrderZoho">
+              <MappingFragment StoreEntitySet="OrderZoho">
+                <ScalarProperty Name="IsDeletedInZoho" ColumnName="IsDeletedInZoho" />
+                <ScalarProperty Name="IdZoho" ColumnName="IdZoho" />
+                <ScalarProperty Name="IdOrder" ColumnName="IdOrder" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PriceListZoho">
+            <EntityTypeMapping TypeName="DbZohoModel.PriceListZoho">
+              <MappingFragment StoreEntitySet="PriceListZoho">
+                <ScalarProperty Name="IsDeletedInZoho" ColumnName="IsDeletedInZoho" />
+                <ScalarProperty Name="IdZoho" ColumnName="IdZoho" />
+                <ScalarProperty Name="IdPricelist" ColumnName="IdPricelist" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserZoho">
+            <EntityTypeMapping TypeName="DbZohoModel.UserZoho">
+              <MappingFragment StoreEntitySet="UserZoho">
+                <ScalarProperty Name="IdZohoAziende" ColumnName="IdZohoAziende" />
+                <ScalarProperty Name="IsDeletedInZoho" ColumnName="IsDeletedInZoho" />
+                <ScalarProperty Name="IdZoho" ColumnName="IdZoho" />
+                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

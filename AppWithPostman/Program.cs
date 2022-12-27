@@ -30,7 +30,7 @@ namespace AppWithPostman
             #region Adding and updating Azienda
             try
             {
-                List<Utenti> utentiCompanie = CompanieRepository.GetUtentiCompanie();
+                List<UserDTO> utentiCompanie = CompanieRepository.GetUtentiCompanie();
                 List<DatumCompanie> _datiCompanie = new List<DatumCompanie>();
                 int numeroContattiCompanie = 1;
                 foreach (var _utente in utentiCompanie)
@@ -45,11 +45,11 @@ namespace AppWithPostman
                                     Enrich_Status__s = "Disponibile",
                                     editable = true,
 
-                                    Phone = _utente.Tel,
-                                    Account_Name = _utente.Nome + " " + _utente.Cognome,
+                                    Phone = _utente.Phone,
+                                    Account_Name = _utente.First_Name + " " + _utente.Last_Name,
                                     s = "Disponibile",
                                     approval_state = "approved",
-                                    Id_Cliente = _utente.IdUt
+                                    Id_Cliente = _utente.IdUser
                                 }
                             );
                         numeroContattiCompanie++;
@@ -68,12 +68,12 @@ namespace AppWithPostman
                                 approved = true,
                                 Enrich_Status__s = "Disponibile",
                                 editable = true,
-
-                                Phone = _utente.Tel,
-                                Account_Name = _utente.Nome + " " + _utente.Cognome,
+                                
+                                Phone = _utente.Phone,
+                                Account_Name = _utente.First_Name + " " + _utente.Last_Name,
                                 s = "Disponibile",
                                 approval_state = "approved",
-                                Id_Cliente = _utente.IdUt
+                                Id_Cliente = _utente.IdUser
                             }
                         );
                     }
@@ -90,12 +90,12 @@ namespace AppWithPostman
                 Console.WriteLine($"Error adding/updating Aziende: {ex.Message}");
                 return ex.HResult;
             }
-            #endregion
+            #endregion       
 
             #region Adding and updating Contatti
             try
             {
-                List<Utenti> utenti = UtentiRepository.GetUtenti();
+                List<UserDTO> utenti = UtentiRepository.GetUtenti();
                 List<Datum> _dati = new List<Datum>();
                 int numeroContatti = 1;
                 foreach (var _utente in utenti)
@@ -106,20 +106,20 @@ namespace AppWithPostman
                                 new Datum()
                                 {
 
-                                    Full_Name = _utente.Nome + " " + _utente.Cognome, //aumente ya que me dio error que es campo necesrio
+                                    Full_Name = _utente.First_Name + " " + _utente.Last_Name, //aumente ya que me dio error que es campo necesrio
                                     Email = _utente.Email,
-                                    First_Name = _utente.Nome,
-                                    Last_Name = _utente.Cognome,
-                                    Phone = _utente.Tel,
+                                    First_Name = _utente.First_Name,
+                                    Last_Name = _utente.Last_Name,
+                                    Phone = _utente.Phone,
                                     PEC = _utente.Pec,
-                                    SDI = _utente.CodiceSDI,
-                                    Codice_Fiscale = string.IsNullOrEmpty(_utente.CodFisc) ? "0" : _utente.CodFisc,
-                                    Id_Cliente = _utente.IdUt,
-                                    Partita_Iva = string.IsNullOrEmpty(_utente.Piva) ? "0" : _utente.Piva,
-                                    Mobile = _utente.Cellulare,
+                                    SDI = _utente.Sdi,
+                                    Codice_Fiscale = string.IsNullOrEmpty(_utente.Codice_Fiscale) ? "0" : _utente.Codice_Fiscale,
+                                    Id_Cliente = _utente.IdUser,
+                                    Partita_Iva = string.IsNullOrEmpty(_utente.Partita_Iva) ? "0" : _utente.Partita_Iva,
+                                    Mobile = _utente.Mobile,
                                     Account_Name = new AccountNameCompanie
                                     {
-                                        name = _utente.Nome + " " + _utente.Cognome,
+                                        name = _utente.First_Name + " " + _utente.Last_Name,
                                         id = _utente.IdZohoAziende
                                     }
                                 }
@@ -137,20 +137,20 @@ namespace AppWithPostman
                             new Datum()
                             {
 
-                                Full_Name = _utente.Nome + " " + _utente.Cognome, //aumente ya que me dio error que es campo necesrio
+                                Full_Name = _utente.First_Name + " " + _utente.Last_Name, //aumente ya que me dio error que es campo necesrio
                                 Email = _utente.Email,
-                                First_Name = _utente.Nome,
-                                Last_Name = _utente.Cognome,
-                                Phone = _utente.Tel,
+                                First_Name = _utente.First_Name,
+                                Last_Name = _utente.Last_Name,
+                                Phone = _utente.Phone,
                                 PEC = _utente.Pec,
-                                SDI = _utente.CodiceSDI,
-                                Codice_Fiscale = string.IsNullOrEmpty(_utente.CodFisc) ? "0" : _utente.CodFisc,
-                                Id_Cliente = _utente.IdUt,
-                                Partita_Iva = string.IsNullOrEmpty(_utente.Piva) ? "0" : _utente.Piva,
-                                Mobile = _utente.Cellulare,
+                                SDI = _utente.Sdi,
+                                Codice_Fiscale = string.IsNullOrEmpty(_utente.Codice_Fiscale) ? "0" : _utente.Codice_Fiscale,
+                                Id_Cliente = _utente.IdUser,
+                                Partita_Iva = string.IsNullOrEmpty(_utente.Partita_Iva) ? "0" : _utente.Partita_Iva,
+                                Mobile = _utente.Mobile,
                                 Account_Name = new AccountNameCompanie
                                 {
-                                    name = _utente.Nome + " " + _utente.Cognome,
+                                    name = _utente.First_Name + " " + _utente.First_Name,
                                     id = _utente.IdZohoAziende
                                 }
                             }
@@ -171,11 +171,12 @@ namespace AppWithPostman
             }
             #endregion
 
+
             #region Deleting Aziende
             try
             {
                 List<string> arrayItem1 = new List<string>();
-                List<Utenti> utenti2 = CompanieRepository.GetCompanieDelete();
+                List<UserDTO> utenti2 = CompanieRepository.GetCompanieDelete();
                 if (utenti2 != null)
                 {
                     int _count = 1;
@@ -215,6 +216,8 @@ namespace AppWithPostman
                 return ex.HResult;
             }
             #endregion
+
+            /*
 
             #region Adding Ordini
             try
@@ -327,7 +330,11 @@ namespace AppWithPostman
             }
             #endregion
 
+            */
+            Console.WriteLine("Finishing process");
             return 0;
+
+            
         }
 
     }

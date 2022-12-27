@@ -70,7 +70,7 @@ namespace AppWithPostman.Helpers
                 if (_zresponse.status != "error")
                 {
                     //Utenti utenti1 = UtentiRepository.GetUtentiEmail(arrayItem[countres].Email);
-                    Utenti utenti1 = UtentiRepository.GetUtentiIdZohoByIdZohoAziende(_zresponse.details.id);
+                    UserZoho utenti1 = UtentiRepository.GetUtentiIdZohoByIdZohoAziende(_zresponse.details.id);
                     if (utenti1 != null)
                     {
                         //utenti1.ZohoId = _zresponse.details.id;

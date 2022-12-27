@@ -111,7 +111,13 @@
     <Compile Include="Helpers\GenerarToken.cs" />
     <Compile Include="Helpers\OrderHelper.cs" />
     <Compile Include="Helpers\ZohoAPIHelper.cs" />
+    <Compile Include="OrderZoho.cs">
+      <DependentUpon>EntityZoho.tt</DependentUpon>
+    </Compile>
     <Compile Include="Ordini.cs">
+      <DependentUpon>EntityZoho.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PriceListZoho.cs">
       <DependentUpon>EntityZoho.tt</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -128,6 +134,9 @@
       <DependentUpon>EntityZoho.tt</DependentUpon>
     </Compile>
     <Compile Include="T_listinobase.cs">
+      <DependentUpon>EntityZoho.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserZoho.cs">
       <DependentUpon>EntityZoho.tt</DependentUpon>
     </Compile>
     <Compile Include="Utenti.cs">

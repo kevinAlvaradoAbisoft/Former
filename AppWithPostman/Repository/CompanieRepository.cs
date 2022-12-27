@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AppWithPostman.DTO;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.Linq;
@@ -9,16 +10,29 @@ namespace AppWithPostman.Repository
 {
     public class CompanieRepository
     {
-        public static List<Utenti> GetUtentiCompanie()
+        public static List<UserDTO> GetUtentiCompanie()
         {
-            List<Utenti> _utentiList = new List<Utenti>();
+            List<UserDTO> _utentiList = new List<UserDTO>();
+
             using (var _dbo = new DbZohoEntities())
             {
-                _utentiList = _dbo.Utenti
-                    .Where(d => d.IdZohoAziende == null && d.DisattivaAccessoSito == 0)
-                    .ToList();
+                _utentiList = (from utenti in _dbo.Utenti
+                            join user in _dbo.UserZoho on utenti.IdUt equals user.IdUser
+                            where user.IdZohoAziende == null && utenti.DisattivaAccessoSito == 0
+                            select new UserDTO
+                            {
+                               IdUser = utenti.IdUt,
+                               First_Name = utenti.Nome,
+                               Last_Name = utenti.Cognome,
+                               Phone = utenti.Tel,
+                               IdZoho = user.IdZoho,
+                               IdZohoAziende = user.IdZohoAziende,
+                               IsDeletedInZoho = user.IsDeletedInZoho
+                            }).ToList();
+                /*_utentiList = _dbo.Utenti
+                    .Where(d => d.IdZohoAziende == null && d.DisattivaAccessoSito == 0 && d.IdUt == 1692)
+                    .ToList();*/
             }
-
             return _utentiList;
         }
         public static Utenti GetUtentiIdClient(int Id)
@@ -37,23 +51,37 @@ namespace AppWithPostman.Repository
             //Utenti dataUtenti = new Utenti();
             using (var _dbo = new DbZohoEntities())
             {
-                var utenti1 = _dbo.Utenti.First(i => i.IdUt == utenti.IdUt);
+                //var utenti1 = _dbo.Utenti.First(i => i.IdUt == utenti.IdUt);
+                var utenti1 = _dbo.UserZoho.First(i => i.IdUser == utenti.IdUt);
 
                 utenti1.IdZohoAziende = utenti.IdZohoAziende;
 
-                _dbo.Utenti.AddOrUpdate(utenti1);
+                _dbo.UserZoho.AddOrUpdate(utenti1);
                 outupdate = _dbo.SaveChanges();
             }
             return outupdate;
         }
-        public static List<Utenti> GetCompanieDelete()
+        public static List<UserDTO> GetCompanieDelete()
         {
-            List<Utenti> _utentiList = new List<Utenti>();
+            List<UserDTO> _utentiList = new List<UserDTO>();
             using (var _dbo = new DbZohoEntities())
             {
-                _utentiList = _dbo.Utenti
+                _utentiList = (from utenti in _dbo.Utenti
+                               join user in _dbo.UserZoho on utenti.IdUt equals user.IdUser
+                               where utenti.DisattivaAccessoSito == 1 && user.IsDeletedInZoho == true
+                               select new UserDTO
+                               {
+                                   IdUser = utenti.IdUt,
+                                   First_Name = utenti.Nome,
+                                   Last_Name = utenti.Cognome,
+                                   Phone = utenti.Tel,
+                                   IdZoho = user.IdZoho,
+                                   IdZohoAziende = user.IdZohoAziende,
+                                   IsDeletedInZoho = user.IsDeletedInZoho
+                               }).ToList();
+                /*_utentiList = _dbo.Utenti
                     .Where(d => d.DisattivaAccessoSito == 1 && d.IsDeletedInZoho == true)
-                    .ToList();
+                    .ToList();*/
             }
 
             return _utentiList;

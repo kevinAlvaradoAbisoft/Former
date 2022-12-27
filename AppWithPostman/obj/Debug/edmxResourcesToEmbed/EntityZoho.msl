@@ -61,6 +61,7 @@
     <EntitySetMapping Name="Ordini">
       <EntityTypeMapping TypeName="DbZohoModel.Ordini">
         <MappingFragment StoreEntitySet="Ordini">
+          <ScalarProperty Name="IsDeletedInZoho" ColumnName="IsDeletedInZoho" />
           <ScalarProperty Name="IdZoho" ColumnName="IdZoho" />
           <ScalarProperty Name="ConsegnaGarantitaDa" ColumnName="ConsegnaGarantitaDa" />
           <ScalarProperty Name="ConsegnaGarantita" ColumnName="ConsegnaGarantita" />
@@ -248,6 +249,34 @@
           <ScalarProperty Name="IdCurvaAtt" ColumnName="IdCurvaAtt" />
           <ScalarProperty Name="Nome" ColumnName="Nome" />
           <ScalarProperty Name="IdListinoBase" ColumnName="IdListinoBase" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrderZoho">
+      <EntityTypeMapping TypeName="DbZohoModel.OrderZoho">
+        <MappingFragment StoreEntitySet="OrderZoho">
+          <ScalarProperty Name="IsDeletedInZoho" ColumnName="IsDeletedInZoho" />
+          <ScalarProperty Name="IdZoho" ColumnName="IdZoho" />
+          <ScalarProperty Name="IdOrder" ColumnName="IdOrder" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PriceListZoho">
+      <EntityTypeMapping TypeName="DbZohoModel.PriceListZoho">
+        <MappingFragment StoreEntitySet="PriceListZoho">
+          <ScalarProperty Name="IsDeletedInZoho" ColumnName="IsDeletedInZoho" />
+          <ScalarProperty Name="IdZoho" ColumnName="IdZoho" />
+          <ScalarProperty Name="IdPricelist" ColumnName="IdPricelist" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserZoho">
+      <EntityTypeMapping TypeName="DbZohoModel.UserZoho">
+        <MappingFragment StoreEntitySet="UserZoho">
+          <ScalarProperty Name="IdZohoAziende" ColumnName="IdZohoAziende" />
+          <ScalarProperty Name="IsDeletedInZoho" ColumnName="IsDeletedInZoho" />
+          <ScalarProperty Name="IdZoho" ColumnName="IdZoho" />
+          <ScalarProperty Name="IdUser" ColumnName="IdUser" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

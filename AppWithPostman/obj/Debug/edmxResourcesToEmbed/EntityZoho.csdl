@@ -18,6 +18,9 @@
       <End Role="Utenti" EntitySet="Utenti" />
       <End Role="Ordini" EntitySet="Ordini" />
     </AssociationSet>
+    <EntitySet Name="OrderZoho" EntityType="DbZohoModel.OrderZoho" />
+    <EntitySet Name="PriceListZoho" EntityType="DbZohoModel.PriceListZoho" />
+    <EntitySet Name="UserZoho" EntityType="DbZohoModel.UserZoho" />
   </EntityContainer>
   <EntityType Name="Utenti">
     <Key>
@@ -135,6 +138,7 @@
     <NavigationProperty Name="T_Corriere" Relationship="DbZohoModel.FK_Ordini_T_Corriere" FromRole="Ordini" ToRole="T_Corriere" />
     <NavigationProperty Name="T_listinobase" Relationship="DbZohoModel.FK_Ordini_T_listinobase" FromRole="Ordini" ToRole="T_listinobase" />
     <NavigationProperty Name="Utenti" Relationship="DbZohoModel.FK_Ordini_Utenti" FromRole="Ordini" ToRole="Utenti" />
+    <Property Name="IsDeletedInZoho" Type="Boolean" />
   </EntityType>
   <EntityType Name="T_Corriere">
     <Key>
@@ -306,4 +310,29 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="OrderZoho">
+    <Key>
+      <PropertyRef Name="IdOrder" />
+    </Key>
+    <Property Name="IdOrder" Type="Int32" Nullable="false" />
+    <Property Name="IdZoho" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IsDeletedInZoho" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="PriceListZoho">
+    <Key>
+      <PropertyRef Name="IdPricelist" />
+    </Key>
+    <Property Name="IdPricelist" Type="Int32" Nullable="false" />
+    <Property Name="IdZoho" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IsDeletedInZoho" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="UserZoho">
+    <Key>
+      <PropertyRef Name="IdUser" />
+    </Key>
+    <Property Name="IdUser" Type="Int32" Nullable="false" />
+    <Property Name="IdZoho" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IsDeletedInZoho" Type="Boolean" />
+    <Property Name="IdZohoAziende" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
 </Schema>

@@ -67,6 +67,7 @@ namespace AppWithPostman
         public Nullable<System.DateTime> ConsegnaGarantita { get; set; }
         public Nullable<int> ConsegnaGarantitaDa { get; set; }
         public string IdZoho { get; set; }
+        public Nullable<bool> IsDeletedInZoho { get; set; }
     
         public virtual T_Corriere T_Corriere { get; set; }
         public virtual T_listinobase T_listinobase { get; set; }
