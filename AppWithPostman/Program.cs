@@ -62,7 +62,7 @@ namespace AppWithPostman
                                     editable = true,
 
                                     Phone = _utente.Phone,
-                                    Account_Name = _utente.First_Name + " " + _utente.Last_Name,
+                                    Account_Name = (_utente.First_Name + " " + _utente.Last_Name).Trim(),
                                     s = "Disponibile",
                                     approval_state = "approved",
                                     Id_Cliente = _utente.IdUser
@@ -86,10 +86,10 @@ namespace AppWithPostman
                                 editable = true,
                                 
                                 Phone = _utente.Phone,
-                                Account_Name = _utente.First_Name + " " + _utente.Last_Name,
+                                Account_Name = (_utente.First_Name + " " + _utente.Last_Name).Trim(),
                                 s = "Disponibile",
                                 approval_state = "approved",
-                                Id_Cliente = _utente.IdUser
+                                Id_Cliente = _utente.IdUser//
                             }
                         );
                     }
@@ -122,20 +122,23 @@ namespace AppWithPostman
                                 new Datum()
                                 {
 
-                                    Full_Name = _utente.First_Name + " " + _utente.Last_Name, //aumente ya que me dio error que es campo necesrio
+                                    Full_Name = (_utente.First_Name + " " + _utente.Last_Name).Trim(), //aumente ya que me dio error que es campo necesrio
                                     Email = _utente.Email,
-                                    First_Name = _utente.First_Name,
-                                    Last_Name = _utente.Last_Name,
+                                    First_Name = _utente.First_Name.Trim(),
+                                    Last_Name = _utente.Last_Name.Trim(),
                                     Phone = _utente.Phone,
                                     PEC = _utente.Pec,
                                     SDI = _utente.Sdi,
                                     Codice_Fiscale = string.IsNullOrEmpty(_utente.Codice_Fiscale) ? "0" : _utente.Codice_Fiscale,
                                     Id_Cliente = _utente.IdUser,
-                                    Partita_Iva = string.IsNullOrEmpty(_utente.Partita_Iva) ? "0" : _utente.Partita_Iva,
+                                    Partita_Iva = string.IsNullOrEmpty(_utente.Partita_Iva) ? "0" : _utente.Partita_Iva.Substring(0,9),
+                                    //Partita_Iva = "0",
                                     Mobile = _utente.Mobile,
+                                    Tipologia = "",  
+                                    E_mail_amministrazione="",//no debe ser null
                                     Account_Name = new AccountNameCompanie
                                     {
-                                        name = _utente.First_Name + " " + _utente.Last_Name,
+                                        name = (_utente.First_Name + " " + _utente.Last_Name).Trim(),
                                         id = _utente.IdZohoAziende
                                     }
                                 }
@@ -153,20 +156,23 @@ namespace AppWithPostman
                             new Datum()
                             {
 
-                                Full_Name = _utente.First_Name + " " + _utente.Last_Name, //aumente ya que me dio error que es campo necesrio
+                                Full_Name = (_utente.First_Name + " " + _utente.Last_Name).Trim(), //aumente ya que me dio error que es campo necesrio
                                 Email = _utente.Email,
-                                First_Name = _utente.First_Name,
-                                Last_Name = _utente.Last_Name,
+                                First_Name = _utente.First_Name.Trim(),
+                                Last_Name = _utente.Last_Name.Trim(),
                                 Phone = _utente.Phone,
                                 PEC = _utente.Pec,
                                 SDI = _utente.Sdi,
                                 Codice_Fiscale = string.IsNullOrEmpty(_utente.Codice_Fiscale) ? "0" : _utente.Codice_Fiscale,
                                 Id_Cliente = _utente.IdUser,
-                                Partita_Iva = string.IsNullOrEmpty(_utente.Partita_Iva) ? "0" : _utente.Partita_Iva,
+                                Partita_Iva = string.IsNullOrEmpty(_utente.Partita_Iva) ? "0" : _utente.Partita_Iva.Substring(0,9),
+                                //Partita_Iva = "0",
                                 Mobile = _utente.Mobile,
+                                Tipologia="",
+                                E_mail_amministrazione="",
                                 Account_Name = new AccountNameCompanie
                                 {
-                                    name = _utente.First_Name + " " + _utente.First_Name,
+                                    name = (_utente.First_Name + " " + _utente.Last_Name).Trim(),
                                     id = _utente.IdZohoAziende
                                 }
                             }

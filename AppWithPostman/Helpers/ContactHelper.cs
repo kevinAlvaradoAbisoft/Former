@@ -16,7 +16,7 @@ namespace AppWithPostman.Helpers
         {
             var client = new RestClient("https://accounts.zoho.eu/oauth/v2/Saten");
 
-            string urlLeads = "https://www.zohoapis.eu/crm/v3/Contacts/upsert";
+            string urlLeads = "https://www.zohoapis.eu/crm/v2/Contacts/upsert";
             var requesturlLeads = new RestRequest(urlLeads, Method.Post);
             requesturlLeads.AddHeader("Authorization", "Zoho-oauthtoken " + Token_Work);
             requesturlLeads.AddHeader("Content-Type", "application/json");

@@ -266,10 +266,6 @@
     <Property Name="IdNazione" Type="int" />
     <Property Name="PrefissoPIva" Type="nvarchar" MaxLength="2" />
     <Property Name="DisattivaAccessoSito" Type="int" />
-    <Property Name="IdZoho" Type="varchar" MaxLength="19" />
-    <Property Name="ZohoId" Type="varchar" MaxLength="50" />
-    <Property Name="IsDeletedInZoho" Type="bit" />
-    <Property Name="IdZohoAziende" Type="varchar" MaxLength="50" />
   </EntityType>
   <Association Name="FK_Ordini_T_Corriere">
     <End Role="T_Corriere" Type="Self.T_Corriere" Multiplicity="0..1" />

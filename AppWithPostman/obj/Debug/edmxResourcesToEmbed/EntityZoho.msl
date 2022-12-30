@@ -4,10 +4,6 @@
     <EntitySetMapping Name="Utenti">
       <EntityTypeMapping TypeName="DbZohoModel.Utenti">
         <MappingFragment StoreEntitySet="Utenti">
-          <ScalarProperty Name="IdZohoAziende" ColumnName="IdZohoAziende" />
-          <ScalarProperty Name="IsDeletedInZoho" ColumnName="IsDeletedInZoho" />
-          <ScalarProperty Name="ZohoId" ColumnName="ZohoId" />
-          <ScalarProperty Name="IdZoho" ColumnName="IdZoho" />
           <ScalarProperty Name="DisattivaAccessoSito" ColumnName="DisattivaAccessoSito" />
           <ScalarProperty Name="PrefissoPIva" ColumnName="PrefissoPIva" />
           <ScalarProperty Name="IdNazione" ColumnName="IdNazione" />
@@ -61,8 +57,6 @@
     <EntitySetMapping Name="Ordini">
       <EntityTypeMapping TypeName="DbZohoModel.Ordini">
         <MappingFragment StoreEntitySet="Ordini">
-          <ScalarProperty Name="IsDeletedInZoho" ColumnName="IsDeletedInZoho" />
-          <ScalarProperty Name="IdZoho" ColumnName="IdZoho" />
           <ScalarProperty Name="ConsegnaGarantitaDa" ColumnName="ConsegnaGarantitaDa" />
           <ScalarProperty Name="ConsegnaGarantita" ColumnName="ConsegnaGarantita" />
           <ScalarProperty Name="IdMacchinarioProduzioneUtilizzato" ColumnName="IdMacchinarioProduzioneUtilizzato" />
@@ -154,7 +148,6 @@
     <EntitySetMapping Name="T_listinobase">
       <EntityTypeMapping TypeName="DbZohoModel.T_listinobase">
         <MappingFragment StoreEntitySet="T_listinobase">
-          <ScalarProperty Name="IsDeletedInZoho" ColumnName="IsDeletedInZoho" />
           <ScalarProperty Name="DisattivaAccessoSito" ColumnName="DisattivaAccessoSito" />
           <ScalarProperty Name="IdZoho" ColumnName="IdZoho" />
           <ScalarProperty Name="CounterDayPromo" ColumnName="CounterDayPromo" />

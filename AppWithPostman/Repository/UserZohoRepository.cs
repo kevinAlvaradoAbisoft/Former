@@ -17,7 +17,8 @@ namespace AppWithPostman.Repository
             using (var _dbo = new DbZohoEntities())
             {
                 _utentiList = _dbo.Utenti
-                    .Where(d => d.DisattivaAccessoSito == 0)
+                    //.Where(d => d.DisattivaAccessoSito == 0)
+                    .Where(d => d.DisattivaAccessoSito == 0 && d.IdUt == 503)
                     .ToList();
 
                 foreach(var utenti in _utentiList)

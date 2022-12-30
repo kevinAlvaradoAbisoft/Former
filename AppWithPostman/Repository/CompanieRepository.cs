@@ -19,6 +19,7 @@ namespace AppWithPostman.Repository
                 _utentiList = (from utenti in _dbo.Utenti
                             join user in _dbo.UserZoho on utenti.IdUt equals user.IdUser
                             where user.IdZohoAziende == null && utenti.DisattivaAccessoSito == 0
+                            && user.IdUser == 503
                             select new UserDTO
                             {
                                IdUser = utenti.IdUt,
@@ -93,7 +94,7 @@ namespace AppWithPostman.Repository
             using (var _dbo = new DbZohoEntities())
             {
                 var utenti1 = _dbo.Utenti.First(i => i.IdUt == utenti.IdUt);
-                utenti1.IsDeletedInZoho = false;
+                //utenti1.IsDeletedInZoho = false;
 
                 _dbo.Utenti.AddOrUpdate(utenti1);
                 outupdate = _dbo.SaveChanges();

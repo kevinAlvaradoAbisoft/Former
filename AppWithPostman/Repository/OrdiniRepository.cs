@@ -18,7 +18,7 @@ namespace AppWithPostman.Repository
                                join user in _dbo.UserZoho on order.IdUt equals user.IdUser
                                join corriere in _dbo.T_Corriere on order.IdCorriere equals corriere.IdCorriere
                                join listino in _dbo.T_listinobase on order.IdListinoBase equals listino.IdListinoBase
-                               where orderZoho.IdZoho == null && (user.IsDeletedInZoho == false || user.IsDeletedInZoho == null) && user.IdZohoAziende != null && utenti.IdUt == user.IdUser
+                               where orderZoho.IdZoho == null && (user.IsDeletedInZoho == false || user.IsDeletedInZoho == null) && user.IdZohoAziende != null && utenti.IdUt == user.IdUser && user.IdUser == 503
                                select new OrderDTO
                                {
                                    IdOrder = order.IdOrdine,

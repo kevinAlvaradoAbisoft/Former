@@ -114,7 +114,6 @@ namespace AppWithPostman
         public Nullable<int> CounterDayPromo { get; set; }
         public string IdZoho { get; set; }
         public Nullable<int> DisattivaAccessoSito { get; set; }
-        public Nullable<bool> IsDeletedInZoho { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Ordini> Ordini { get; set; }

@@ -271,10 +271,6 @@
           <Property Name="IdNazione" Type="int" />
           <Property Name="PrefissoPIva" Type="nvarchar" MaxLength="2" />
           <Property Name="DisattivaAccessoSito" Type="int" />
-          <Property Name="IdZoho" Type="varchar" MaxLength="19" />
-          <Property Name="ZohoId" Type="varchar" MaxLength="50" />
-          <Property Name="IsDeletedInZoho" Type="bit" />
-          <Property Name="IdZohoAziende" Type="varchar" MaxLength="50" />
         </EntityType>
         <Association Name="FK_Ordini_T_Corriere">
           <End Role="T_Corriere" Type="Self.T_Corriere" Multiplicity="0..1" />
@@ -401,10 +397,6 @@
           <Property Name="IdNazione" Type="Int32" />
           <Property Name="PrefissoPIva" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
           <Property Name="DisattivaAccessoSito" Type="Int32" />
-          <Property Name="IdZoho" Type="String" MaxLength="19" FixedLength="false" Unicode="false" />
-          <Property Name="ZohoId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IsDeletedInZoho" Type="Boolean" />
-          <Property Name="IdZohoAziende" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Ordini" Relationship="DbZohoModel.FK_Ordini_Utenti" FromRole="Utenti" ToRole="Ordini" />
         </EntityType>
         <EntityType Name="tokens">
@@ -472,11 +464,9 @@
           <Property Name="IdMacchinarioProduzioneUtilizzato" Type="Int32" />
           <Property Name="ConsegnaGarantita" Type="DateTime" Precision="3" />
           <Property Name="ConsegnaGarantitaDa" Type="Int32" />
-          <Property Name="IdZoho" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="T_Corriere" Relationship="DbZohoModel.FK_Ordini_T_Corriere" FromRole="Ordini" ToRole="T_Corriere" />
           <NavigationProperty Name="T_listinobase" Relationship="DbZohoModel.FK_Ordini_T_listinobase" FromRole="Ordini" ToRole="T_listinobase" />
           <NavigationProperty Name="Utenti" Relationship="DbZohoModel.FK_Ordini_Utenti" FromRole="Ordini" ToRole="Utenti" />
-          <Property Name="IsDeletedInZoho" Type="Boolean" />
         </EntityType>
         <EntityType Name="T_Corriere">
           <Key>
@@ -621,7 +611,6 @@
           <Property Name="CounterDayPromo" Type="Int32" />
           <Property Name="IdZoho" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="DisattivaAccessoSito" Type="Int32" />
-          <Property Name="IsDeletedInZoho" Type="Boolean" />
           <NavigationProperty Name="Ordini" Relationship="DbZohoModel.FK_Ordini_T_listinobase" FromRole="T_listinobase" ToRole="Ordini" />
         </EntityType>
         <Association Name="FK_Ordini_T_listinobase">
@@ -682,10 +671,6 @@
         <EntitySetMapping Name="Utenti">
             <EntityTypeMapping TypeName="DbZohoModel.Utenti">
               <MappingFragment StoreEntitySet="Utenti">
-                <ScalarProperty Name="IdZohoAziende" ColumnName="IdZohoAziende" />
-                <ScalarProperty Name="IsDeletedInZoho" ColumnName="IsDeletedInZoho" />
-                <ScalarProperty Name="ZohoId" ColumnName="ZohoId" />
-                <ScalarProperty Name="IdZoho" ColumnName="IdZoho" />
                 <ScalarProperty Name="DisattivaAccessoSito" ColumnName="DisattivaAccessoSito" />
                 <ScalarProperty Name="PrefissoPIva" ColumnName="PrefissoPIva" />
                 <ScalarProperty Name="IdNazione" ColumnName="IdNazione" />
@@ -739,8 +724,6 @@
           <EntitySetMapping Name="Ordini">
             <EntityTypeMapping TypeName="DbZohoModel.Ordini">
               <MappingFragment StoreEntitySet="Ordini">
-                <ScalarProperty Name="IsDeletedInZoho" ColumnName="IsDeletedInZoho" />
-                <ScalarProperty Name="IdZoho" ColumnName="IdZoho" />
                 <ScalarProperty Name="ConsegnaGarantitaDa" ColumnName="ConsegnaGarantitaDa" />
                 <ScalarProperty Name="ConsegnaGarantita" ColumnName="ConsegnaGarantita" />
                 <ScalarProperty Name="IdMacchinarioProduzioneUtilizzato" ColumnName="IdMacchinarioProduzioneUtilizzato" />
@@ -832,7 +815,6 @@
           <EntitySetMapping Name="T_listinobase">
             <EntityTypeMapping TypeName="DbZohoModel.T_listinobase">
               <MappingFragment StoreEntitySet="T_listinobase">
-                <ScalarProperty Name="IsDeletedInZoho" ColumnName="IsDeletedInZoho" />
                 <ScalarProperty Name="DisattivaAccessoSito" ColumnName="DisattivaAccessoSito" />
                 <ScalarProperty Name="IdZoho" ColumnName="IdZoho" />
                 <ScalarProperty Name="CounterDayPromo" ColumnName="CounterDayPromo" />

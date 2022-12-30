@@ -57,10 +57,6 @@ namespace AppWithPostman
         public Nullable<int> IdNazione { get; set; }
         public string PrefissoPIva { get; set; }
         public Nullable<int> DisattivaAccessoSito { get; set; }
-        public string IdZoho { get; set; }
-        public string ZohoId { get; set; }
-        public Nullable<bool> IsDeletedInZoho { get; set; }
-        public string IdZohoAziende { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Ordini> Ordini { get; set; }
