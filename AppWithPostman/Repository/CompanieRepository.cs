@@ -19,16 +19,17 @@ namespace AppWithPostman.Repository
                 _utentiList = (from utenti in _dbo.Utenti
                             join user in _dbo.UserZoho on utenti.IdUt equals user.IdUser
                             where user.IdZohoAziende == null && utenti.DisattivaAccessoSito == 0
-                            && user.IdUser == 503
+                            && user.IdUser == 162
                             select new UserDTO
                             {
                                IdUser = utenti.IdUt,
                                First_Name = utenti.Nome,
-                               Last_Name = utenti.Cognome,
+                               Last_Name = utenti.Cognome,                               
                                Phone = utenti.Tel,
                                IdZoho = user.IdZoho,
                                IdZohoAziende = user.IdZohoAziende,
-                               IsDeletedInZoho = user.IsDeletedInZoho
+                               IsDeletedInZoho = user.IsDeletedInZoho,
+                               RagSoc = utenti.RagSoc
                             }).ToList();
                 /*_utentiList = _dbo.Utenti
                     .Where(d => d.IdZohoAziende == null && d.DisattivaAccessoSito == 0 && d.IdUt == 1692)

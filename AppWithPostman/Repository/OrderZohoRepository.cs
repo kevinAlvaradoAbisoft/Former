@@ -17,7 +17,7 @@ namespace AppWithPostman.Repository
             using (var _dbo = new DbZohoEntities())
             {
                 _orderList = _dbo.Ordini
-                    .Where(i=>i.IdUt == 503)
+                    .Where(i=>i.IdUt == 162)
                     .ToList();
 
                 foreach (var item in _orderList)

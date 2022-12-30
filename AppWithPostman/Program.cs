@@ -62,7 +62,8 @@ namespace AppWithPostman
                                     editable = true,
 
                                     Phone = _utente.Phone,
-                                    Account_Name = (_utente.First_Name + " " + _utente.Last_Name).Trim(),
+                                    //Account_Name = (_utente.First_Name + " " + _utente.Last_Name).Trim(),
+                                    Account_Name = _utente.RagSoc,
                                     s = "Disponibile",
                                     approval_state = "approved",
                                     Id_Cliente = _utente.IdUser
@@ -83,10 +84,10 @@ namespace AppWithPostman
                                 state = "save",
                                 approved = true,
                                 Enrich_Status__s = "Disponibile",
-                                editable = true,
-                                
+                                editable = true,                                
                                 Phone = _utente.Phone,
-                                Account_Name = (_utente.First_Name + " " + _utente.Last_Name).Trim(),
+                                //Account_Name = (_utente.First_Name + " " + _utente.Last_Name).Trim(),
+                                Account_Name = _utente.RagSoc,
                                 s = "Disponibile",
                                 approval_state = "approved",
                                 Id_Cliente = _utente.IdUser//
@@ -129,7 +130,7 @@ namespace AppWithPostman
                                     Phone = _utente.Phone,
                                     PEC = _utente.Pec,
                                     SDI = _utente.Sdi,
-                                    Codice_Fiscale = string.IsNullOrEmpty(_utente.Codice_Fiscale) ? "0" : _utente.Codice_Fiscale,
+                                    Codice_Fiscale = string.IsNullOrEmpty(_utente.Codice_Fiscale) ? "0" : _utente.Codice_Fiscale.Substring(0, 9),
                                     Id_Cliente = _utente.IdUser,
                                     Partita_Iva = string.IsNullOrEmpty(_utente.Partita_Iva) ? "0" : _utente.Partita_Iva.Substring(0,9),
                                     //Partita_Iva = "0",
@@ -138,7 +139,8 @@ namespace AppWithPostman
                                     E_mail_amministrazione="",//no debe ser null
                                     Account_Name = new AccountNameCompanie
                                     {
-                                        name = (_utente.First_Name + " " + _utente.Last_Name).Trim(),
+                                        //name = (_utente.First_Name + " " + _utente.Last_Name).Trim(),
+                                        name = _utente.RagSoc,
                                         id = _utente.IdZohoAziende
                                     }
                                 }
@@ -163,7 +165,7 @@ namespace AppWithPostman
                                 Phone = _utente.Phone,
                                 PEC = _utente.Pec,
                                 SDI = _utente.Sdi,
-                                Codice_Fiscale = string.IsNullOrEmpty(_utente.Codice_Fiscale) ? "0" : _utente.Codice_Fiscale,
+                                Codice_Fiscale = string.IsNullOrEmpty(_utente.Codice_Fiscale) ? "0" : _utente.Codice_Fiscale.Substring(0, 9),
                                 Id_Cliente = _utente.IdUser,
                                 Partita_Iva = string.IsNullOrEmpty(_utente.Partita_Iva) ? "0" : _utente.Partita_Iva.Substring(0,9),
                                 //Partita_Iva = "0",
@@ -172,7 +174,8 @@ namespace AppWithPostman
                                 E_mail_amministrazione="",
                                 Account_Name = new AccountNameCompanie
                                 {
-                                    name = (_utente.First_Name + " " + _utente.Last_Name).Trim(),
+                                    //name = (_utente.First_Name + " " + _utente.Last_Name).Trim(),
+                                    name = _utente.RagSoc,
                                     id = _utente.IdZohoAziende
                                 }
                             }

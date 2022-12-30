@@ -22,5 +22,6 @@ namespace AppWithPostman.DTO
         public Nullable<bool> IsDeletedInZoho { get; set; }
         public string IdZohoAziende { get; set; }
 
+        public string RagSoc { get; set; }
     }
 }

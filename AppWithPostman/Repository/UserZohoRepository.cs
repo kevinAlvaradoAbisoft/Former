@@ -18,7 +18,7 @@ namespace AppWithPostman.Repository
             {
                 _utentiList = _dbo.Utenti
                     //.Where(d => d.DisattivaAccessoSito == 0)
-                    .Where(d => d.DisattivaAccessoSito == 0 && d.IdUt == 503)
+                    .Where(d => d.DisattivaAccessoSito == 0 && d.IdUt == 162)
                     .ToList();
 
                 foreach(var utenti in _utentiList)
