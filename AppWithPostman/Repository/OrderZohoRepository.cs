@@ -17,7 +17,9 @@ namespace AppWithPostman.Repository
             using (var _dbo = new DbZohoEntities())
             {
                 _orderList = _dbo.Ordini
-                    .Where(i=>i.IdUt == 162)
+                    //.Where(s=>s.Stato < 80) //valido
+                    //.Where(i=>i.IdUt == 695 && (i.Stato == 70 || i.Stato == 80)) //no valio
+                    .Where(i => i.IdUt == 695 && (i.Stato < 80)) //idut solo para test
                     .ToList();
 
                 foreach (var item in _orderList)

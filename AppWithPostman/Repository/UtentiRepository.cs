@@ -22,7 +22,7 @@ namespace AppWithPostman.Repository
                 _utentiList = (from utenti in _dbo.Utenti
                                join user in _dbo.UserZoho on utenti.IdUt equals user.IdUser
                                where user.IdZohoAziende != null && utenti.DisattivaAccessoSito == 0
-                               && user.IdUser == 162
+                               && user.IdUser == 695
                                select new UserDTO
                                {
                                    IdUser = utenti.IdUt,

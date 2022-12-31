@@ -67,7 +67,7 @@ namespace AppWithPostman.DTO
         public object review { get; set; }
         public string state { get; set; }
         public Account_Name Account_Name { get; set; }
-        public int Adjustment { get; set; }
+        public int? Adjustment { get; set; }
         public object Anteprima { get; set; }
         public object Billing_City { get; set; }
         public object Billing_Code { get; set; }
@@ -86,7 +86,7 @@ namespace AppWithPostman.DTO
         public int Id_Ordine { get; set; }
         public ProductDetails[] Product_Details { get; set; }
         public object Purchase_Order { get; set; }
-        public int Quantit { get; set; }
+        public int? Quantit { get; set; }
         public object Quote_Name { get; set; }
         public object Sales_Commission { get; set; }
         public object Shipping_City { get; set; }
@@ -158,7 +158,7 @@ namespace AppWithPostman.DTO
         public int net_total { get; set; }
         public Product product { get; set; }
         public object product_description { get; set; }
-        public int quantity { get; set; }
+        public int? quantity { get; set; }
         public int quantity_in_stock { get; set; }
         public object Tax { get; set; }
         public decimal total { get; set; }

@@ -17,8 +17,10 @@ namespace AppWithPostman.Repository
                                join utenti in _dbo.Utenti on order.IdUt equals utenti.IdUt
                                join user in _dbo.UserZoho on order.IdUt equals user.IdUser
                                join corriere in _dbo.T_Corriere on order.IdCorriere equals corriere.IdCorriere
-                               join listino in _dbo.T_listinobase on order.IdListinoBase equals listino.IdListinoBase
-                               where orderZoho.IdZoho == null && (user.IsDeletedInZoho == false || user.IsDeletedInZoho == null) && user.IdZohoAziende != null && utenti.IdUt == user.IdUser && user.IdUser == 162
+                               join listino in _dbo.T_listinobase on order.IdListinoBase equals listino.IdListinoBase into fullListinoBase
+                               from flistino in fullListinoBase.DefaultIfEmpty()
+                               where orderZoho.IdZoho == null && (user.IsDeletedInZoho == false || user.IsDeletedInZoho == null) && user.IdZohoAziende != null && utenti.IdUt == user.IdUser && user.IdUser == 695
+                               orderby order.IdOrdine descending
                                select new OrderDTO
                                {
                                    IdOrder = order.IdOrdine,
@@ -34,11 +36,22 @@ namespace AppWithPostman.Repository
                                        id = user.IdZohoAziende
                                    },
                                    Sub_Total = (decimal)order.TotaleNetto,
-                                   Subject = listino.Nome,
+                                   Subject = string.IsNullOrEmpty(flistino.Nome) ? "SN" : flistino.Nome,
+                                   PrezzoCalcolatoNetto=order.PrezzoCalcolatoNetto,
+                                   qta= order.Qta,
+                                   DataIns=order.DataIns,
+                                   DataCambioStato=order.DataCambioStato,   
+                                   DataPrevProduzione=order.DataPrevProduzione, 
+                                   DataPrevConsegna=order.DataPrevConsegna,
+                                   Sconto = order.Sconto
+
                                }).ToList();
-                /*_ordiniList = _dbo.Ordini.Include("Utenti").Include("T_listinobase").Include("T_Corriere")
-                    .Where(d => d.IdZoho == null && d.Utenti.IsDeletedInZoho == false && d.Utenti.IdZohoAziende != null)
-                    .ToList();*/
+
+                //var _ordiniList1 = _dbo.Ordini.Include("Utenti").Include("T_listinobase").Include("T_Corriere")
+                //    .Where(d => d.IdUt==695)
+                //    .ToList();
+
+
             }
 
             return _ordiniList;
