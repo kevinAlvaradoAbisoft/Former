@@ -23,5 +23,35 @@ namespace AppWithPostman.DTO
         public string IdZohoAziende { get; set; }
 
         public string RagSoc { get; set; }
+        public string Mailing_State { get; set; }
+        public string Mailing_Country { get; set; }
+        public string Mailing_Zip { get; set; }
+        public string Mailing_Street { get; set; }
+        public string Mailing_City { get; set; }
+        public int IdRubricaInt { get; set; }
+        public int Tipologia { get; set; }
+
+        public string Tipologiastr
+        {
+            get
+            {
+                switch (Tipologia)
+                {
+                    case 0:
+                        return "Prova";
+
+                    case 1:
+                        return "Cliente Finale";
+                    case 2:
+                        return "";
+                    case 3:
+                        return "Rivenditore";
+                    case 4:
+                        return "Agenti";
+                    default:
+                        return "Prova";
+                }
+            }
+        }
     }
 }

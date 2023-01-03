@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="f8717441162a4f1eb79e5830eeaad981" Name="Diagram1" ZoomLevel="60">
+      <Diagram DiagramId="f8717441162a4f1eb79e5830eeaad981" Name="Diagram1" ZoomLevel="86">
         <EntityTypeShape EntityType="DbZohoModel.Utenti" Width="1.5" PointX="3.625" PointY="1.875" />
         <EntityTypeShape EntityType="DbZohoModel.tokens" Width="1.5" PointX="6.75" PointY="0.75" />
         <EntityTypeShape EntityType="DbZohoModel.Ordini" Width="1.5" PointX="1.125" PointY="1" />
@@ -16,6 +16,9 @@
         <EntityTypeShape EntityType="DbZohoModel.OrderZoho" Width="1.5" PointX="9.375" PointY="0.75" />
         <EntityTypeShape EntityType="DbZohoModel.PriceListZoho" Width="1.5" PointX="10.375" PointY="3.75" />
         <EntityTypeShape EntityType="DbZohoModel.UserZoho" Width="1.5" PointX="10.375" PointY="6.75" />
+        <EntityTypeShape EntityType="DbZohoModel.Nazioni" Width="1.5" PointX="10.375" PointY="9.75" />
+        <EntityTypeShape EntityType="DbZohoModel.Comuni" Width="1.5" PointX="3.375" PointY="11.75" />
+        <EntityTypeShape EntityType="DbZohoModel.Province" Width="1.5" PointX="5.375" PointY="11.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

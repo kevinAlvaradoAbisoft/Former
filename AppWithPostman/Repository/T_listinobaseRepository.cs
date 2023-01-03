@@ -15,7 +15,7 @@ namespace AppWithPostman.Repository
             List<T_listinobase> _list = new List<T_listinobase>();
             using(var _db = new DbZohoEntities())
             {
-                _list = _db.T_listinobase.Where(x => x.IdZoho == null && x.DisattivaAccessoSito == 0).ToList();
+                //_list = _db.T_listinobase.Where(x => x.IdZoho == null && x.DisattivaAccessoSito == 0).ToList();
             }
             return _list;
         }
@@ -38,7 +38,7 @@ namespace AppWithPostman.Repository
             {
                 var _product = _dbo.T_listinobase.FirstOrDefault(i => i.IdListinoBase == product.IdListinoBase);
 
-                _product.IdZoho = product.IdZoho;
+                //_product.IdZoho = product.IdZoho;
 
                 _dbo.T_listinobase.AddOrUpdate(_product);
                 outupdate = _dbo.SaveChanges();
@@ -51,7 +51,7 @@ namespace AppWithPostman.Repository
             List<T_listinobase> _list = new List<T_listinobase>();
             using (var _db = new DbZohoEntities())
             {
-                _list = _db.T_listinobase.Where(x => x.DisattivaAccessoSito == 1 ).ToList();
+                //_list = _db.T_listinobase.Where(x => x.DisattivaAccessoSito == 1 ).ToList();
             }
             return _list;
         }

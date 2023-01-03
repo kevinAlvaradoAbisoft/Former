@@ -33,5 +33,69 @@ namespace AppWithPostman.DTO
         public DateTime? DataPrevConsegna { get; set; }
 
         public decimal? Sconto { get; set; }
+        public int Tipologia_di_consegna { get; set; }
+        public int Status { get; set; }
+
+        public int IdOrdineInt { get; set; } 
+        public string Tipologia_di_consegnastr
+        {
+            get
+            {
+                switch (Tipologia_di_consegna)
+                {
+                    case 0:
+                        return "CN";
+
+                    case 1:
+                        return "RC";
+                    case 2:
+                        return "Prova";
+                    default:
+                        return "Prova";
+                }
+            }
+        }
+        public string Statusstr
+        {
+            get
+            {
+                switch (Status)
+                {
+                    case 5:
+                        return "PROVA";
+                    case 7:
+                        return "Registrato";
+                    case 10:
+                        return "Preinserito";
+                    case 20:
+                        return "Registrato";
+                    case 21:
+                        return "In Sospeso";
+                    case 22:
+                        return "In Coda di Stampa";
+                    case 31:
+                        return "In Attesa di finitura";
+                    case 32:
+                        return "PROVA";
+                    case 40:
+                        return "In Imballaggio";
+                    case 50:
+                        return "Pronto per il ritiro";
+                    case 51:
+                        return "Uscito da magazzino";
+                    case 60:
+                        return "In consegna";
+                    case 70:
+                        return "Consegnato";
+                    case 80:
+                        return "Acconto";
+                    case 81:
+                        return "Pagato";
+                    default:
+                        return "PROVA";
+                }
+            }
+        }
+        public string Note { get; set; }
     }
 }

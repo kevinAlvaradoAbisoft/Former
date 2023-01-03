@@ -148,8 +148,6 @@
     <EntitySetMapping Name="T_listinobase">
       <EntityTypeMapping TypeName="DbZohoModel.T_listinobase">
         <MappingFragment StoreEntitySet="T_listinobase">
-          <ScalarProperty Name="DisattivaAccessoSito" ColumnName="DisattivaAccessoSito" />
-          <ScalarProperty Name="IdZoho" ColumnName="IdZoho" />
           <ScalarProperty Name="CounterDayPromo" ColumnName="CounterDayPromo" />
           <ScalarProperty Name="AttivaPromoAutomatico" ColumnName="AttivaPromoAutomatico" />
           <ScalarProperty Name="IdLavTaglioDuplicati" ColumnName="IdLavTaglioDuplicati" />
@@ -270,6 +268,45 @@
           <ScalarProperty Name="IsDeletedInZoho" ColumnName="IsDeletedInZoho" />
           <ScalarProperty Name="IdZoho" ColumnName="IdZoho" />
           <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Nazioni">
+      <EntityTypeMapping TypeName="DbZohoModel.Nazioni">
+        <MappingFragment StoreEntitySet="Nazioni">
+          <ScalarProperty Name="IdGruppo" ColumnName="IdGruppo" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Nazione" ColumnName="Nazione" />
+          <ScalarProperty Name="IdNazione" ColumnName="IdNazione" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Comuni">
+      <EntityTypeMapping TypeName="DbZohoModel.Comuni">
+        <MappingFragment StoreEntitySet="Comuni">
+          <ScalarProperty Name="ordine" ColumnName="ordine" />
+          <ScalarProperty Name="DTVARIAZIONE" ColumnName="DTVARIAZIONE" />
+          <ScalarProperty Name="FLGVARIAZIONE" ColumnName="FLGVARIAZIONE" />
+          <ScalarProperty Name="CAP" ColumnName="CAP" />
+          <ScalarProperty Name="SGLCATASTALE" ColumnName="SGLCATASTALE" />
+          <ScalarProperty Name="SGLNAZIONALE" ColumnName="SGLNAZIONALE" />
+          <ScalarProperty Name="DESCCOMUNE" ColumnName="DESCCOMUNE" />
+          <ScalarProperty Name="IDPROV" ColumnName="IDPROV" />
+          <ScalarProperty Name="CODCOMUNE" ColumnName="CODCOMUNE" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Province">
+      <EntityTypeMapping TypeName="DbZohoModel.Province">
+        <MappingFragment StoreEntitySet="Province">
+          <ScalarProperty Name="ordine" ColumnName="ordine" />
+          <ScalarProperty Name="DTVARIAZIONE" ColumnName="DTVARIAZIONE" />
+          <ScalarProperty Name="FLGVARIAZIONE" ColumnName="FLGVARIAZIONE" />
+          <ScalarProperty Name="IdRegione" ColumnName="IdRegione" />
+          <ScalarProperty Name="PROVINCIA" ColumnName="PROVINCIA" />
+          <ScalarProperty Name="Cod" ColumnName="Cod" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

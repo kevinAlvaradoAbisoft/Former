@@ -66,7 +66,14 @@ namespace AppWithPostman
                                     Account_Name = _utente.RagSoc,
                                     s = "Disponibile",
                                     approval_state = "approved",
-                                    Id_Cliente = _utente.IdUser
+                                    Id_Cliente = _utente.IdRubricaInt.ToString(),                                    
+                                    Billing_Country = _utente.Mailing_Country,
+                                    Billing_Street = _utente.Mailing_Street,
+                                    Billing_City = _utente.Mailing_City,
+                                    Billing_State = _utente.Mailing_State,
+                                    Billing_Code = _utente.Mailing_Zip,
+                                    Tipologia = _utente.Tipologiastr,
+                                    IdUser = _utente.IdUser,    
                                 }
                             );
                         numeroContattiCompanie++;
@@ -90,7 +97,14 @@ namespace AppWithPostman
                                 Account_Name = _utente.RagSoc,
                                 s = "Disponibile",
                                 approval_state = "approved",
-                                Id_Cliente = _utente.IdUser//
+                                Id_Cliente = _utente.IdRubricaInt.ToString(), //
+                                Billing_Country = _utente.Mailing_Country,
+                                Billing_Street = _utente.Mailing_Street,
+                                Billing_City = _utente.Mailing_City,
+                                Billing_State = _utente.Mailing_State,
+                                Billing_Code = _utente.Mailing_Zip,
+                                Tipologia = _utente.Tipologiastr,
+                                IdUser = _utente.IdUser,
                             }
                         );
                     }
@@ -132,12 +146,18 @@ namespace AppWithPostman
                                     PEC = _utente.Pec,
                                     SDI = _utente.Sdi,
                                     Codice_Fiscale = string.IsNullOrEmpty(_utente.Codice_Fiscale) ? "0" : _utente.Codice_Fiscale.Substring(0, 9),
-                                    Id_Cliente = _utente.IdUser,
+                                    Id_Cliente = _utente.IdRubricaInt,
+                                    IdUt = _utente.IdUser,
                                     Partita_Iva = string.IsNullOrEmpty(_utente.Partita_Iva) ? "0" : _utente.Partita_Iva.Substring(0,9),
                                     //Partita_Iva = "0",
                                     Mobile = _utente.Mobile,
-                                    Tipologia = "",  
+                                    Tipologia = _utente.Tipologiastr,  
                                     E_mail_amministrazione="",//no debe ser null
+                                    Mailing_City = _utente.Mailing_City,
+                                    Mailing_Country = _utente.Mailing_Country,
+                                    Mailing_State = _utente.Mailing_State,
+                                    Mailing_Street = _utente.Mailing_Street,
+                                    Mailing_Zip = _utente.Mailing_Zip,
                                     Account_Name = new AccountNameCompanie
                                     {
                                         //name = (_utente.First_Name + " " + _utente.Last_Name).Trim(),
@@ -167,12 +187,18 @@ namespace AppWithPostman
                                 PEC = _utente.Pec,
                                 SDI = _utente.Sdi,
                                 Codice_Fiscale = string.IsNullOrEmpty(_utente.Codice_Fiscale) ? "0" : _utente.Codice_Fiscale.Substring(0, 9),
-                                Id_Cliente = _utente.IdUser,
+                                Id_Cliente = _utente.IdRubricaInt,
+                                IdUt = _utente.IdUser,
                                 Partita_Iva = string.IsNullOrEmpty(_utente.Partita_Iva) ? "0" : _utente.Partita_Iva.Substring(0,9),
                                 //Partita_Iva = "0",
                                 Mobile = _utente.Mobile,
-                                Tipologia="",
+                                Tipologia=_utente.Tipologiastr,
                                 E_mail_amministrazione="",
+                                Mailing_City = _utente.Mailing_City,
+                                Mailing_Country = _utente.Mailing_Country,
+                                Mailing_State = _utente.Mailing_State,
+                                Mailing_Street = _utente.Mailing_Street,
+                                Mailing_Zip = _utente.Mailing_Zip,
                                 Account_Name = new AccountNameCompanie
                                 {
                                     //name = (_utente.First_Name + " " + _utente.Last_Name).Trim(),
@@ -315,7 +341,7 @@ namespace AppWithPostman
                                     Carrier = _order.Carrier,
                                     approved = true,
                                     Quote_Name = null,
-                                    Status = "Registrato",
+                                    Status = _order.Statusstr,
                                     Grand_Total = (int)_order.Total_Order,
 
                                     Billing_Street = null,
@@ -339,7 +365,7 @@ namespace AppWithPostman
 
                                     review = null,
                                     Account_Name = _order.Account_Name,
-                                    Tipologia_di_consegna = "Ritiro da Cliente",
+                                    Tipologia_di_consegna = _order.Tipologia_di_consegnastr,
                                     Sales_Commission = null,
 
                                     Due_Date = null,
@@ -352,7 +378,9 @@ namespace AppWithPostman
                                     Subject = _order.qta + " " + _order.Subject,
                                     orchestration = false,
                                     Contact_Name = null,
-                                    Id_Ordine = _order.IdOrder
+                                    Id_Ordine = _order.IdOrdineInt, //codigo presentar en zoho
+                                    IdOrder = _order.IdOrder, //codigo para busqueda en tabla orderzoho
+                                    Note = _order.Note,
                                 }
                             );
                         OrderHelper.AddUpdateOrder(Token_Work, _datiOrder);

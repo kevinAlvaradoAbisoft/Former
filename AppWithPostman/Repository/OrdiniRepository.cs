@@ -7,6 +7,59 @@ namespace AppWithPostman.Repository
 {
     public class OrdiniRepository
     {
+        public static string GetTipologiaConsegna(int? tipo)
+        {
+            switch (tipo)
+            {
+                case 0:
+                    return "CN";
+
+                case 1:
+                    return "RC";
+                case 2:
+                    return "Prova";
+                default:
+                    return "Prova";
+            }
+        }
+        public static string GetStato(int? stato)
+        {
+            switch (stato)
+            {
+                case 5:
+                    return "PROVA";
+                case 7:
+                    return "Registrato";
+                case 10:
+                    return "Preinserito";
+                case 20:
+                    return "Registrato";
+                case 21:
+                    return "In Sospeso";
+                case 22:
+                    return "In Coda di Stampa";
+                case 31:
+                    return "In Attesa di finitura";
+                case 32:
+                    return "PROVA";
+                case 40:
+                    return "In Imballaggio";
+                case 50:
+                    return "Pronto per il ritiro";
+                case 51:
+                    return "Uscito da magazzino";
+                case 60:
+                    return "In consegna";
+                case 70:
+                    return "Consegnato";
+                case 80:
+                    return "Acconto";
+                case 81:
+                    return "Pagato";
+                default:
+                    return "PROVA";
+            }
+        }
         public static List<OrderDTO> GetOrders()
         {
             List<OrderDTO> _ordiniList = new List<OrderDTO>();
@@ -24,6 +77,7 @@ namespace AppWithPostman.Repository
                                select new OrderDTO
                                {
                                    IdOrder = order.IdOrdine,
+                                   IdOrdineInt = order.IdOrdineInt ?? default(int) ,
                                    Total_Order = (decimal)order.TotaleOrdine,
                                    Total_Iva = (decimal)order.TotaleIva,
                                    Anteprima = order.Anteprima,
@@ -43,8 +97,12 @@ namespace AppWithPostman.Repository
                                    DataCambioStato=order.DataCambioStato,   
                                    DataPrevProduzione=order.DataPrevProduzione, 
                                    DataPrevConsegna=order.DataPrevConsegna,
-                                   Sconto = order.Sconto
-
+                                   Sconto = order.Sconto,
+                                   //Tipologia_di_consegna = order.TipoConsegna == null ? "CN" : GetTipologiaConsegna(order.TipoConsegna),
+                                   //Status = order.Stato==null ? "PROVA" : GetStato(order.Stato),
+                                   Tipologia_di_consegna = order.TipoConsegna ?? default(int),
+                                   Status = order.Stato ?? default(int),
+                                   Note = order.Annotazioni
                                }).ToList();
 
                 //var _ordiniList1 = _dbo.Ordini.Include("Utenti").Include("T_listinobase").Include("T_Corriere")

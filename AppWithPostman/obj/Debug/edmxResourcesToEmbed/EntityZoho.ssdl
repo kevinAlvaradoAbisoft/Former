@@ -1,5 +1,32 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="DbZohoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'FormerWeb.dbo.Comuni' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="Comuni">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="DESCCOMUNE" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="CODCOMUNE" Type="int" />
+    <Property Name="IDPROV" Type="int" />
+    <Property Name="DESCCOMUNE" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="SGLNAZIONALE" Type="nvarchar" MaxLength="255" />
+    <Property Name="SGLCATASTALE" Type="nvarchar" MaxLength="255" />
+    <Property Name="CAP" Type="nvarchar" MaxLength="255" />
+    <Property Name="FLGVARIAZIONE" Type="int" />
+    <Property Name="DTVARIAZIONE" Type="nvarchar" MaxLength="255" />
+    <Property Name="ordine" Type="int" />
+  </EntityType>
+  <EntityType Name="Nazioni">
+    <Key>
+      <PropertyRef Name="IdNazione" />
+    </Key>
+    <Property Name="IdNazione" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nazione" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="2" Nullable="false" />
+    <Property Name="IdGruppo" Type="int" />
+  </EntityType>
   <EntityType Name="OrderZoho">
     <Key>
       <PropertyRef Name="IdOrder" />
@@ -64,8 +91,6 @@
     <Property Name="IdMacchinarioProduzioneUtilizzato" Type="int" />
     <Property Name="ConsegnaGarantita" Type="datetime" />
     <Property Name="ConsegnaGarantitaDa" Type="int" />
-    <Property Name="IdZoho" Type="varchar" MaxLength="50" />
-    <Property Name="IsDeletedInZoho" Type="bit" />
   </EntityType>
   <EntityType Name="PriceListZoho">
     <Key>
@@ -74,6 +99,20 @@
     <Property Name="IdPricelist" Type="int" Nullable="false" />
     <Property Name="IdZoho" Type="varchar" MaxLength="50" />
     <Property Name="IsDeletedInZoho" Type="bit" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'FormerWeb.dbo.Province' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="Province">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Cod" Type="nvarchar" MaxLength="255" />
+    <Property Name="PROVINCIA" Type="nvarchar" MaxLength="255" />
+    <Property Name="IdRegione" Type="int" />
+    <Property Name="FLGVARIAZIONE" Type="int" />
+    <Property Name="DTVARIAZIONE" Type="nvarchar" MaxLength="255" />
+    <Property Name="ordine" Type="int" />
   </EntityType>
   <EntityType Name="T_Corriere">
     <Key>
@@ -111,7 +150,7 @@
     <Key>
       <PropertyRef Name="IdListinoBase" />
     </Key>
-    <Property Name="IdListinoBase" Type="int" Nullable="false" />
+    <Property Name="IdListinoBase" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Nome" Type="nvarchar" MaxLength="255" />
     <Property Name="IdCurvaAtt" Type="int" />
     <Property Name="IdCurvaPubbl" Type="int" />
@@ -203,9 +242,6 @@
     <Property Name="IdLavTaglioDuplicati" Type="int" />
     <Property Name="AttivaPromoAutomatico" Type="int" />
     <Property Name="CounterDayPromo" Type="int" />
-    <Property Name="IdZoho" Type="varchar" MaxLength="50" />
-    <Property Name="DisattivaAccessoSito" Type="int" />
-    <Property Name="IsDeletedInZoho" Type="bit" />
   </EntityType>
   <EntityType Name="tokens">
     <Key>
@@ -267,43 +303,8 @@
     <Property Name="PrefissoPIva" Type="nvarchar" MaxLength="2" />
     <Property Name="DisattivaAccessoSito" Type="int" />
   </EntityType>
-  <Association Name="FK_Ordini_T_Corriere">
-    <End Role="T_Corriere" Type="Self.T_Corriere" Multiplicity="0..1" />
-    <End Role="Ordini" Type="Self.Ordini" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="T_Corriere">
-        <PropertyRef Name="IdCorriere" />
-      </Principal>
-      <Dependent Role="Ordini">
-        <PropertyRef Name="IdCorriere" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Ordini_T_listinobase">
-    <End Role="T_listinobase" Type="Self.T_listinobase" Multiplicity="0..1" />
-    <End Role="Ordini" Type="Self.Ordini" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="T_listinobase">
-        <PropertyRef Name="IdListinoBase" />
-      </Principal>
-      <Dependent Role="Ordini">
-        <PropertyRef Name="IdListinoBase" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Ordini_Utenti">
-    <End Role="Utenti" Type="Self.Utenti" Multiplicity="0..1" />
-    <End Role="Ordini" Type="Self.Ordini" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Utenti">
-        <PropertyRef Name="IdUt" />
-      </Principal>
-      <Dependent Role="Ordini">
-        <PropertyRef Name="IdUt" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityContainer Name="DbZohoModelStoreContainer">
+    <EntitySet Name="Nazioni" EntityType="Self.Nazioni" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="OrderZoho" EntityType="Self.OrderZoho" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Ordini" EntityType="Self.Ordini" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PriceListZoho" EntityType="Self.PriceListZoho" Schema="dbo" store:Type="Tables" />
@@ -312,17 +313,30 @@
     <EntitySet Name="tokens" EntityType="Self.tokens" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserZoho" EntityType="Self.UserZoho" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Utenti" EntityType="Self.Utenti" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK_Ordini_T_Corriere" Association="Self.FK_Ordini_T_Corriere">
-      <End Role="T_Corriere" EntitySet="T_Corriere" />
-      <End Role="Ordini" EntitySet="Ordini" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Ordini_T_listinobase" Association="Self.FK_Ordini_T_listinobase">
-      <End Role="T_listinobase" EntitySet="T_listinobase" />
-      <End Role="Ordini" EntitySet="Ordini" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Ordini_Utenti" Association="Self.FK_Ordini_Utenti">
-      <End Role="Utenti" EntitySet="Utenti" />
-      <End Role="Ordini" EntitySet="Ordini" />
-    </AssociationSet>
+    <EntitySet Name="Comuni" EntityType="Self.Comuni" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Comuni].[ID] AS [ID], 
+    [Comuni].[CODCOMUNE] AS [CODCOMUNE], 
+    [Comuni].[IDPROV] AS [IDPROV], 
+    [Comuni].[DESCCOMUNE] AS [DESCCOMUNE], 
+    [Comuni].[SGLNAZIONALE] AS [SGLNAZIONALE], 
+    [Comuni].[SGLCATASTALE] AS [SGLCATASTALE], 
+    [Comuni].[CAP] AS [CAP], 
+    [Comuni].[FLGVARIAZIONE] AS [FLGVARIAZIONE], 
+    [Comuni].[DTVARIAZIONE] AS [DTVARIAZIONE], 
+    [Comuni].[ordine] AS [ordine]
+    FROM [dbo].[Comuni] AS [Comuni]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="Province" EntityType="Self.Province" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Province].[ID] AS [ID], 
+    [Province].[Cod] AS [Cod], 
+    [Province].[PROVINCIA] AS [PROVINCIA], 
+    [Province].[IdRegione] AS [IdRegione], 
+    [Province].[FLGVARIAZIONE] AS [FLGVARIAZIONE], 
+    [Province].[DTVARIAZIONE] AS [DTVARIAZIONE], 
+    [Province].[ordine] AS [ordine]
+    FROM [dbo].[Province] AS [Province]</DefiningQuery>
+    </EntitySet>
   </EntityContainer>
 </Schema>

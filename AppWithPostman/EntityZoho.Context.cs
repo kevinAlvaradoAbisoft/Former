@@ -33,5 +33,8 @@ namespace AppWithPostman
         public virtual DbSet<OrderZoho> OrderZoho { get; set; }
         public virtual DbSet<PriceListZoho> PriceListZoho { get; set; }
         public virtual DbSet<UserZoho> UserZoho { get; set; }
+        public virtual DbSet<Nazioni> Nazioni { get; set; }
+        public virtual DbSet<Comuni> Comuni { get; set; }
+        public virtual DbSet<Province> Province { get; set; }
     }
 }

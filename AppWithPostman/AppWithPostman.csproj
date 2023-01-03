@@ -86,8 +86,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Comuni.cs">
+      <DependentUpon>EntityZoho.tt</DependentUpon>
+    </Compile>
     <Compile Include="DTO\Companie.cs" />
     <Compile Include="DTO\Contact.cs" />
+    <Compile Include="DTO\Note.cs" />
     <Compile Include="DTO\Order.cs" />
     <Compile Include="DTO\OrderDTO.cs" />
     <Compile Include="DTO\tmp\Order.cs" />
@@ -111,8 +115,12 @@
     <Compile Include="Helpers\CompanieHelper.cs" />
     <Compile Include="Helpers\ContactHelper.cs" />
     <Compile Include="Helpers\GenerarToken.cs" />
+    <Compile Include="Helpers\NoteHelper.cs" />
     <Compile Include="Helpers\OrderHelper.cs" />
     <Compile Include="Helpers\ZohoAPIHelper.cs" />
+    <Compile Include="Nazioni.cs">
+      <DependentUpon>EntityZoho.tt</DependentUpon>
+    </Compile>
     <Compile Include="OrderZoho.cs">
       <DependentUpon>EntityZoho.tt</DependentUpon>
     </Compile>
@@ -124,6 +132,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Province.cs">
+      <DependentUpon>EntityZoho.tt</DependentUpon>
+    </Compile>
     <Compile Include="Repository\CompanieRepository.cs" />
     <Compile Include="Repository\OrderZohoRepository.cs" />
     <Compile Include="Repository\OrdiniRepository.cs" />

@@ -44,17 +44,22 @@ namespace AppWithPostman.Helpers
                 {
                     if (_zresponse.status != "error")
                     {
-                        OrderZoho data = OrdiniRepository.GetOrderById((int)arrayItem[counter].Id_Ordine);
+                        OrderZoho data = OrdiniRepository.GetOrderById((int)arrayItem[counter].IdOrder);
                         if (data != null)
                         {
                             data.IdZoho = _zresponse.details.id;
                             OrdiniRepository.UpdateOrder(data);
                             retVal = true;
                         }
+                        if (!string.IsNullOrEmpty(arrayItem[counter].Note))
+                        {
+                            NoteHelper.AddNote(Token_Work, "Sales_Orders", _zresponse.details.id, arrayItem[counter].Note);
+                        }
                     }
                     counter++;
                 }
             }
         }
+
     }
 }

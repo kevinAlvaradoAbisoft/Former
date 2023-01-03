@@ -13,7 +13,25 @@ namespace AppWithPostman.Repository
 {
     public class UtentiRepository
     {
+        public static string GetTipologia(int tipo)
+        {
+            switch (tipo)
+            {
+                case 0:
+                    return "Prova";
 
+                case 1:
+                    return "Cliente Finale";
+                case 2:
+                    return "";
+                case 3:
+                    return "Rivenditore";
+                case 4:
+                    return "Agenti";
+                default:
+                    return "Prova";
+            }
+        }
         public static List<UserDTO> GetUtenti()
         {
             List<UserDTO> _utentiList = new List<UserDTO>();
@@ -21,11 +39,17 @@ namespace AppWithPostman.Repository
             {
                 _utentiList = (from utenti in _dbo.Utenti
                                join user in _dbo.UserZoho on utenti.IdUt equals user.IdUser
+                               join province in _dbo.Province on utenti.IdProvincia equals province.ID into fullProvince
+                               from fprovince in fullProvince.DefaultIfEmpty()
+                               join nazioni in _dbo.Nazioni on utenti.IdNazione equals nazioni.IdNazione into fullNazione
+                               from fnazione in fullNazione.DefaultIfEmpty()
+
                                where user.IdZohoAziende != null && utenti.DisattivaAccessoSito == 0
                                && user.IdUser == 695
                                select new UserDTO
                                {
                                    IdUser = utenti.IdUt,
+                                   IdRubricaInt = utenti.IdRubricaInt ?? default(int),
                                    First_Name = utenti.Nome,
                                    Last_Name = utenti.Cognome,
                                    Email = utenti.Email,
@@ -38,11 +62,15 @@ namespace AppWithPostman.Repository
                                    IdZoho = user.IdZoho,
                                    IdZohoAziende = user.IdZohoAziende,
                                    IsDeletedInZoho = user.IsDeletedInZoho,
-                                   RagSoc = utenti.RagSoc
+                                   RagSoc = utenti.RagSoc,
+                                   Mailing_Country = fnazione.Nazione == null ? "" : fnazione.Nazione,
+                                   Mailing_State = fprovince.PROVINCIA == null ? "" : fprovince.PROVINCIA,
+                                   Mailing_City = utenti.Citta,
+                                   Mailing_Street = utenti.Indirizzo,
+                                   Mailing_Zip = utenti.Cap,
+                                   //Tipologia = string.IsNullOrEmpty(utenti.TipoRub.ToString()) ? "Prova" : GetTipologia(utenti.TipoRub)
+                                   Tipologia = utenti.TipoRub,
                                }).ToList();
-                /*_utentiList = _dbo.Utenti
-                    .Where(d=>d.DisattivaAccessoSito==0 && d.IdZohoAziende != null && d.IdUt == 1692)
-                    .ToList();*/
             }
 
             return _utentiList;
@@ -103,16 +131,10 @@ namespace AppWithPostman.Repository
         public static int  UpdateUtentiEmail(UserZoho utenti)
         {
             int outupdate = 0;
-            //Utenti dataUtenti = new Utenti();
             using (var _dbo = new DbZohoEntities())
             {
-                //var utenti1 = _dbo.Utenti.First(i => i.IdUt == utenti.IdUt);
                 var user = _dbo.UserZoho.First(i => i.IdUser == utenti.IdUser);
                 user.IdZoho = utenti.IdZoho;
-                //user.IdZohoAziende = utenti.IdZohoAziende;
-              
-                //_dbo.Utenti.Attach(utenti1);
-                //_dbo.Entry(utenti1).State = EntityState.Modified;
                 _dbo.UserZoho.AddOrUpdate(user);
                 outupdate = _dbo.SaveChanges();
 

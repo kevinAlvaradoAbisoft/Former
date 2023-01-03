@@ -5,6 +5,33 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="DbZohoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'FormerWeb.dbo.Comuni' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="Comuni">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="DESCCOMUNE" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="CODCOMUNE" Type="int" />
+          <Property Name="IDPROV" Type="int" />
+          <Property Name="DESCCOMUNE" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="SGLNAZIONALE" Type="nvarchar" MaxLength="255" />
+          <Property Name="SGLCATASTALE" Type="nvarchar" MaxLength="255" />
+          <Property Name="CAP" Type="nvarchar" MaxLength="255" />
+          <Property Name="FLGVARIAZIONE" Type="int" />
+          <Property Name="DTVARIAZIONE" Type="nvarchar" MaxLength="255" />
+          <Property Name="ordine" Type="int" />
+        </EntityType>
+        <EntityType Name="Nazioni">
+          <Key>
+            <PropertyRef Name="IdNazione" />
+          </Key>
+          <Property Name="IdNazione" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nazione" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="2" Nullable="false" />
+          <Property Name="IdGruppo" Type="int" />
+        </EntityType>
         <EntityType Name="OrderZoho">
           <Key>
             <PropertyRef Name="IdOrder" />
@@ -69,8 +96,6 @@
           <Property Name="IdMacchinarioProduzioneUtilizzato" Type="int" />
           <Property Name="ConsegnaGarantita" Type="datetime" />
           <Property Name="ConsegnaGarantitaDa" Type="int" />
-          <Property Name="IdZoho" Type="varchar" MaxLength="50" />
-          <Property Name="IsDeletedInZoho" Type="bit" />
         </EntityType>
         <EntityType Name="PriceListZoho">
           <Key>
@@ -79,6 +104,20 @@
           <Property Name="IdPricelist" Type="int" Nullable="false" />
           <Property Name="IdZoho" Type="varchar" MaxLength="50" />
           <Property Name="IsDeletedInZoho" Type="bit" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'FormerWeb.dbo.Province' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="Province">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Cod" Type="nvarchar" MaxLength="255" />
+          <Property Name="PROVINCIA" Type="nvarchar" MaxLength="255" />
+          <Property Name="IdRegione" Type="int" />
+          <Property Name="FLGVARIAZIONE" Type="int" />
+          <Property Name="DTVARIAZIONE" Type="nvarchar" MaxLength="255" />
+          <Property Name="ordine" Type="int" />
         </EntityType>
         <EntityType Name="T_Corriere">
           <Key>
@@ -116,7 +155,7 @@
           <Key>
             <PropertyRef Name="IdListinoBase" />
           </Key>
-          <Property Name="IdListinoBase" Type="int" Nullable="false" />
+          <Property Name="IdListinoBase" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nome" Type="nvarchar" MaxLength="255" />
           <Property Name="IdCurvaAtt" Type="int" />
           <Property Name="IdCurvaPubbl" Type="int" />
@@ -208,9 +247,6 @@
           <Property Name="IdLavTaglioDuplicati" Type="int" />
           <Property Name="AttivaPromoAutomatico" Type="int" />
           <Property Name="CounterDayPromo" Type="int" />
-          <Property Name="IdZoho" Type="varchar" MaxLength="50" />
-          <Property Name="DisattivaAccessoSito" Type="int" />
-          <Property Name="IsDeletedInZoho" Type="bit" />
         </EntityType>
         <EntityType Name="tokens">
           <Key>
@@ -272,43 +308,8 @@
           <Property Name="PrefissoPIva" Type="nvarchar" MaxLength="2" />
           <Property Name="DisattivaAccessoSito" Type="int" />
         </EntityType>
-        <Association Name="FK_Ordini_T_Corriere">
-          <End Role="T_Corriere" Type="Self.T_Corriere" Multiplicity="0..1" />
-          <End Role="Ordini" Type="Self.Ordini" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="T_Corriere">
-              <PropertyRef Name="IdCorriere" />
-            </Principal>
-            <Dependent Role="Ordini">
-              <PropertyRef Name="IdCorriere" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Ordini_T_listinobase">
-          <End Role="T_listinobase" Type="Self.T_listinobase" Multiplicity="0..1" />
-          <End Role="Ordini" Type="Self.Ordini" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="T_listinobase">
-              <PropertyRef Name="IdListinoBase" />
-            </Principal>
-            <Dependent Role="Ordini">
-              <PropertyRef Name="IdListinoBase" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Ordini_Utenti">
-          <End Role="Utenti" Type="Self.Utenti" Multiplicity="0..1" />
-          <End Role="Ordini" Type="Self.Ordini" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Utenti">
-              <PropertyRef Name="IdUt" />
-            </Principal>
-            <Dependent Role="Ordini">
-              <PropertyRef Name="IdUt" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="DbZohoModelStoreContainer">
+          <EntitySet Name="Nazioni" EntityType="Self.Nazioni" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderZoho" EntityType="Self.OrderZoho" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ordini" EntityType="Self.Ordini" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PriceListZoho" EntityType="Self.PriceListZoho" Schema="dbo" store:Type="Tables" />
@@ -317,18 +318,31 @@
           <EntitySet Name="tokens" EntityType="Self.tokens" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserZoho" EntityType="Self.UserZoho" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Utenti" EntityType="Self.Utenti" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Ordini_T_Corriere" Association="Self.FK_Ordini_T_Corriere">
-            <End Role="T_Corriere" EntitySet="T_Corriere" />
-            <End Role="Ordini" EntitySet="Ordini" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Ordini_T_listinobase" Association="Self.FK_Ordini_T_listinobase">
-            <End Role="T_listinobase" EntitySet="T_listinobase" />
-            <End Role="Ordini" EntitySet="Ordini" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Ordini_Utenti" Association="Self.FK_Ordini_Utenti">
-            <End Role="Utenti" EntitySet="Utenti" />
-            <End Role="Ordini" EntitySet="Ordini" />
-          </AssociationSet>
+          <EntitySet Name="Comuni" EntityType="Self.Comuni" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Comuni].[ID] AS [ID], 
+    [Comuni].[CODCOMUNE] AS [CODCOMUNE], 
+    [Comuni].[IDPROV] AS [IDPROV], 
+    [Comuni].[DESCCOMUNE] AS [DESCCOMUNE], 
+    [Comuni].[SGLNAZIONALE] AS [SGLNAZIONALE], 
+    [Comuni].[SGLCATASTALE] AS [SGLCATASTALE], 
+    [Comuni].[CAP] AS [CAP], 
+    [Comuni].[FLGVARIAZIONE] AS [FLGVARIAZIONE], 
+    [Comuni].[DTVARIAZIONE] AS [DTVARIAZIONE], 
+    [Comuni].[ordine] AS [ordine]
+    FROM [dbo].[Comuni] AS [Comuni]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Province" EntityType="Self.Province" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Province].[ID] AS [ID], 
+    [Province].[Cod] AS [Cod], 
+    [Province].[PROVINCIA] AS [PROVINCIA], 
+    [Province].[IdRegione] AS [IdRegione], 
+    [Province].[FLGVARIAZIONE] AS [FLGVARIAZIONE], 
+    [Province].[DTVARIAZIONE] AS [DTVARIAZIONE], 
+    [Province].[ordine] AS [ordine]
+    FROM [dbo].[Province] AS [Province]</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -355,6 +369,9 @@
           <EntitySet Name="OrderZoho" EntityType="DbZohoModel.OrderZoho" />
           <EntitySet Name="PriceListZoho" EntityType="DbZohoModel.PriceListZoho" />
           <EntitySet Name="UserZoho" EntityType="DbZohoModel.UserZoho" />
+          <EntitySet Name="Nazioni" EntityType="DbZohoModel.Nazioni" />
+          <EntitySet Name="Comuni" EntityType="DbZohoModel.Comuni" />
+          <EntitySet Name="Province" EntityType="DbZohoModel.Province" />
         </EntityContainer>
         <EntityType Name="Utenti">
           <Key>
@@ -609,9 +626,6 @@
           <Property Name="IdLavTaglioDuplicati" Type="Int32" />
           <Property Name="AttivaPromoAutomatico" Type="Int32" />
           <Property Name="CounterDayPromo" Type="Int32" />
-          <Property Name="IdZoho" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="DisattivaAccessoSito" Type="Int32" />
-          <NavigationProperty Name="Ordini" Relationship="DbZohoModel.FK_Ordini_T_listinobase" FromRole="T_listinobase" ToRole="Ordini" />
         </EntityType>
         <Association Name="FK_Ordini_T_listinobase">
           <End Type="DbZohoModel.T_listinobase" Role="T_listinobase" Multiplicity="0..1" />
@@ -661,6 +675,43 @@
           <Property Name="IdZoho" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="IsDeletedInZoho" Type="Boolean" />
           <Property Name="IdZohoAziende" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Nazioni">
+          <Key>
+            <PropertyRef Name="IdNazione" />
+          </Key>
+          <Property Name="IdNazione" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nazione" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="IdGruppo" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Comuni">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="DESCCOMUNE" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="CODCOMUNE" Type="Int32" />
+          <Property Name="IDPROV" Type="Int32" />
+          <Property Name="DESCCOMUNE" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="SGLNAZIONALE" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="SGLCATASTALE" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CAP" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="FLGVARIAZIONE" Type="Int32" />
+          <Property Name="DTVARIAZIONE" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ordine" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Province">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Cod" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="PROVINCIA" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="IdRegione" Type="Int32" />
+          <Property Name="FLGVARIAZIONE" Type="Int32" />
+          <Property Name="DTVARIAZIONE" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ordine" Type="Int32" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -815,8 +866,6 @@
           <EntitySetMapping Name="T_listinobase">
             <EntityTypeMapping TypeName="DbZohoModel.T_listinobase">
               <MappingFragment StoreEntitySet="T_listinobase">
-                <ScalarProperty Name="DisattivaAccessoSito" ColumnName="DisattivaAccessoSito" />
-                <ScalarProperty Name="IdZoho" ColumnName="IdZoho" />
                 <ScalarProperty Name="CounterDayPromo" ColumnName="CounterDayPromo" />
                 <ScalarProperty Name="AttivaPromoAutomatico" ColumnName="AttivaPromoAutomatico" />
                 <ScalarProperty Name="IdLavTaglioDuplicati" ColumnName="IdLavTaglioDuplicati" />
@@ -937,6 +986,45 @@
                 <ScalarProperty Name="IsDeletedInZoho" ColumnName="IsDeletedInZoho" />
                 <ScalarProperty Name="IdZoho" ColumnName="IdZoho" />
                 <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Nazioni">
+            <EntityTypeMapping TypeName="DbZohoModel.Nazioni">
+              <MappingFragment StoreEntitySet="Nazioni">
+                <ScalarProperty Name="IdGruppo" ColumnName="IdGruppo" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Nazione" ColumnName="Nazione" />
+                <ScalarProperty Name="IdNazione" ColumnName="IdNazione" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Comuni">
+            <EntityTypeMapping TypeName="DbZohoModel.Comuni">
+              <MappingFragment StoreEntitySet="Comuni">
+                <ScalarProperty Name="ordine" ColumnName="ordine" />
+                <ScalarProperty Name="DTVARIAZIONE" ColumnName="DTVARIAZIONE" />
+                <ScalarProperty Name="FLGVARIAZIONE" ColumnName="FLGVARIAZIONE" />
+                <ScalarProperty Name="CAP" ColumnName="CAP" />
+                <ScalarProperty Name="SGLCATASTALE" ColumnName="SGLCATASTALE" />
+                <ScalarProperty Name="SGLNAZIONALE" ColumnName="SGLNAZIONALE" />
+                <ScalarProperty Name="DESCCOMUNE" ColumnName="DESCCOMUNE" />
+                <ScalarProperty Name="IDPROV" ColumnName="IDPROV" />
+                <ScalarProperty Name="CODCOMUNE" ColumnName="CODCOMUNE" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Province">
+            <EntityTypeMapping TypeName="DbZohoModel.Province">
+              <MappingFragment StoreEntitySet="Province">
+                <ScalarProperty Name="ordine" ColumnName="ordine" />
+                <ScalarProperty Name="DTVARIAZIONE" ColumnName="DTVARIAZIONE" />
+                <ScalarProperty Name="FLGVARIAZIONE" ColumnName="FLGVARIAZIONE" />
+                <ScalarProperty Name="IdRegione" ColumnName="IdRegione" />
+                <ScalarProperty Name="PROVINCIA" ColumnName="PROVINCIA" />
+                <ScalarProperty Name="Cod" ColumnName="Cod" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -26,7 +26,8 @@ namespace AppWithPostman.DTO
         //public object SIC_Code { get; set; }
         //public object Last_Activity_Time { get; set; }
         //public object Industry { get; set; }
-        //public string Tipologia { get; set; }
+        public string Tipologia { get; set; }
+
         //public object Account_Site { get; set; }
 
         [JsonProperty("$state")]
@@ -34,7 +35,7 @@ namespace AppWithPostman.DTO
 
         //[JsonProperty("$process_flow")]
         //public bool process_flow { get; set; }
-        //public object Billing_Country { get; set; }
+        public object Billing_Country { get; set; }
         //public string id { get; set; }
 
         [JsonProperty("$approved")]
@@ -43,16 +44,16 @@ namespace AppWithPostman.DTO
         //[JsonProperty("$approval")]
         //public Approval approval { get; set; }
         public string Enrich_Status__s { get; set; }
-        //public object Billing_Street { get; set; }
+        public object Billing_Street { get; set; }
         //public DateTime Created_Time { get; set; }
 
         [JsonProperty("$editable")]
         public bool editable { get; set; }
-        //public object Billing_Code { get; set; }
+        public object Billing_Code { get; set; }
         //public object Shipping_City { get; set; }
         //public object Shipping_Country { get; set; }
         //public object Shipping_Code { get; set; }
-        //public object Billing_City { get; set; }
+        public object Billing_City { get; set; }
         //public CreatedBy Created_By { get; set; }
         //public object Annual_Revenue { get; set; }
         //public object Shipping_Street { get; set; }
@@ -84,7 +85,7 @@ namespace AppWithPostman.DTO
 
         //[JsonProperty("$in_merge")]
         //public bool in_merge { get; set; }
-        //public object Billing_State { get; set; }
+        public object Billing_State { get; set; }
         //public List<object> Tag { get; set; }
         //public object Fax { get; set; }
 
@@ -95,10 +96,10 @@ namespace AppWithPostman.DTO
         //public object pathfinder { get; set; }
         //public object Last_Enriched_Time__s { get; set; }
 
-        [JsonIgnore]
-        public int Id_Cliente { get; set; }
+        public string Id_Cliente { get; set; }
 
-        
+        [JsonIgnore]
+        public int IdUser { get; set; }
 
     }
 

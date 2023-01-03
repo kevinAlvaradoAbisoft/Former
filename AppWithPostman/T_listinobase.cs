@@ -14,12 +14,6 @@ namespace AppWithPostman
     
     public partial class T_listinobase
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public T_listinobase()
-        {
-            this.Ordini = new HashSet<Ordini>();
-        }
-    
         public int IdListinoBase { get; set; }
         public string Nome { get; set; }
         public Nullable<int> IdCurvaAtt { get; set; }
@@ -112,10 +106,5 @@ namespace AppWithPostman
         public Nullable<int> IdLavTaglioDuplicati { get; set; }
         public Nullable<int> AttivaPromoAutomatico { get; set; }
         public Nullable<int> CounterDayPromo { get; set; }
-        public string IdZoho { get; set; }
-        public Nullable<int> DisattivaAccessoSito { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Ordini> Ordini { get; set; }
     }
 }

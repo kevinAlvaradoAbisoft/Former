@@ -83,7 +83,10 @@ namespace AppWithPostman.DTO
         public object Due_Date { get; set; }
         public object Excise_Duty { get; set; }
         public int Grand_Total { get; set; }
-        public int Id_Ordine { get; set; }
+        public int? Id_Ordine { get; set; } //codigo enviado a zoho
+
+        [JsonIgnore]
+        public int IdOrder { get; set; } //codigo para busqueda en tabla orderzoho
         public ProductDetails[] Product_Details { get; set; }
         public object Purchase_Order { get; set; }
         public int? Quantit { get; set; }
@@ -102,6 +105,9 @@ namespace AppWithPostman.DTO
         public int Tax { get; set; }
         public object Terms_and_Conditions { get; set; }
         public string Tipologia_di_consegna { get; set; }
+
+        [JsonIgnore]
+        public string Note { get; set; }
     }
 
     public class Info
